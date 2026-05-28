@@ -1,0 +1,30 @@
+/**
+ * Hide technical code blocks from non-technical readers
+ * Code remains in source .md files for developers
+ */
+
+/* Hide fenced code blocks (```php, ```sql, etc.) */
+div[class*="language-"] {
+  display: none !important;
+}
+
+/* Hide inline code that looks like code (paths, variables, etc.) */
+/* Keeping inline code visible as it's often used for terms like `is_local` */
+
+/* Optional: Show a subtle indicator that technical details exist */
+/* Uncomment below if you want to show a message instead of completely hiding */
+/*
+div[class*="language-"]::before {
+  content: "Technical implementation details available in source documentation.";
+  display: block;
+  padding: 1rem;
+  background: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  color: var(--vp-c-text-2);
+  font-style: italic;
+  font-size: 0.9em;
+}
+div[class*="language-"] > * {
+  display: none !important;
+}
+*/

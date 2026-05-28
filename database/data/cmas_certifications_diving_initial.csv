@@ -1,0 +1,169 @@
+committee_id;professional_role_id;parent_id;license_id;name
+Scientific Committee;Scientific Diver;Scientific Diving Instructor;;Scientific Diver
+Scientific Committee;Scientific Diver;Scientific Diving Instructor;;Scientific Advanced Diver
+Scientific Committee;Scientific Instructor;National Scientific Committee;Scientific Instructor;Scientific Diving Instructor Trainer
+Scientific Committee;Scientific Instructor;Scientific Diving Instructor Trainer;Scientific Instructor;Scientific Diving Instructor
+Scientific Committee;Scientific Speciality Diver;National Scientific Committee;;Citizen Science Instructor Trainer
+Scientific Committee;Scientific Speciality Diver;Archaeology Instructor;;Archaeology
+Scientific Committee;Scientific Speciality Diver;Archaeology Instructor;;Archaeology - Advanced
+Scientific Committee;Scientific Speciality Diver;Citizen Science Instructor Trainer;;Citizen Science Instructor
+Scientific Committee;Scientific Speciality Diver;Citizen Science Instructor;;Citizen Science Diver
+Scientific Committee;Scientific Speciality Diver;Conservation Biology Course Instructor;;Conservation Biology Course
+Scientific Committee;Scientific Speciality Diver;Fresh water Biology Instructor  ;;Fresh water Biology
+Scientific Committee;Scientific Speciality Diver;Fresh water Biology Instructor  ;;Fresh water Biology - Advanced
+Scientific Committee;Scientific Speciality Diver;Geology Instructor;;Geology
+Scientific Committee;Scientific Speciality Diver;Geology Instructor;;Geology Advanced
+Scientific Committee;Scientific Speciality Diver;Heritage Discovery Course Instructor  ;;Heritage Discovery Course
+Scientific Committee;Scientific Speciality Diver;Marine Biology Instructor;;Marine Biology
+Scientific Committee;Scientific Speciality Diver;Marine Biology Instructor Trainer;;Marine Biology - Advanced
+Scientific Committee;Scientific Speciality Diver;Ocean Discovery Instructor;;Ocean Discovery Course
+Scientific Committee;Scientific Speciality Instructor;National Scientific Committee;Scientific Instructor;Archaeology Instructor Trainer
+Scientific Committee;Scientific Speciality Instructor;National Scientific Committee;Scientific Instructor;Conservation Biology Course Instructor Trainer
+Scientific Committee;Scientific Speciality Instructor;National Scientific Committee;Scientific Instructor;Conservation Biology Course Instructor Trainer
+Scientific Committee;Scientific Speciality Instructor;National Scientific Committee;Scientific Instructor;Fresh water Biology Instructor Trainer
+Scientific Committee;Scientific Speciality Instructor;National Scientific Committee;Scientific Instructor;Geology Instructor Trainer
+Scientific Committee;Scientific Speciality Instructor;National Scientific Committee;Scientific Instructor;Heritage Discovery Course Instructor Trainer
+Scientific Committee;Scientific Speciality Instructor;National Scientific Committee;Scientific Instructor;Marine Biology Instructor Trainer
+Scientific Committee;Scientific Speciality Instructor;National Scientific Committee;Scientific Instructor;Ocean Discovery Instructor Trainer
+Scientific Committee;Scientific Speciality Instructor;Archaeology Instructor Trainer;Scientific Instructor;Archaeology Instructor
+Scientific Committee;Scientific Speciality Instructor;Conservation Biology Course Instructor Trainer;Scientific Instructor;Conservation Biology Course Instructor
+Scientific Committee;Scientific Speciality Instructor;Fresh water Biology Instructor Trainer;Scientific Instructor;Fresh water Biology Instructor
+Scientific Committee;Scientific Speciality Instructor;Geology Instructor Trainer;Scientific Instructor;Geology Instructor
+Scientific Committee;Scientific Speciality Instructor;Heritage Discovery Course Instructor Trainer;Scientific Instructor;Heritage Discovery Course Instructor
+Scientific Committee;Scientific Speciality Instructor;Marine Biology Instructor Trainer;Scientific Instructor;Marine Biology Instructor
+Scientific Committee;Scientific Speciality Instructor;Ocean Discovery Instructor Trainer;Scientific Instructor;Ocean Discovery Instructor
+Technical Committee;Dive Leader;Two Star Instructor, Three Star Instructor;Dive Leader;Three Star Diver
+Technical Committee;Diver;Advanced Drift Instructor;;Advanced Drift Diver
+Technical Committee;Diver;Advanced Skills Instructor  ;;Advanced Skills Diver
+Technical Committee;Diver;Altitude Instructor;;Altitude Diver
+Technical Committee;Diver;Altitude Instructor Trainer;;Altitude Instructor
+Technical Committee;Diver;Cave Instructor 1  ;;Cave Diver 1
+Technical Committee;Diver;Children Instructor;;Children 1
+Technical Committee;Diver;Children Instructor;;Children 2
+Technical Committee;Diver;Children Instructor;;Children 3
+Technical Committee;Diver;Children Instructor;;Children Assistant
+Technical Committee;Diver;Compressor Operator Instructor;;Compressor Operator
+Technical Committee;Diver;Compressor Operator Instructor Trainer;;Compressor Operator Instructor
+Technical Committee;Diver;Disable Instructor;;Disable Assistant
+Technical Committee;Diver;Disable Instructor;;Disable Diver 1
+Technical Committee;Diver;Disable Instructor;;Disable Diver 2
+Technical Committee;Diver;Disable Instructor;;Disable Diver 3
+Technical Committee;Diver;Dry Suit Instructor  ;;Dry Suit
+Technical Committee;Diver;Two Star Instructor, Three Star Instructor;;Four Star Diver
+Technical Committee;Diver;Ice Diving Instructor  ;;Ice Diving
+Technical Committee;Diver;One Star Instructor, Two Star Instructor, Three Star Instructor;;Intro to Scuba Diving Experience
+Technical Committee;Diver;Night Diving Instructor;;Night Diving
+Technical Committee;Diver;Nitrox Instructor  ;;Nitrox Diver
+Technical Committee;Diver;Nitrox Gasblender Instructor  ;;Nitrox Gasblender
+Technical Committee;Diver;Nitrox Instructor Trainer;;Nitrox Instructor
+Technical Committee;Diver;One Star Instructor, Two Star Instructor, Three Star Instructor;;One Star Diver
+Technical Committee;Diver;Oxygen Administrator Instructor;;Oxygen Administrator
+Technical Committee;Diver;National Technical Committee;;Oxygen Administrator Instructor
+Technical Committee;Diver;Photo Instructor 1  ;;Photo 1
+Technical Committee;Diver;Photo Instructor 2  ;;Photo 2
+Technical Committee;Diver;Photo Instructor 2  ;;Photo 3
+Technical Committee;Diver;Two Star Instructor, Three Star Instructor;;Rescue Diver
+Technical Committee;Diver;Recreational Scooter Instructor;;Recreational Scooter Diver
+Technical Committee;Diver;Self Rescue Instructor;;Self Rescue Diver
+Technical Committee;Diver;Self Rescue Instructor Trainer;;Self Rescue Instructor
+Technical Committee;Diver;Sidemount Instructor  ;;Sidemount Diver
+Technical Committee;Diver;Snorkel Instructor 1  ;;Snorkel 1
+Technical Committee;Diver;Snorkel Instructor 2  ;;Snorkel 2
+Technical Committee;Diver;Snorkel Instructor 2  ;;Snorkel 3
+Technical Committee;Diver;Two Star Instructor, Three Star Instructor;;Two Star Diver
+Technical Committee;Diver;One Star Instructor, Two Star Instructor, Three Star Instructor;;Underwater Navigation
+Technical Committee;Diver;Wreck Instructor 1  ;;Wreck Diver 1
+Technical Committee;Diver;National Technical Committee;;Altitude Instructor Trainer
+Technical Committee;Diver;National Technical Committee;;Compressor Operator Instructor Trainer
+Technical Committee;Diver;National Technical Committee;;Nitrox Instructor Trainer
+Technical Committee;Diver;National Technical Committee;;Self Rescue Instructor Trainer
+Technical Committee;Diving Instructor;Advanced Drift Instructor Trainer;Diving Instructor;Advanced Drift Instructor
+Technical Committee;Diving Instructor;Advanced Skills Instructor Trainer;Diving Instructor;Advanced Skills Instructor
+Technical Committee;Diving Instructor;Cave Instructor 3  ;Diving Instructor;Cave Instructor 1
+Technical Committee;Diving Instructor;Children Instructor Trainer;Diving Instructor;Children Instructor
+Technical Committee;Diving Instructor;Disable Instructor Trainer;Diving Instructor;Disable Instructor
+Technical Committee;Diving Instructor;Dry Suit Instructor Trainer;Diving Instructor;Dry Suit Instructor
+Technical Committee;Diving Instructor;Ice Diving Instructor Trainer;Diving Instructor;Ice Diving Instructor
+Technical Committee;Diving Instructor;Night Diving Instructor Trainer;Diving Instructor;Night Diving Instructor
+Technical Committee;Diving Instructor;Nitrox Gasblender Instructor Trainer;Diving Instructor;Nitrox Gasblender Instructor
+Technical Committee;Diving Instructor;Three Star Instructor;Diving Instructor;One Star Instructor
+Technical Committee;Diving Instructor;Photo Instructor 3  ;Diving Instructor;Photo Instructor 1
+Technical Committee;Diving Instructor;Photo Instructor 3  ;Diving Instructor;Photo Instructor 2
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Photo Instructor 3
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Recreational Scooter Instructor
+Technical Committee;Diving Instructor;Sidemount Instructor Trainer;Diving Instructor;Sidemount Instructor
+Technical Committee;Diving Instructor;Three Star Instructor;Diving Instructor;Snorkel Instructor 1
+Technical Committee;Diving Instructor;Three Star Instructor;Diving Instructor;Snorkel Instructor 2
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Three Star Instructor
+Technical Committee;Diving Instructor;Three Star Instructor;Diving Instructor;Two Star Instructor
+Technical Committee;Diving Instructor;Wreck Instructor Trainer;Diving Instructor;Wreck Instructor 1
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Advanced Drift Instructor Trainer
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Advanced Skills Instructor Trainer
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Children Instructor Trainer
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Disable Instructor Trainer
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Dry Suit Instructor Trainer
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Ice Diving Instructor Trainer
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Night Diving Instructor Trainer
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Nitrox Instructor Trainer
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Nitrox Gasblender Instructor Trainer
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Sidemount Instructor Trainer
+Technical Committee;Diving Instructor;National Technical Committee;Diving Instructor;Wreck Instructor Trainer
+Technical Committee;Freediver;Apnea Instructor 1  ;;Apnea 1
+Technical Committee;Freediver;Apnea Instructor 2  ;;Apnea 2
+Technical Committee;Freediver;Apnea Instructor 2  ;;Apnea 3
+Technical Committee;Freediver;Apnea Instructor 2  ;;Apnea 4
+Technical Committee;Freediver;One Star Freediving Instructor;;Discovery Freediver
+Technical Committee;Freediver;One Star Freediving Instructor  ;;One Star Freediver
+Technical Committee;Freediver;Pool One Star Freediving Instructor  ;;Pool Discovery Freediver
+Technical Committee;Freediver;Pool One Star Freediving Instructor  ;;Pool One Star Freediver
+Technical Committee;Freediver;Pool Two Star Freediving Instructor  ;;Pool Two Star Freediver
+Technical Committee;Freediver;Two Star Freediving Instructor  ;;Three Star Freediver
+Technical Committee;Freediver;Two Star Freediving Instructor  ;;Two Star Freediver
+Technical Committee;Freediving Instructor;Apnea Instructor 3  ;Freediving Instructor;Apnea Instructor 1
+Technical Committee;Freediving Instructor;Apnea Instructor 3  ;Freediving Instructor;Apnea Instructor 2
+Technical Committee;Freediving Instructor;National Technical Committee;Freediving Instructor;Apnea Instructor 3
+Technical Committee;Freediving Instructor;Three Star Freediving Instructor  ;Freediving Instructor;One Star Freediving Instructor
+Technical Committee;Freediving Instructor;National Technical Committee;Freediving Instructor;Pool One Star Freediving Instructor
+Technical Committee;Freediving Instructor;National Technical Committee;Freediving Instructor;Pool Two Star Freediving Instructor
+Technical Committee;Freediving Instructor;Three Star Freediving Instructor  ;Freediving Instructor;Two Star Freediving Instructor
+Technical Committee;Freediving Instructor;National Technical Committee;Freediving Instructor;Three Star Freediving Instructor
+Technical Committee;Technical Diver;Cave Instructor 2  ;;Cave Diver 2
+Technical Committee;Technical Diver;National Technical Committee;;Cave Diver 3
+Technical Committee;Technical Diver;Extended Range Instructor  ;;Extended Range
+Technical Committee;Technical Diver;Nitrox Advanced Instructor  ;;Nitrox Advanced Diver
+Technical Committee;Technical Diver;Rebreather CCR Instructor  ;;Rebreather CCR Diver
+Technical Committee;Technical Diver;Rebreather SCR Instructor  ;;Rebreather SCR Diver
+Technical Committee;Technical Diver;Technical Scooter Instructor;;Technical Scooter Diver
+Technical Committee;Technical Diver;Overhead Environment Scooter Instructor;;Overhead Environment Scooter Diver
+Technical Committee;Technical Diver;Tech Sidemount Instructor  ;;Tech Sidemount Diver
+Technical Committee;Technical Diver;Technical Skills Instructor  ;;Technical Skills Diver
+Technical Committee;Technical Diver;Trimix Advanced Instructor  ;;Trimix Advanced Diver
+Technical Committee;Technical Diver;Trimix Gasblender Instructor  ;;Trimix Gasblender
+Technical Committee;Technical Diver;Trimix Normoxic Instructor  ;;Trimix Normoxic Diver
+Technical Committee;Technical Diver;Trimix Recreational Instructor  ;;Trimix Recreational Diver
+Technical Committee;Technical Diver;Wreck Instructor 2  ;;Wreck Diver 2
+Technical Committee;Technical Diving Instructor;Cave Instructor 3  ;Technical Diving Instructor;Cave Instructor 2
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Cave Instructor 3
+Technical Committee;Technical Diving Instructor;Extended Range Instructor Trainer;Technical Diving Instructor;Extended Range Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Extended Range Instructor Trainer
+Technical Committee;Technical Diving Instructor;Nitrox Advanced Instructor Trainer;Technical Diving Instructor;Nitrox Advanced Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Nitrox Advanced Instructor Trainer
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Rebreather CCR Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Rebreather CCR Instructor Trainer
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Rebreather SCR Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Rebreather SCR Instructor Trainer
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Technical Scooter Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Overhead Environment Scooter Instructor
+Technical Committee;Technical Diving Instructor;Tech Sidemount Instructor  Trainer;Technical Diving Instructor;Tech Sidemount Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Tech Sidemount Instructor Trainer
+Technical Committee;Technical Diving Instructor;Technical Skills Instructor Trainer;Technical Diving Instructor;Technical Skills Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Technical Skills Instructor Trainer
+Technical Committee;Technical Diving Instructor;Trimix Advanced Instructor Trainer;Technical Diving Instructor;Trimix Advanced Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Trimix Advanced Instructor Trainer
+Technical Committee;Technical Diving Instructor;Trimix Gasblender Instructor Trainer;Technical Diving Instructor;Trimix Gasblender Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Trimix Gasblender Instructor Trainer
+Technical Committee;Technical Diving Instructor;Trimix Normoxic Instructor Trainer;Technical Diving Instructor;Trimix Normoxic Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Trimix Normoxic Instructor Trainer
+Technical Committee;Technical Diving Instructor;Trimix Recreational Instructor Trainer  ;Technical Diving Instructor;Trimix Recreational Instructor
+Technical Committee;Technical Diving Instructor;National Technical Committee;Technical Diving Instructor;Trimix Recreational Instructor Trainer
+Technical Committee;Technical Diving Instructor;Wreck Instructor Trainer;Technical Diving Instructor;Wreck Instructor 2

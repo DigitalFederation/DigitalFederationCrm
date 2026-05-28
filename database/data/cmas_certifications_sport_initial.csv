@@ -1,0 +1,71 @@
+committee_id;professional_role_id;parent_id;license_id;name;price;deleted_at;created_at;updated_at
+Sport Committee;Aquathlon Coach;;NULL;Aquathlon Coach - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Aquathlon Coach;;NULL;Aquathlon Coach - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Aquathlon Coach;;NULL;Aquathlon Coach - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Aquathlon Coach;;NULL;Aquathlon Coach - Level 4;NULL;NULL;NULL;NULL
+Sport Committee;Finswimming Coach;;NULL;Finswimming Coach - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Finswimming Coach;;NULL;Finswimming Coach - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Finswimming Coach;;NULL;Finswimming Coach - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Finswimming Coach;;NULL;Finswimming Coach - Level 4;NULL;NULL;NULL;NULL
+Sport Committee;Freediving Coach;;NULL;Freediving Coach - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Freediving Coach;;NULL;Freediving Coach - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Freediving Coach;;NULL;Freediving Coach - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Freediving Coach;;NULL;Freediving Coach - Level 4;NULL;NULL;NULL;NULL
+Sport Committee;Orienteering Coach;;NULL;Orienteering Coach - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Orienteering Coach;;NULL;Orienteering Coach - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Orienteering Coach;;NULL;Orienteering Coach - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Orienteering Coach;;NULL;Orienteering Coach - Level 4;NULL;NULL;NULL;NULL
+Sport Committee;Spearfishing Coach;;NULL;Spearfishing Coach - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Spearfishing Coach;;NULL;Spearfishing Coach - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Spearfishing Coach;;NULL;Spearfishing Coach - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Spearfishing Coach;;NULL;Spearfishing Coach - Level 4;NULL;NULL;NULL;NULL
+Sport Committee;Sport Diving Coach;;NULL;Sport Diving Coach - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Sport Diving Coach;;NULL;Sport Diving Coach - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Sport Diving Coach;;NULL;Sport Diving Coach - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Sport Diving Coach;;NULL;Sport Diving Coach - Level 4;NULL;NULL;NULL;NULL
+Sport Committee;Target Shooting Coach;;NULL;Target Shooting Coach - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Target Shooting Coach;;NULL;Target Shooting Coach - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Target Shooting Coach;;NULL;Target Shooting Coach - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Target Shooting Coach;;NULL;Target Shooting Coach - Level 4;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Hockey Coach;;NULL;Underwater Hockey Coach - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Hockey Coach;;NULL;Underwater Hockey Coach - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Hockey Coach;;NULL;Underwater Hockey Coach - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Hockey Coach;;NULL;Underwater Hockey Coach - Level 4;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Rugby Coach;;NULL;Underwater Rugby Coach - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Rugby Coach;;NULL;Underwater Rugby Coach - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Rugby Coach;;NULL;Underwater Rugby Coach - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Rugby Coach;;NULL;Underwater Rugby Coach - Level 4;NULL;NULL;NULL;NULL
+Sport Committee;Visual Coach;;NULL;Visual Coach - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Visual Coach;;NULL;Visual Coach - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Visual Coach;;NULL;Visual Coach - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Visual Coach;;NULL;Visual Coach - Level 4;NULL;NULL;NULL;NULL
+Sport Committee;Aquathlon Referee ;;NULL;Aquathlon Referee - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Aquathlon Referee ;;NULL;Aquathlon Referee - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Aquathlon Referee ;;NULL;Aquathlon Referee - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Finswimming Judge ;;NULL;Finswimming Judge - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Finswimming Judge ;;NULL;Finswimming Judge - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Finswimming Judge ;;NULL;Finswimming Judge - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Freediving Judge ;;NULL;Freediving Judge - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Freediving Judge ;;NULL;Freediving Judge - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Freediving Judge ;;NULL;Freediving Judge - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Orienteering Referee ;;NULL;Orienteering Referee - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Orienteering Referee ;;NULL;Orienteering Referee - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Orienteering Referee ;;NULL;Orienteering Referee - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Spearfishing Judge ;;NULL;Spearfishing Judge - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Spearfishing Judge ;;NULL;Spearfishing Judge - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Spearfishing Judge ;;NULL;Spearfishing Judge - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Sport Diving Judge ;;NULL;Sport Diving Judge - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Sport Diving Judge ;;NULL;Sport Diving Judge - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Sport Diving Judge ;;NULL;Sport Diving Judge - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Target Shooting Judge ;;NULL;Target Shooting Judge - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Target Shooting Judge ;;NULL;Target Shooting Judge - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Target Shooting Judge ;;NULL;Target Shooting Judge - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Hockey Referee ;;NULL;Underwater Hockey Referee - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Hockey Referee ;;NULL;Underwater Hockey Referee - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Hockey Referee ;;NULL;Underwater Hockey Referee - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Rugby Referee ;;NULL;Underwater Rugby Referee - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Rugby Referee ;;NULL;Underwater Rugby Referee - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Underwater Rugby Referee ;;NULL;Underwater Rugby Referee - Level 3;NULL;NULL;NULL;NULL
+Sport Committee;Visual Jury ;;NULL;Visual Jury - Level 1;NULL;NULL;NULL;NULL
+Sport Committee;Visual Jury ;;NULL;Visual Jury - Level 2;NULL;NULL;NULL;NULL
+Sport Committee;Visual Jury ;;NULL;Visual Jury - Level 3;NULL;NULL;NULL;NULL

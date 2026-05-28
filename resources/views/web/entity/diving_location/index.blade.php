@@ -1,0 +1,9 @@
+<x-layout>
+    <x-common.diving_location.index
+        :divingLocations="$divingLocations"
+        :districts="$districts"
+        :searchName="$searchName"
+        :districtId="$districtId"
+        group="entity"
+    />
+</x-layout>

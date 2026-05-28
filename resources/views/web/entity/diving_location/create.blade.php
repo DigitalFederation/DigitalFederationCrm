@@ -1,0 +1,11 @@
+<x-layout>
+    <x-common.diving_location.form
+        :countries="$countries"
+        :districts="$districts"
+        :divingLocation="$divingLocation"
+        :existingLocations="$existingLocations"
+        :publicLocations="$publicLocations"
+        formMethod="POST"
+        :formAction="route('entity.diving-location.store')"
+    />
+</x-layout>
