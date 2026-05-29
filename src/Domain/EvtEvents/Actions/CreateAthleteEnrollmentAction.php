@@ -3,6 +3,8 @@
 namespace Domain\EvtEvents\Actions;
 
 use App\Enums\EvtAthleteEnrollmentStatusEnum;
+use App\Enums\EvtEventEnrollmentRoleEnum;
+use App\Enums\EvtEventFeeTypeEnum;
 use Domain\Entities\Models\Entity;
 use Domain\EvtEvents\Models\AthleteEnrollment;
 use Domain\EvtEvents\Models\AthleteEnrollmentAttributes;
@@ -80,6 +82,12 @@ class CreateAthleteEnrollmentAction
         try {
             // Handle PER_PERSON pricing (optional)
             $perPersonPricing = $perPersonPricingId ? Pricing::find($perPersonPricingId) : null;
+            if (! $perPersonPricing && $this->requiresPerPersonPricing($event)) {
+                throw ValidationException::withMessages([
+                    'pricing' => __('events.select_pricing_option'),
+                ]);
+            }
+
             $perPersonPrice = $perPersonPricing ? $perPersonPricing->price : 0.0;
 
             // Handle discipline pricing (only if discipline exists)
@@ -201,5 +209,18 @@ class CreateAthleteEnrollmentAction
 
             throw $e;
         }
+    }
+
+    private function requiresPerPersonPricing(Event $event): bool
+    {
+        return Pricing::active()
+            ->where('event_id', $event->id)
+            ->where('price_type', EvtEventFeeTypeEnum::PER_PERSON->value)
+            ->where(function ($query) {
+                $query->where('enrollment_role', EvtEventEnrollmentRoleEnum::ATHLETE->value)
+                    ->orWhereNull('enrollment_role');
+            })
+            ->where('price', '>', 0)
+            ->exists();
     }
 }
