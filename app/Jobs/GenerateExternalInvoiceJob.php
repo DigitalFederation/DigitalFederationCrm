@@ -9,6 +9,7 @@ use Domain\Invoicing\Actions\CreateMoloniInvoiceReceiptAction;
 use Domain\Invoicing\Models\MoloniInvoice;
 use Domain\Payments\Models\PaymentTransaction;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -30,7 +31,7 @@ use Illuminate\Support\Facades\Notification;
  *
  * @see \App\Listeners\DispatchInvoiceGenerationListener
  */
-class GenerateExternalInvoiceJob implements ShouldQueue
+class GenerateExternalInvoiceJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -38,6 +39,11 @@ class GenerateExternalInvoiceJob implements ShouldQueue
      * The number of times the job may be attempted.
      */
     public int $tries = 3;
+
+    /**
+     * Keep duplicate invoice generation jobs for the same document out of the queue.
+     */
+    public int $uniqueFor = 300;
 
     /**
      * The number of seconds to wait before retrying the job.
@@ -56,6 +62,11 @@ class GenerateExternalInvoiceJob implements ShouldQueue
         public ?PaymentTransaction $transaction,
         public array $webhookData
     ) {}
+
+    public function uniqueId(): string
+    {
+        return $this->document->id;
+    }
 
     /**
      * Execute the job.
