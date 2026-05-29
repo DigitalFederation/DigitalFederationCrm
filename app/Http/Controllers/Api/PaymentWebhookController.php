@@ -176,8 +176,10 @@ class PaymentWebhookController extends Controller
         $amount = $paymentResponse->amount;
 
         try {
+            $paymentWasProcessed = false;
+
             // Use database transaction with locking to prevent race conditions
-            DB::transaction(function () use ($document, $transaction, $webhookData, $requestId, $amount) {
+            DB::transaction(function () use ($document, $transaction, $webhookData, $requestId, $amount, &$paymentWasProcessed) {
                 // Lock the transaction row to prevent concurrent processing
                 $lockedTransaction = PaymentTransaction::lockForUpdate()->find($transaction->id);
 
@@ -207,7 +209,15 @@ class PaymentWebhookController extends Controller
                     'transaction_id' => $transaction->id,
                     'amount' => $amount,
                 ]);
+
+                $paymentWasProcessed = true;
             });
+
+            if (! $paymentWasProcessed) {
+                $this->updateWebhookLog($webhookLog, 'already_processed', $startTime, ['status' => 'already_processed'], 200, $transaction->id);
+
+                return response()->json(['status' => 'already_processed'], 200);
+            }
 
             // Dispatch DocumentMarkedAsPaid event AFTER the transaction commits
             // This event is the hook point for external invoice generation (Moloni)

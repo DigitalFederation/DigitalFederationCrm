@@ -6,6 +6,7 @@ use Domain\Documents\Models\Document;
 use Domain\Invoicing\Exceptions\MoloniNotConfiguredException;
 use Domain\Invoicing\Models\MoloniInvoice;
 use Domain\Invoicing\Models\MoloniSyncLog;
+use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -77,16 +78,32 @@ class MoloniInvoiceService
             throw new \RuntimeException('Failed to create Moloni invoice: no document_id returned');
         }
 
-        $moloniInvoice = MoloniInvoice::create([
-            'document_id' => $document->id,
-            'moloni_document_id' => $response['document_id'],
-            'moloni_document_set_id' => $invoiceData['document_set_id'],
-            'moloni_number' => $response['document_number'] ?? $response['number'] ?? 'PENDING',
-            'moloni_status' => ($response['status'] ?? 0) == 1 ? 'closed' : 'draft',
-            'moloni_total' => $document->total_value,
-            'moloni_response' => $response,
-            'synced_at' => now(),
-        ]);
+        try {
+            $moloniInvoice = MoloniInvoice::create([
+                'document_id' => $document->id,
+                'moloni_document_id' => $response['document_id'],
+                'moloni_document_set_id' => $invoiceData['document_set_id'],
+                'moloni_number' => $response['document_number'] ?? $response['number'] ?? 'PENDING',
+                'moloni_status' => ($response['status'] ?? 0) == 1 ? 'closed' : 'draft',
+                'moloni_total' => $document->total_value,
+                'moloni_response' => $response,
+                'synced_at' => now(),
+            ]);
+        } catch (UniqueConstraintViolationException $e) {
+            $existingInvoice = MoloniInvoice::findByDocument($document->id);
+
+            if ($existingInvoice) {
+                Log::warning('MoloniInvoiceService: Invoice was created by another process', [
+                    'document_id' => $document->id,
+                    'moloni_invoice_id' => $existingInvoice->moloni_document_id,
+                    'discarded_moloni_document_id' => $response['document_id'],
+                ]);
+
+                return $existingInvoice;
+            }
+
+            throw $e;
+        }
 
         MoloniSyncLog::logSuccess('invoice_create', [
             'document_id' => $document->id,

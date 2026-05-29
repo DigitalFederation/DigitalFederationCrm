@@ -179,6 +179,28 @@ describe('MoloniInvoiceFailedNotification', function () {
 
 });
 
+describe('GenerateExternalInvoiceJob', function () {
+
+    it('uses the document id as its unique queue key', function () {
+        $document = Document::factory()->create([
+            'status_class' => PaidDocumentState::class,
+            'total_value' => 100.00,
+        ]);
+
+        $transaction = PaymentTransaction::factory()->create([
+            'document_id' => $document->id,
+            'amount' => 100.00,
+            'status' => 'success',
+        ]);
+
+        $job = new GenerateExternalInvoiceJob($document, $transaction, []);
+
+        expect($job->uniqueId())->toBe($document->id)
+            ->and($job->uniqueFor)->toBe(300);
+    });
+
+});
+
 describe('MoloniInvoice Model', function () {
 
     it('detects existing invoice for document', function () {
