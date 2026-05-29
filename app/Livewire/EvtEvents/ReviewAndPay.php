@@ -3,6 +3,8 @@
 namespace App\Livewire\EvtEvents;
 
 use App\Enums\EvtAthleteEnrollmentStatusEnum;
+use App\Enums\EvtEventEnrollmentRoleEnum;
+use App\Enums\EvtEventFeeTypeEnum;
 use App\Enums\EvtEventPaymentStatusEnum;
 use Domain\Documents\States\CanceledDocumentState;
 use Domain\Documents\States\PaidDocumentState;
@@ -13,6 +15,7 @@ use Domain\EvtEvents\Models\AthleteEnrollment;
 use Domain\EvtEvents\Models\CoachEnrollment;
 use Domain\EvtEvents\Models\Enrollment;
 use Domain\EvtEvents\Models\Event;
+use Domain\EvtEvents\Models\Pricing;
 use Domain\EvtEvents\Models\RefereeEnrollment;
 use Domain\EvtEvents\Models\TeamOfficialEnrollment;
 use Domain\EvtEvents\States\ActiveRefereeEnrollmentState;
@@ -486,6 +489,23 @@ class ReviewAndPay extends Component
         }
 
         if ($this->grandTotal <= 0) {
+            if ($this->hasActivePaidPricingForCurrentEnrollment()) {
+                Log::warning('Blocked event enrollment confirmation with zero total while paid pricing exists', [
+                    'event_id' => $this->event->id,
+                    'enrollment_id' => $this->enrollment->id,
+                    'enrollable_type' => $this->enrollment->enrollable_type,
+                    'enrollable_id' => $this->enrollment->enrollable_id,
+                ]);
+
+                Notification::make()
+                    ->title(__('events.configuration_error'))
+                    ->body(__('events.pricing_config_error'))
+                    ->danger()
+                    ->send();
+
+                return;
+            }
+
             $this->enrollment->update([
                 'payment_status' => EvtEventPaymentStatusEnum::PAID->value,
                 'activated_at' => now(),
@@ -546,6 +566,51 @@ class ReviewAndPay extends Component
                 ->danger()
                 ->send();
         }
+    }
+
+    private function hasActivePaidPricingForCurrentEnrollment(): bool
+    {
+        if (! $this->enrollment) {
+            return false;
+        }
+
+        $roles = [];
+
+        if (! empty($this->enrollmentsByDiscipline)) {
+            $roles[] = EvtEventEnrollmentRoleEnum::ATHLETE->value;
+        }
+
+        if (! empty($this->otherEnrollments['coaches'])) {
+            $roles[] = EvtEventEnrollmentRoleEnum::COACH->value;
+        }
+
+        if (! empty($this->otherEnrollments['officials'])) {
+            $roles[] = EvtEventEnrollmentRoleEnum::OFFICIAL->value;
+        }
+
+        if (! empty($this->otherEnrollments['referees'])) {
+            $roles[] = EvtEventEnrollmentRoleEnum::TECHNICAL_OFFICIAL->value;
+            $roles[] = EvtEventEnrollmentRoleEnum::REFEREE->value;
+        }
+
+        if (empty($roles)) {
+            return false;
+        }
+
+        return Pricing::active()
+            ->where('event_id', $this->event->id)
+            ->where(function ($query) use ($roles) {
+                $query->whereIn('enrollment_role', array_unique($roles))
+                    ->orWhereNull('enrollment_role');
+            })
+            ->whereIn('price_type', [
+                EvtEventFeeTypeEnum::PER_PERSON->value,
+                EvtEventFeeTypeEnum::PER_DISCIPLINE->value,
+                EvtEventFeeTypeEnum::EVENT_FEE->value,
+                EvtEventFeeTypeEnum::FLAT_FEE->value,
+            ])
+            ->where('price', '>', 0)
+            ->exists();
     }
 
     protected function transitionEnrollmentsToConfirmed(): void

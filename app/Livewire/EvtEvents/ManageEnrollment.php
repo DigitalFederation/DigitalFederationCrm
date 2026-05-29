@@ -4,6 +4,7 @@ namespace App\Livewire\EvtEvents;
 
 use App\Enums\EvtAthleteEnrollmentStatusEnum;
 use App\Enums\EvtEventEnrollmentRoleEnum;
+use App\Enums\EvtEventFeeTypeEnum;
 use App\Traits\ValidatesEventAttributes;
 use Domain\Entities\Models\Entity;
 use Domain\EvtEvents\Actions\CreateAthleteEnrollmentAction;
@@ -2072,9 +2073,9 @@ class ManageEnrollment extends Component implements HasForms, HasTable
 
         return view('livewire.evt-events.manage-enrollment', [
             'selectedDisciplineModel' => $selectedDisciplineModel,
-            'multiplePerPersonPricing' => ! empty($this->selectedPricingIds['perPerson']) && is_array($this->selectedPricingIds['perPerson']),
-            'multipleDisciplinePricing' => ! empty($this->selectedPricingIds['discipline']) && is_array($this->selectedPricingIds['discipline']),
-            'multipleEventFeePricing' => ! empty($this->selectedPricingIds['eventFee']) && is_array($this->selectedPricingIds['eventFee']),
+            'multiplePerPersonPricing' => $this->pricingData->where('price_type', EvtEventFeeTypeEnum::PER_PERSON->value)->count() > 1,
+            'multipleDisciplinePricing' => $this->pricingData->where('price_type', EvtEventFeeTypeEnum::PER_DISCIPLINE->value)->count() > 1,
+            'multipleEventFeePricing' => $this->pricingData->where('price_type', EvtEventFeeTypeEnum::EVENT_FEE->value)->count() > 1,
             'enrollmentType' => $this->enrollmentType,
             'attributeValues' => $attributeValues,
         ]);
