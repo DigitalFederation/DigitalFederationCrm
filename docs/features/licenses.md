@@ -31,15 +31,20 @@ Licenses go through the following states:
 
 When a license is purchased, the initial state depends on:
 
-| Purchaser | License Type | Requires Validation | Free | Initial State |
-|-----------|--------------|---------------------|------|---------------|
-| Entity | Diving | Yes | - | Pending TD Approval |
-| Individual | Diving | Yes | - | Pending Validation |
-| Any | Non-Diving | Yes | - | Pending Validation |
+The decision is driven by several properties: the purchaser type, whether the license is free, the license's `requires_admin_validation` flag, the license committee, and whether that committee is international (`committee.isInternational()`). In the diving example deployment, `DIVING` (CMAS) is an international committee while `DIVINGSERVICES` is non-international.
+
+| Purchaser | License | Requires Validation | Free | Initial State |
+|-----------|---------|---------------------|------|---------------|
+| Entity | Non-international diving (`DIVINGSERVICES`) | Yes | - | Pending TD Approval |
+| Any | Non-international, non-diving | Yes | - | Pending Validation |
+| Any | International committee (e.g. `DIVING`/CMAS) | Yes | No | Pending (awaiting payment) |
 | Any | Any | No | Yes | Active |
 | Any | Any | No | No | Pending (awaiting payment) |
 
-**Important:** TD approval only applies to entities purchasing diving licenses. Individuals go directly to federation validation.
+**Important:**
+- **TD approval** applies **only** to entities purchasing **non-international** diving (`DIVINGSERVICES`) licenses.
+- **International** licenses (e.g. CMAS `DIVING`) skip **both** TD approval **and** admin validation regardless of the `requires_admin_validation` flag — they go straight to payment (or to Active if free).
+- Non-international, non-diving licenses with validation enabled go to federation (admin) validation.
 
 ---
 
@@ -80,28 +85,39 @@ Licenses can require official documents before purchase:
 
 Licenses can require certifications before purchase:
 - Only applies to individual purchasers (entities exempt)
-- All required certifications must be held
+- The individual must hold **at least one** of the required certifications (OR logic) — e.g. a coach with Grade I OR Grade II OR Grade III qualifies
+- Active and provisional certifications both count
 - Clear error message if requirements not met
 
 ---
 
-## 5. Diving License Workflow
+## 5. Diving License Workflow (Example Deployment)
 
-Diving licenses have a special validation workflow for entities.
+In the diving example deployment, licenses split into two committees that behave differently: **non-international** diving services (`DIVINGSERVICES`) and the **international** CMAS committee (`DIVING`).
 
-### Entity vs Individual
+### Non-International Diving (`DIVINGSERVICES`)
 
 | Purchaser | Flow |
 |-----------|------|
 | **Entity** | Request → TD Approval → Federation Validation → Payment → Active |
 | **Individual** | Request → Federation Validation → Payment → Active |
 
-### Entity Diving License Steps
+(Both flows assume the license has `requires_admin_validation` enabled.)
 
-1. Entity requests diving license
+### International Diving (`DIVING` / CMAS)
+
+International licenses skip **both** TD approval and federation validation:
+
+| Purchaser | Flow |
+|-----------|------|
+| **Entity / Individual** | Request → Payment → Active (or directly Active if free) |
+
+### Entity Non-International Diving Steps
+
+1. Entity requests the diving license
 2. **TD Approval**: All assigned technical directors must approve
 3. **Federation Validation**: Admin reviews and approves/rejects
-4. **Payment**: If approved and paid license, awaits payment
+4. **Payment**: If approved and the license is paid, awaits payment
 5. **Active**: Payment confirmed, license is valid
 
 ### Validation Rules

@@ -60,18 +60,21 @@ The Import System allows federation administrators to perform bulk imports of in
 | Surname | Last name |
 | Email | Valid email address |
 | Birthdate | Date of birth |
-| Country | Country code |
+
+> Country is **not** a required field. If it is not mapped/provided, the country is auto-set from the Main (default) Federation's country and a warning is recorded.
 
 ## Optional Fields
 
+These fields are imported only if mapped to a source column:
+
 | Field | Description |
 |-------|-------------|
+| Country | Country name (resolved to `country_id`); auto-set from Main Federation if omitted |
 | Phone | Phone number |
 | Address | Street address |
 | City | City name |
 | Postal Code | ZIP/postal code |
-| Gender | M/F |
-| Nationality | Nationality code |
+| Gender | male / female / other |
 
 ---
 
@@ -81,11 +84,11 @@ The Import System allows federation administrators to perform bulk imports of in
 - Missing required fields
 - Invalid email format
 - Invalid date format
-- Invalid country code
 
 ### Warnings
 - Potential duplicate records
 - Fields exceeding length limits
+- Country not found (the Main Federation country is used instead)
 
 ### Recovery
 - Failed imports can be retried

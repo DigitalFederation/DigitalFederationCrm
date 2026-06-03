@@ -62,11 +62,11 @@ The Dynamic Permission Management System allows administrators to create, manage
 Certain core permissions are protected:
 - Cannot be deleted
 - Cannot be renamed
-- Examples: `access users`, `manage roles`
+- Examples: `access users`, `manage user roles`
 
 ### Permission Naming
-- Lowercase with hyphens
-- Pattern: `action resource` (e.g., `create user`, `access licenses`)
+- Lowercase, space-separated
+- Pattern: `action resource` (e.g., `access users`, `access licenses`)
 
 ### Audit Trail
 All permission changes are logged:

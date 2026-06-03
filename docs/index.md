@@ -4,7 +4,7 @@ title: Home
 hero:
   name: Digital Federation CRM
   text: Platform Documentation
-  tagline: Technical and functional documentation for the Sports Federation management system
+  tagline: Technical and functional documentation for a federation management platform (the Sports Federation deployment shown as the example)
   actions:
     - theme: brand
       text: Get Started
@@ -49,9 +49,9 @@ features:
 
 2. **Federation Membership** - See [Federation Membership Rules](/access-control/federation-membership-rules)
    - Entity join → Only LOCAL federations synced
-   - License activation → Modalidade federation synced
+   - License activation → sport/discipline federation synced
 
-3. **License TD Approval** - See [Licenses](/features/licenses)
+3. **License TD Approval** (example deployment rule) - See [Licenses](/features/licenses)
    - Entity + Diving license → TD approval required first
    - Individual + Diving license → Direct to federation validation
 
