@@ -24,27 +24,31 @@ description: Critical business rules for local vs modalidade federation membersh
 
 ## Terminology
 
-| Term | Portuguese | Database Field | Description |
-|------|------------|----------------|-------------|
+> The platform is a generic federation-management system. The "Portuguese" column and the
+> term "modalidade" (sport/discipline) below come from the example diving deployment and
+> are illustrative only; the database fields are the actual code identifiers.
+
+| Term | Example label (PT) | Database Field | Description |
+|------|--------------------|----------------|-------------|
 | **Main Federation** | Federacao Principal | `is_default_federation = true` | The main national federation. All individuals are members. |
-| **Local Federation** | Associacao Territorial | `is_local = true` | Regional/territorial associations (e.g., Norte, Centro, Sul, Madeira, Acores). Based on geography. |
-| **Modalidade Federation** | Associacao de Modalidade | `is_local = false` (and not main) | Sport-specific associations (e.g., international diving, underwater fishing). Based on sport/activity. |
+| **Local Federation** | Associacao Territorial | `is_local = true` | Regional/territorial associations (based on geography). |
+| **Modalidade Federation** | Associacao de Modalidade | `is_local = false` (and not main) | Sport/discipline-specific associations (based on sport/activity). "Modalidade" = sport/discipline in the example deployment. |
 
 ### Visual Hierarchy
 
 ```
 Primary Federation (Main Federation - is_default_federation = true)
 ├── Local Federations (is_local = true)
-│   ├── Associacao Territorial Norte de Actividades Subaquaticas
-│   ├── Regiao Centro
-│   ├── Example Local Region
-│   ├── Regiao Autonoma dos Acores
-│   └── Associacao Natacao da Madeira
+│   ├── Example Local Region North
+│   ├── Example Local Region Center
+│   ├── Example Local Region South
+│   ├── Example Autonomous Region A
+│   └── Example Autonomous Region B
 │
 └── Modalidade Federations (is_local = false)
-    ├── International Diving Federation
+    ├── Example Diving Federation
     ├── Example Sport Federation
-    └── Centro Portugues de Actividades Subaquaticas
+    └── Example Underwater Activities Federation
 ```
 
 ---
@@ -76,7 +80,7 @@ Federation::where('is_local', false)
 
 ### Rationale
 
-- An individual joining an example club should become a member of "Example Local Region" (territorial), NOT the international diving federation (modalidade)
+- An individual joining an example club should become a member of "Example Local Region" (territorial), NOT the Example Diving Federation (modalidade)
 - Modalidade membership is earned through licenses, not entity membership
 - An individual can be an athlete in one sport at Club A and another sport at Club B
 
@@ -418,11 +422,11 @@ if ($affiliation->federation_id &&
 **Entity's Federations:**
 - Primary Federation (Main) - Active
 - Example Local Region (Local) - Active
-- International Diving Federation (Modalidade) - Active
+- Example Diving Federation (Modalidade) - Active
 
 **Result for Example Member A:**
 - Synced to: Example Local Region (Local) - Pending approval
-- NOT synced to: International Diving Federation (Modalidade)
+- NOT synced to: Example Diving Federation (Modalidade)
 - Already has: Primary Federation (Main) - from individual creation
 
 ### Example 2: License Activation

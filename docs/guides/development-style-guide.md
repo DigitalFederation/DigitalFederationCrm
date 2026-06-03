@@ -358,7 +358,7 @@ Important: Wrap action groups with `space-x-1 flex justify-end items-end` for al
 ### Background Colors
 - White background: `bg-white`
 - Gray background: `bg-slate-50`
-- Active state: `bg-cmas_green`
+- Active state: `bg-active`
 - Pending state: `bg-yellow-400`
 - Canceled state: `bg-red-700`
 - Draft state: `bg-gray-400`
@@ -372,7 +372,7 @@ Important: Wrap action groups with `space-x-1 flex justify-end items-end` for al
 
 ### Brand & Status Colors
 - Brand: `primary` `#6482AD` (light: `#7FA1C3`), `secondary` `#E2DAD6` (light: `#F5EDED`).
-- Status (BG/Text prefixes apply): `draft #71717a`, `pending/#waiting-director #fbbf24`, `paid/#active #10b981`, `approved #1570EF`, `canceled/#suspended #ef4444`, `cmas_brown #9D915F`, `cmas_blue #1b6cb3`, `cmas_green #10B981`.
+- Status (BG/Text prefixes apply): `draft #71717a`, `pending/#waiting-director #fbbf24`, `paid/#active #10b981`, `approved #1570EF`, `canceled/#suspended #ef4444`, `admin_brown #9D915F`, `admin_blue #1b6cb3`, `admin_green #10B981`.
 - Utility: Filament preset exposes `info`, `success`, `warning`, and `danger` scales.
 
 Usage:

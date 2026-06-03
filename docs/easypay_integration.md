@@ -58,13 +58,21 @@ EASYPAY_SANDBOX=true
 
 Located at `config/payment.php`:
 
+The gateway config is read via `config('payment.gateways.easypay')`, so the `easypay`
+key lives under `gateways` (the file also sets `'default' => 'offline'`):
+
 ```php
-'easypay' => [
-    'driver' => 'EasyPay',
-    'handler' => Domain\Payments\Handlers\EasyPayPaymentHandler::class,
-    'account_id' => env('EASYPAY_ACCOUNT_ID'),
-    'api_key' => env('EASYPAY_API_KEY'),
-    'sandbox' => env('EASYPAY_SANDBOX', true),
+'default' => 'offline',
+
+'gateways' => [
+    'easypay' => [
+        'driver' => 'EasyPay',
+        'handler' => Domain\Payments\Handlers\EasyPayPaymentHandler::class,
+        'account_id' => env('EASYPAY_ACCOUNT_ID'),
+        'api_key' => env('EASYPAY_API_KEY'),
+        'webhook_secret' => env('EASYPAY_WEBHOOK_SECRET'),
+        'sandbox' => env('EASYPAY_SANDBOX', true),
+    ],
 ],
 ```
 
@@ -383,8 +391,8 @@ POST /void/{authorization-id}
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-g1h2-i3j4k5l6m7n8",
-  "url": "https://easypay.pt/s/XStDvnMKZaN",
-  "image": "https://cdn.easypay.pt/images/qr/XStDvnMKZaN",
+  "url": "https://easypay.pt/s/<short-code>",
+  "image": "https://cdn.easypay.pt/images/qr/<short-code>",
   "status": "ACTIVE",
   "type": "SINGLE",
   "created_at": "2025-06-16T13:32:32Z",
@@ -414,7 +422,7 @@ GET /link/{id}
 PATCH /link/{id}
 {
   "description": "Updated description",
-  "expiration_time": "2025-01-31 23:59"
+  "expiration_time": "2026-06-10T09:27:55.339Z"
 }
 ```
 

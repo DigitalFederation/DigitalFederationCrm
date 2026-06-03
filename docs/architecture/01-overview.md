@@ -99,6 +99,8 @@ The system organizes many aspects by committees. See [Committee Structure](/arch
 | `DIVING` | `true` | CMAS diving (international) |
 | `SCIENTIFIC` | `true` | CMAS scientific (international) |
 
+> The committee codes above come from the example CMAS-diving (reference) deployment; they are configured data, not platform built-ins.
+
 Methods often filter by committee, e.g., `$individual->certificationsDivingAttributed()`.
 
 ---
@@ -117,12 +119,12 @@ The Individuals domain manages all person-related data and relationships.
 #### Entities Domain
 The Entities domain manages organizations and their relationships.
 - **Key Models:** `Entity`, `EntityFederation`, `EntityProfessionalRole`, `EntityAthlete`
-- **Relationships:** An Entity can belong to many Federations, have many Individuals as members, have professionals with specific roles, have licenses, and host LMS class groups.
+- **Relationships:** An Entity can belong to many Federations, have many Individuals as members, have professionals with specific roles, and have licenses.
 
 #### Federations Domain
 The Federations domain manages governing bodies and their hierarchical structure.
 - **Key Models:** `Federation`, `FederationProfessionalRole`
-- **Relationships:** A Federation can have a parent-child hierarchy, manage Entities and Individuals, handle certifications, licenses, memberships, and LMS access.
+- **Relationships:** A Federation can have a parent-child hierarchy, manage Entities and Individuals, and handle certifications, licenses, and memberships.
 
 #### Licenses Domain
 The Licenses domain manages permissions and authorization aspects.
@@ -144,11 +146,6 @@ The Memberships domain manages federation memberships and plans.
 - **Key Models:** `Membership`, `MembershipPlan`, `LocalMembershipPlan`
 - **Relationships:** A Membership belongs to a Federation and can have many MembershipPlans, which can include multiple Licenses.
 
-#### Learning Management System (LMS)
-The LMS functionality is managed through various models related to courses and training.
-- **Key Models:** `ClassGroup`, `Course`, `CourseInstructor`, `CourseSeat`, `FederationAccess`
-- **Relationships:** ClassGroups belong to Entities. Individuals can be students or instructors. Federations manage course seats and access.
-
 ### Database Schema Conventions
 - **Primary Keys:** UUID is used as the primary key for most models.
 - **Relationships:** Many-to-many relationships often include additional pivot data, especially status information.
@@ -161,8 +158,7 @@ The model relationships are visualized through several Mermaid diagrams:
 2.  License and Certification Models
 3.  Events and Enrollments Models
 4.  Memberships and Plans Models
-5.  Learning Management System Models
-6.  Complete Domain Model Relationships
+5.  Complete Domain Model Relationships
 
 ---
 
@@ -207,12 +203,15 @@ $entities = Entity::filterFederation($federationId)->get();
 
 ### License Management
 **Attributing a License to an Individual:**
+
+> Polymorphic `model_type` values use the registered morph map aliases (`'individual'`, `'entity'`, `'federation'`, registered in `AppServiceProvider`), not fully qualified class names. Scopes query e.g. `where('model_type', 'individual')`.
+
 ```php
 // Create a new license attribution
 $licenseAttributed = LicenseAttributed::create([
     'license_id' => $licenseId,
     'federation_id' => $federationId,
-    'model_type' => Individual::class,
+    'model_type' => 'individual',
     'model_id' => $individualId,
     'status_class' => ActiveLicenseAttributedState::class,
     'license_name' => $license->name,

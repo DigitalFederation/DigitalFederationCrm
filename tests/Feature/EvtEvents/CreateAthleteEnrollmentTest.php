@@ -10,6 +10,7 @@ use Domain\Federations\Models\Federation;
 use Domain\Individuals\Models\Individual;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\ValidationException;
 
 uses(RefreshDatabase::class);
 
@@ -87,5 +88,30 @@ it('successfully creates athlete enrollment with all pricing types', function ()
         'event_fee_pricing_id' => $this->eventFeePricing->id,
         'event_fee' => 25.00,
         'total_price' => 175.00,  // 100 + 50 + 25
+    ]);
+});
+
+it('rejects athlete enrollment when paid per-person pricing exists but no pricing option is selected', function () {
+    $action = new CreateAthleteEnrollmentAction;
+
+    $this->mock(EnrollmentEligibilityService::class, function ($mock) {
+        $mock->shouldReceive('canEnrollInEvent')->andReturn(true);
+    });
+
+    expect(fn () => $action->execute(
+        $this->event,
+        $this->federation,
+        $this->individual->id,
+        $this->enrollment,
+        null,
+        null,
+        null,
+        $this->discipline->id,
+        []
+    ))->toThrow(ValidationException::class);
+
+    $this->assertDatabaseMissing('evt_athletes_enrollment', [
+        'individual_id' => $this->individual->id,
+        'event_id' => $this->event->id,
     ]);
 });
