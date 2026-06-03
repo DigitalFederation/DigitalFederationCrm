@@ -27,7 +27,11 @@ class UserFactory extends Factory
         return [
             'id' => $this->faker->unique()->uuid(),
             'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            // Use a globally-unique address rather than faker's safeEmail(): faker's
+            // unique() only dedupes within a single test (the app/faker is rebuilt per
+            // test), and safeEmail() draws from a small pool, so across a full suite run
+            // two factory users can collide on the users_email_unique constraint.
+            'email' => Str::uuid().'@example.test',
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
             'email_verified_at' => Carbon::now(),
