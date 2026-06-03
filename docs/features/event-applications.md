@@ -47,7 +47,7 @@ The Event Applications system allows entities to submit candidatures (applicatio
 | **Approved** | Application accepted |
 | **Rejected** | Application declined |
 | **Published** | Approved and visible on calendar |
-| **Archived** | Historical record |
+| **Returned for Correction** | Sent back to the entity for changes; can be edited and resubmitted |
 
 ### Flow
 

@@ -20,7 +20,7 @@ The payment system is designed to be flexible and accommodate multiple payment g
 1.  **EasyPay Gateway (`Domain\Payments\Gateways\EasyPayGateway`)**
     *   Integrates with EasyPay Checkout API.
     *   Supports credit cards, Multibanco, MBWay, etc.
-    *   Handles webhooks with signature validation.
+    *   Handles webhooks by verifying payments against the EasyPay API (EasyPay does not use signatures).
     *   Supports sandbox and production modes.
 
 2.  **Offline Gateway (`Domain\Payments\Gateways\OfflineGateway`)**

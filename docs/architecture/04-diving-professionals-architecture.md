@@ -22,9 +22,8 @@ Allow entities to associate with certified diving professionals for operational 
 ### Business Rules
 
 **Eligibility:**
-- Individual must have at least one active diving professional certification
-- Certifications can be from: CMAS, SSI, PADI, SDI/TDI, DDI, GUE
-- Individual must have active diving license from federation
+- Individual must have an active diving (CMAS) certification OR an active diving professional certification OR an active diving license from the federation
+- Diving professional certifications can be from: CMAS, SSI, PADI, SDI/TDI, DDI, GUE
 
 **Invitation Process:**
 - Entity can invite any eligible professional
@@ -57,17 +56,17 @@ Fulfill legal requirements for entity diving licenses. This is NOT a professiona
 | Aspect | Diving Professional | Technical Director |
 |--------|--------------------|--------------------|
 | Invitation | Direct from entity | Only during license request |
-| Relationship | Many-to-many | One per license |
+| Relationship | Many-to-many | One or more directors per license |
 | Purpose | Operational | Legal requirement |
-| Can be removed | Yes, by either party | No, tied to license |
+| Can be removed | Yes, by either party | Yes, transitions to a removed state |
 
 ### Business Rules
 
 - Directors can only be nominated during license request workflow
 - Director must have certifications for the specified systems
 - Director must accept nomination before license can be approved
-- One director per license
-- Cannot be removed once license is active
+- A license can have one or more technical directors (`LicenseAttributed::divingTechnicalDirectors()` is a `HasMany`)
+- A director can be removed: the assignment transitions to `RemovedDivingTechnicalDirectorState`
 
 ### Workflow
 
@@ -101,5 +100,5 @@ Fulfill legal requirements for entity diving licenses. This is NOT a professiona
 | **Diving Professional** | Certified instructor who works with entities |
 | **Technical Director** | Individual responsible for a specific entity diving license |
 | **Entity** | Organization (diving center, school, etc.) |
-| **CMAS Code** | Unique identifier for individuals in the federation |
+| **CMAS Code** | Member-number identifier for individuals (the example deployment's member-number scheme; stored in `member_number`) |
 | **Certification System** | Diving organization (PADI, SSI, CMAS, etc.) |

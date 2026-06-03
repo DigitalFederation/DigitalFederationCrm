@@ -1,15 +1,22 @@
 # Federation License Permissions System
 
+> **Status: implemented and shipped.** This document describes the federation license
+> permission system as it exists in the codebase. The `federation_licenses` table,
+> `License::federations()` / `Federation::licenses()` relationships,
+> `GetAllowedEntityLicensesAction`, and the `FederationLicenseManager` admin component are
+> all present. Code blocks below illustrate the design; the exact production source is the
+> source of truth.
+
 ## Overview
 
-This document describes the implementation of a permission system that allows federations to control which specific licenses their member entities can request. This addresses the limitation where entities could request any license matching their committee type, regardless of their federation's actual offerings.
+This permission system allows federations to control which specific licenses their member entities can request. It addresses the prior limitation where entities could request any license matching their committee type, regardless of their federation's actual offerings.
 
 ## Problem Statement
 
-Currently, entities can request any license that matches their committee type (e.g., 'sport', 'diving'). This creates issues where:
-- Entities from a fishing federation could potentially request hockey licenses
-- There's no way to limit which specific licenses a federation can offer
-- The system relies only on committee-level permissions, which is too broad
+Previously, entities could request any license that matched their committee type (e.g., 'sport', 'diving'). This created issues where:
+- Entities from one federation could potentially request licenses they were never meant to offer
+- There was no way to limit which specific licenses a federation can offer
+- The system relied only on committee-level permissions, which is too broad
 
 ## Solution Architecture
 
@@ -90,6 +97,7 @@ class GetAllowedEntityLicensesAction
     {
         $licensesCacheKey = "licenses_for_type_{$type}_entity_{$entity->id}";
 
+        // TTL is 5 (an integer), which Laravel's Cache::remember() interprets as 5 SECONDS.
         $licenses = Cache::remember($licensesCacheKey, 5, function () use ($type, $entity) {
             // Get all federations the entity belongs to
             $federationIds = $entity->federations()
@@ -227,11 +235,15 @@ class FederationLicenseManager extends Component
 }
 ```
 
-## Migration Steps
+## Migration & Setup
+
+> These steps describe how the feature was rolled out. The schema migration ships with the
+> application; the data/seeder steps below are reference examples for populating initial
+> federation-license relationships.
 
 ### 1. Database Migration
 ```php
-// database/migrations/2025_01_05_create_federation_licenses_table.php
+// database/migrations/2025_07_05_001430_create_federation_licenses_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -352,7 +364,7 @@ If issues arise, the system can be rolled back without data loss:
 
 ## Performance Considerations
 
-1. **Caching**: License queries are already cached for 5 minutes
+1. **Caching**: License queries are cached via `Cache::remember(..., 5, ...)` in `GetAllowedEntityLicensesAction`. The TTL value `5` is an integer, so Laravel treats it as **5 seconds** (not minutes)
 2. **Indexes**: Proper indexes on federation_licenses table
 3. **Eager Loading**: Use `with('federations')` when loading licenses
 4. **Query Optimization**: The additional join is minimal overhead

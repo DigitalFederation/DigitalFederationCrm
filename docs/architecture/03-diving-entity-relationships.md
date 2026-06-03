@@ -9,6 +9,8 @@ description: Relationship structure between individuals, entities, and diving ro
 
 This document explains the relationships between Individuals, Entities, and Diving-related roles in the system.
 
+> The diving roles described here belong to the example (reference) deployment. The underlying model — Individual↔Entity associations, professional roles, and entity athletes — is generic to the platform; diving is one configured set of roles built on top of it.
+
 ---
 
 ## Core Relationships
