@@ -13,32 +13,35 @@ The Dynamic Role Management System enables administrators to create, modify, and
 
 ## Role Hierarchy
 
-### CMAS (Root Organization)
-- **cmas-super-admin** - Full system access
-- **cmas-sport-admin** - Sports-specific administration
-- **cmas-diving-admin** - Diving-specific administration
-- **cmas-scientific-admin** - Scientific-specific administration
+> The platform is a generic federation-management system. The role names below are the
+> actual values seeded by `RoleAndPermissionSeeder` (after the
+> `2025_10_01_172644_simplify_role_system` migration). The diving/CMAS naming in some
+> roles reflects the example diving deployment; the codes themselves are stable identifiers.
+
+### Platform Administration (top tier)
+- **admin** - Full platform access. In the diving example deployment this is the CMAS (root organization) tier.
+
+### Associations
+- **association-sport-admin** - Sport association administration
+- **association-cmas-admin** - Diving/CMAS association administration
+- **association-scientific-admin** - Scientific association administration
+- **association-territorial-admin** - Territorial (local) association administration
 
 ### Federations
-- **federation-admin** - Federation management
-- **federation-sport-admin** - Federation sports management
-- **federation-diving-admin** - Federation diving management
-
-### Local Federations
-- **local-federation-admin** - Local federation management
-- Similar sport/diving/scientific variants
+- **federation-admin** - Main federation management
 
 ### Entities (Clubs/Schools/Centers)
 - **entity-admin** - Entity management
-- **entity-sport-admin** - Entity sports management
-- **entity-diving-admin** - Entity diving management
+- **entity-sport** - Sport-focused entity access
+- **entity-diving-services** - Diving-services entity access
+- **entity-cmas** - Entity authorized for international (CMAS) content
 
 ### Individuals
 - **individual-approved** - Basic approved individual
 - **individual-coach** - Coach role
 - **individual-instructor** - Instructor role
 - **individual-athlete** - Athlete role
-- Various specialized roles (judges, referees, divers, etc.)
+- Various specialized roles (technical-official, leader, diver, scientific, sport, view-* roles, etc.)
 
 ---
 
@@ -72,15 +75,18 @@ The Dynamic Role Management System enables administrators to create, modify, and
 
 ## Permission Categories
 
+> Permission names below are real values from `RoleAndPermissionSeeder`. Use the seeder as
+> the source of truth for the full list.
+
 | Category | Examples |
 |----------|----------|
-| User Management | access users, create user, edit user, delete user |
-| Federation Management | access federations, create federation, manage membership |
-| Entity Management | access entities, create entities, manage membership |
-| License Management | access licenses, create license, edit license |
-| Certification Management | access certifications, manage certifications |
-| Document Management | access documents, download reports, generate documents |
-| System Administration | access settings, manage configuration, view logs |
+| User Management | access users, manage user roles, impersonate users |
+| Federation Management | access federations, access memberships |
+| Entity Management | access entities, create entities |
+| License Management | access licenses, access licenses manager |
+| Certification Management | access certifications, access certification slots manager |
+| Document Management | access documents, access official documents, download reports |
+| System Administration | access settings, manage_menus |
 
 ---
 

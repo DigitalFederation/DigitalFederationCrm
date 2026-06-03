@@ -47,19 +47,19 @@ The payment webhook system handles asynchronous payment notifications from EasyP
 +-----------------------------------------------------------------------------------+
 |                           PaymentWebhookController                                 |
 |                                                                                   |
-|  1. Validate Signature                                                            |
+|  1. Validate Signature (no-op for EasyPay - always passes)                        |
 |  2. Verify Payment (via Gateway)                                                  |
 |  3. Idempotency Checks                                                            |
 |  4. Update Transaction Status (with row locking)                                  |
 |  5. Mark Document as Paid (MarkAsPaidAction)                                      |
-|  6. Dispatch PaymentConfirmed Event                                               |
+|  6. Dispatch DocumentMarkedAsPaid Event                                           |
 +-----------------------------------------------------------------------------------+
                                                 |
                     +---------------------------+---------------------------+
                     |                                                       |
                     v                                                       v
 +-----------------------------------+               +-----------------------------------+
-|     ActivateAfterPayment Event    |               |     PaymentConfirmed Event        |
+|     ActivateAfterPayment Event    |               |   DocumentMarkedAsPaid Event      |
 |                                   |               |                                   |
 |  - Activates Memberships          |               |  - DispatchInvoiceGeneration      |
 |  - Activates Licenses             |               |    Listener (queued)              |
@@ -73,11 +73,17 @@ The payment webhook system handles asynchronous payment notifications from EasyP
 | Component | Purpose |
 |-----------|---------|
 | `PaymentWebhookController` | Receives and processes EasyPay webhooks |
-| `EasyPayGateway` | Validates signatures and interprets webhook data |
+| `EasyPayGateway` | Verifies payments via the EasyPay API and interprets webhook data |
 | `MarkAsPaidAction` | Marks documents as paid and creates payment records |
-| `PaymentConfirmed` | Event dispatched after successful payment |
+| `DocumentMarkedAsPaid` | Event dispatched after a document is marked as paid |
 | `DispatchInvoiceGenerationListener` | Queues the invoice generation job |
-| `GenerateExternalInvoiceJob` | Handles external invoice API calls |
+| `GenerateExternalInvoiceJob` | Generates the external (Moloni) invoice |
+
+> **Signature validation**: The controller calls `EasyPayGateway::validateWebhookSignature()`
+> and returns `401` if it fails. For EasyPay this hook is a deliberate no-op that always
+> returns `true` — EasyPay does not send signatures, so authenticity is established by
+> querying the EasyPay API in `verifyPayment()` instead. The hook exists so other gateways
+> can implement real signature checks.
 
 ---
 
@@ -110,7 +116,7 @@ The payment webhook system handles asynchronous payment notifications from EasyP
        └── Fires ActivateAfterPayment event
 
 6. After commit:
-   └── Dispatch PaymentConfirmed event
+   └── Dispatch DocumentMarkedAsPaid event
        └── DispatchInvoiceGenerationListener queues GenerateExternalInvoiceJob
 
 7. Return 200 { "status": "success" }
@@ -121,7 +127,7 @@ The payment webhook system handles asynchronous payment notifications from EasyP
 ```
 1. EasyPay sends webhook with status: "failed" | "cancelled" | "expired"
 
-2. Controller validates signature
+2. Controller accepts request (no signature validation - EasyPay doesn't use signatures)
 
 3. Controller updates transaction status to 'failed'
    └── Idempotency: Only updates if not already 'failed'
@@ -178,93 +184,81 @@ DB::transaction(function () use ($document, $transaction, ...) {
 
 ## 5. External Invoice Integration
 
-### PaymentConfirmed Event
+The platform integrates with **Moloni** (a Portuguese invoicing service) to generate
+invoice-receipts after a payment is confirmed. The integration is wired through the
+`DocumentMarkedAsPaid` event, a queued listener, and a queued job.
 
-The `PaymentConfirmed` event is the hook point for external integrations:
+### DocumentMarkedAsPaid Event
+
+The `DocumentMarkedAsPaid` event is the hook point for external invoice generation:
 
 ```php
-// app/Events/PaymentConfirmed.php
-class PaymentConfirmed
+// app/Events/DocumentMarkedAsPaid.php
+class DocumentMarkedAsPaid
 {
     public function __construct(
         public Document $document,
-        public PaymentTransaction $transaction,
-        public array $webhookData,
-        public string $gateway
+        public ?PaymentTransaction $transaction,
+        public bool $createMoloniInvoice = true,
+        public string $source = 'webhook',
+        public array $webhookData = []
     ) {}
 
-    public function getAmount(): float;
-    public function getGatewayReference(): ?string;
+    public function getAmount(): float;        // transaction amount, or document total
+    public function isManualPayment(): bool;   // true when $source === 'manual'
 }
 ```
+
+It can be dispatched from two places:
+
+- **Payment webhooks** (automatic payments) — `source: 'webhook'`, always creates an invoice.
+- **Manual payment marking** (admin) — `source: 'manual'`, creates an invoice only when the admin opted in (`createMoloniInvoice`).
+
+### DispatchInvoiceGenerationListener
+
+The listener (`ShouldQueueAfterCommit`) queues the job only when invoice generation
+should happen. Its `shouldQueue()` returns false when:
+
+- `createMoloniInvoice` is false, or
+- the document's detail owner types are not enabled for invoicing
+  (`MoloniSettingsService::shouldGenerateInvoiceForDocument()`).
 
 ### GenerateExternalInvoiceJob
 
-A queued job that handles external invoice API calls:
+A queued job (implements `ShouldQueue` and `ShouldBeUnique`) that calls the real Moloni
+integration. It is already fully implemented:
 
 ```php
 // app/Jobs/GenerateExternalInvoiceJob.php
-class GenerateExternalInvoiceJob implements ShouldQueue
+class GenerateExternalInvoiceJob implements ShouldBeUnique, ShouldQueue
 {
     public int $tries = 3;
+    public int $uniqueFor = 300;
     public array $backoff = [30, 60, 120];  // Exponential backoff
     public int $timeout = 60;
 
-    public function handle(): void
+    public function handle(CreateMoloniInvoiceReceiptAction $createInvoiceAction): void
     {
-        // Integrate with the configured external invoice API here.
-        // See the job file for an example structure.
+        // Idempotency: skip if an invoice already exists for this document
+        if (MoloniInvoice::existsForDocument($this->document->id)) {
+            return;
+        }
+
+        // Create the Moloni invoice-receipt; returns a MoloniInvoice model
+        // (or null when Moloni is disabled / not configured).
+        $moloniInvoice = $createInvoiceAction($this->document, $this->transaction);
     }
 }
 ```
 
-### Adding Your Invoice API
+Key points:
 
-1. Create an invoice service class:
-
-```php
-// app/Services/ExternalInvoiceService.php
-class ExternalInvoiceService
-{
-    public function create(array $data): ExternalInvoiceResponse
-    {
-        // Call your invoice API
-        return Http::post('https://invoice-api.example.test/invoices', $data);
-    }
-}
-```
-
-2. Update `GenerateExternalInvoiceJob::handle()`:
-
-```php
-public function handle(ExternalInvoiceService $invoiceService): void
-{
-    if ($this->invoiceAlreadyGenerated()) {
-        return;
-    }
-
-    $externalInvoice = $invoiceService->create([
-        'document_number' => $this->document->number_extended,
-        'customer_name' => $this->document->customer_name,
-        'customer_tax_id' => $this->getCustomerTaxId(),
-        'amount' => $this->transaction->amount,
-        'payment_date' => now(),
-        'items' => $this->getInvoiceItems(),
-    ]);
-
-    $this->storeExternalInvoiceReference($externalInvoice);
-}
-```
-
-3. Add idempotency tracking (recommended):
-
-```php
-// Add to documents table or create external_invoices table
-Schema::table('documents', function (Blueprint $table) {
-    $table->string('external_invoice_id')->nullable();
-    $table->timestamp('external_invoice_generated_at')->nullable();
-});
-```
+- **Idempotency** is enforced via `MoloniInvoice::existsForDocument()` (backed by the
+  `moloni_invoices` table) plus `ShouldBeUnique` (`uniqueId()` = document ID, `uniqueFor` = 300s).
+  No `documents.external_invoice_id` column is involved.
+- **Failure handling**: after exhausting retries, `failed()` logs the error and sends a
+  `MoloniInvoiceFailedNotification` to the configured `invoicing.providers.moloni.alert_email`
+  and to admin users with the `access settings` permission.
 
 ---
 
@@ -299,9 +293,14 @@ The webhook endpoint is rate-limited to 60 requests per minute per IP:
 ```php
 // routes/api.php
 Route::prefix('payment')->middleware('throttle:60,1')->group(function () {
-    Route::post('easypay', [PaymentWebhookController::class, 'easypay']);
+    Route::prefix('webhook')->group(function () {
+        Route::post('easypay', [PaymentWebhookController::class, 'easypay'])
+            ->name('api.payment.webhook.easypay');
+    });
 });
 ```
+
+This resolves to `POST /api/payment/webhook/easypay` (route name `api.payment.webhook.easypay`).
 
 ---
 
@@ -433,10 +432,10 @@ php artisan test --filter=EasyPayGatewayTest
 |------|-------------|
 | `marks document as paid on successful webhook` | Happy path for payment success |
 | `handles failed payment webhook correctly` | Verifies failed payment handling |
-| `rejects webhook with invalid signature` | Security test for signature validation |
+| `accepts webhook without signature (EasyPay does not use signatures)` | Confirms no signature is required |
 | `handles duplicate webhook with idempotency - transaction already success` | Tests Layer 1 idempotency |
 | `handles duplicate webhook with idempotency - document already paid` | Tests Layer 2 idempotency |
-| `dispatches PaymentConfirmed event with correct data` | Verifies event dispatch |
+| `dispatches DocumentMarkedAsPaid event with correct data` | Verifies event dispatch |
 | `does not dispatch event for failed payment` | Ensures no event for failures |
 
 ### Manual Testing
@@ -500,7 +499,7 @@ php artisan test --filter=EasyPayGatewayTest
 
 | File | Purpose |
 |------|---------|
-| `app/Events/PaymentConfirmed.php` | Dispatched after successful payment |
+| `app/Events/DocumentMarkedAsPaid.php` | Dispatched after a document is marked as paid; triggers invoice generation |
 | `app/Events/ActivateAfterPayment.php` | Existing event for activation flows |
 
 ### Listeners

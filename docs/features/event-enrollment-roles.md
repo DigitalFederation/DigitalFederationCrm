@@ -152,20 +152,20 @@ This is the most complex role because it requires a **certification**.
 
 #### Step 2: Find a Referee Certification
 
-1. **Go to CMAS Certifications**
-   - URL: `/cmas/certifications` (as CMAS admin)
+1. **Go to the certification catalog (admin)**
+   - URL: `/admin/certifications` (as platform/federation admin — CMAS admin in the diving example)
    - This shows all available certifications
 
 2. **Identify a referee certification**
    - Look for certifications with "Referee" or "Arbitro" in the name
-   - Examples:
+   - Examples (from the diving/CMAS example deployment):
      - "Underwater Hockey Referee Level 1"
      - "Underwater Rugby Referee"
      - "Arbitro de Hockey Subaquatico"
 
 3. **Verify the certification grants referee status**
    - The certification must be linked to a Professional Role with type "REFEREE"
-   - If no referee certification exists, one must be created by CMAS admin
+   - If no referee certification exists, one must be created by a platform/federation admin (CMAS admin in the diving example)
 
 #### Step 3: Attribute the Certification to the Person
 
@@ -316,9 +316,9 @@ The sections below contain technical implementation details.
 |------|-----------|
 | Athlete | `entity_athletes` (entity_id, individual_id, sport_id) |
 | Coach | `entity_professional_role` (entity_id, individual_id, professional_role_id, sport_id) |
-| Official | `individual_federations` / `individual_entities` (membership only) |
+| Official | `individual_federation` / `individual_entity` (membership only) |
 | Referee | `individual_professional_role` (individual_id, professional_role_id where role='REFEREE') |
-| Staff | `individual_federations` / `individual_entities` (membership only) |
+| Staff | `individual_federation` / `individual_entity` (membership only) |
 
 ## Enrollment Tables
 

@@ -54,7 +54,7 @@ The system supports three types of insurance policy number management, configure
 
 ### Policy Number Assignment
 
-The `CreateMemberSubscriptionAction` uses a `generatePolicyNumber` method that intelligently decides which numbering scheme to apply based on the `InsurancePlan`'s configuration.
+`CreateMemberSubscriptionAction` delegates insurance creation to `CreateInsuranceAction`, whose private `generatePolicyNumber()` method decides which numbering scheme to apply based on the `InsurancePlan`'s configuration. For sequential plans it calls `InsurancePlan::generateNextPolicyNumber()` to produce the next unique number.
 
 ### Official Document Requirements
 

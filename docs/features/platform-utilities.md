@@ -73,9 +73,9 @@ This allows for creating custom regions (Zones) that don't necessarily align wit
 
 ---
 
-## 5. Diving Map & Available Courses
+## 5. Diving Map & Available Courses (Example Deployment)
 
-This feature enhances the public-facing Diving Map.
+This feature is part of the diving example deployment and enhances its public-facing Diving Map.
 
 ### Functionality
 

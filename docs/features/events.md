@@ -45,7 +45,7 @@ When enrolling participants through the Entity portal, the system enforces that 
    - For athletes: Individual must have an active record in `entity_athletes` with matching `entity_id` and `sport_id`
    - For coaches: Individual must have an active record in `entity_professional_role` with matching `entity_id` and `sport_id`
 
-2. This is **always enforced** (not configurable) for Entity-level enrollments
+2. This is enforced **when the competition has these requirements enabled** via the per-competition toggles `requires_athlete_entity_sport_registration` and `requires_coach_entity_sport_registration` (both default to `true`)
 
 3. Federation-level enrollments are NOT affected by this rule
 
@@ -100,12 +100,11 @@ The system provides a RESTful API for accessing event data.
 
 -   **Endpoint**: `GET /api/events/competitions`
 -   **Authentication**: Requires a Bearer token in the `Authorization` header.
--   **Rate Limiting**: 10 requests per minute per API token.
+-   **Rate Limiting**: 20 requests per minute per API token.
 
 ### Query Parameters
 
--   `start_date` (YYYY-MM-DD): Filter events starting on or after this date.
--   `end_date` (YYYY-MM-DD): Filter events ending on or before this date.
+-   `start_date` (YYYY-MM-DD) and `end_date` (YYYY-MM-DD): Must be supplied **together** to filter by date. The filter returns events whose date range **overlaps** the requested range (events starting or ending within it, plus events that fully span it). If only one of the two is provided, no date filtering is applied. `end_date` must be on or after `start_date`.
 -   `competition_type` (string): Filter by type (e.g., 'world_championship', 'continental_championship').
 
 ### Response

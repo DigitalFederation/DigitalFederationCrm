@@ -34,31 +34,33 @@ The primary mechanism for assigning these roles is the `SyncUserRolesAction`. Th
 
 ### `SyncUserRolesAction` Logic
 
-The `SyncUserRolesAction` maps professional role names (e.g., 'instructor', 'coach') to the corresponding `individual-` roles defined in the `RoleAndPermissionSeeder`. When an individual's professional status changes (e.g., they become a certified instructor), this action is triggered to update their permissions accordingly.
+The `SyncUserRolesAction` is **pivot-table driven**. It does not use a hardcoded
+professional-role-name-to-role map. Instead, it derives a user's roles from the role
+mapping tables, collecting role IDs from:
 
-For example, if an individual is assigned the professional role of 'instructor', the `SyncUserRolesAction` will grant them the `individual-instructor` role, which in turn provides them with the permissions to access the instructor menu, manage events, and handle diving-related licenses.
+-   **Active licenses** mapped through the `license_roles` pivot table.
+-   **Active certifications** mapped through the `certification_roles` pivot table.
+-   **Federation memberships** mapped through the `federation_roles` table (including
+    global mappings where `federation_id` is `NULL`, and respecting the
+    `requires_active_membership` flag).
 
-### Example from the Code
+The action gathers the unique role IDs from these pivots, resolves them to role names, and
+calls Spatie's `syncRoles()` to set the user's roles. When an individual's licenses,
+certifications, or federation memberships change, this action keeps their permissions in
+sync with their current standing.
 
-The following snippet from `src/Domain/Users/Actions/SyncUserRolesAction.php` illustrates the mapping:
-
-```php
-[
-    // ...
-    'instructor' => 'individual-instructor',
-    'coach' => 'individual-coach',
-    'athlete' => 'individual-athlete',
-    // ...
-]
-```
-
-This ensures that the user's permissions are always in sync with their current professional standing in the federation.
+**Admin roles are preserved.** Before syncing, the action intersects the user's current
+roles with a `$preservedAdminRoles` allowlist (`admin`, `federation-admin`,
+`association-sport-admin`, `association-scientific-admin`, `association-cmas-admin`,
+`association-territorial-admin`) and merges those back into the final role set. This is a
+safeguard to prevent accidental admin lockout. (Entity roles are managed separately by
+`SyncEntityUserRolesAction`.)
 
 ## Where `SyncUserRolesAction` is Triggered
 
 The `SyncUserRolesAction` is a critical component for keeping user permissions up-to-date. It is triggered in several key places throughout the application, ensuring that role changes are reflected in response to various events:
 
--   **Manual Trigger**: An artisan command `sync:user-roles` exists to manually trigger the synchronization for all users. This is useful for correcting any inconsistencies or for system-wide updates.
+-   **Manual Trigger**: An artisan command `sync:user-roles` exists to manually trigger the synchronization. It takes an optional `{userId?}` argument: pass a user ID to sync a single user, or omit it to sync all users. This is useful for correcting any inconsistencies or for system-wide updates.
     -   *File*: `app/Console/Commands/SyncUserRoles.php`
 
 -   **Individual Creation**: When a new individual is created in the system, their roles are synchronized.

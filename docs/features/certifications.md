@@ -29,19 +29,26 @@ Entity/Federation → Select Instructor/Students → Choose Certification → At
 
 ## Database Schema
 
-### New Fields in `certifications` Table
+### New Fields in `certification` Table
+
+> **Note:** The table is named `certification` (singular) — see `protected $table = 'certification'` in the `Certification` model.
 
 ```sql
--- Pricing fields
+-- Pricing fields (current — migration 2026_01_07_033051)
+digital_price DECIMAL(10,2) -- Price for a digital-only certification
+digital_plus_card_price DECIMAL(10,2) -- Price for digital + physical card
+
+-- Pricing fields (legacy — retained on the table, no longer the primary model)
 unit_value DECIMAL(10,2) -- General price (fallback)
 unit_value_entity DECIMAL(10,2) -- Entity-specific price
 unit_value_federation DECIMAL(10,2) -- Federation-specific price
 tax_value DECIMAL(10,2) -- Tax amount
 tax_percentage DECIMAL(5,2) -- Tax percentage
+-- Note: unit_value_individual was dropped in migration 2025_07_04_195331.
 
 -- Configuration fields
 is_available BOOLEAN DEFAULT true -- Whether certification is available for purchase
-requester_model VARCHAR(255) DEFAULT 'all' -- Who can request: 'Entity', 'Federation', 'all'
+requester_model VARCHAR(255) DEFAULT 'all' -- Who can request: 'Individual', 'Entity', 'all'
 allow_entity_group_request BOOLEAN DEFAULT false -- Allow entities to purchase for groups
 requires_admin_validation BOOLEAN DEFAULT false -- Requires admin approval
 ```
@@ -68,7 +75,7 @@ The `CertificationAttributionWizard` is a comprehensive Livewire component that 
 - **Instructor validation**: Ensures only qualified instructors can issue certifications
 - **Batch processing**: Can attribute certifications to multiple students at once
 - **Payment integration**: Automatically creates payment documents for paid certifications
-- **Role-based restrictions**: Enforces entity-cmas-operator role for international certifications
+- **Role-based restrictions**: Enforces entity-cmas role for international certifications
 
 #### Wizard Steps:
 1. **Context Selection**: Federation/School selection (varies by actor type)
@@ -188,7 +195,7 @@ resources/views/
 ### International Certification Rules
 
 1. **Committee-Based Internationality**: Determined by `committee.is_international` flag
-2. **Entity Role Requirements**: Only entities with `entity-cmas-operator` role can purchase international certifications
+2. **Entity Role Requirements**: Only entities with `entity-cmas` role can purchase international certifications
 3. **Validation Flow**: System checks `$certification->committee->is_international` and entity roles
 
 ## Payment Flow
@@ -322,11 +329,11 @@ Configure in admin panel:
 
 2. **"Not authorized for certification request"**
    - For regular certifications: Verify entity validation plan includes certification privileges
-   - For international certifications: Verify entity has 'entity-cmas-operator' role
+   - For international certifications: Verify entity has 'entity-cmas' role
    - Check membership package configuration
 
 3. **"International certification not available"**
-   - Verify entity has 'entity-cmas-operator' role
+   - Verify entity has 'entity-cmas' role
    - Check certification's `committee.is_international` (see [Committee Structure](/architecture/02-committee-structure))
 
 4. **Payment not activating certification**
@@ -344,7 +351,7 @@ php artisan tinker
 # Verify entity privileges
 >>> $entity = Entity::find(1);
 >>> $entity->hasActiveAffiliation();
->>> $entity->hasRole('entity-cmas-operator');
+>>> $entity->hasRole('entity-cmas');
 
 # Check international certification availability (via committee)
 >>> $cert = Certification::find(1);
