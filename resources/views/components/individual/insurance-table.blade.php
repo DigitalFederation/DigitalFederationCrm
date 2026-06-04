@@ -1,5 +1,15 @@
 @props(['insurances', 'showActions' => false, 'context' => null])
 
+@php
+    // Eager-load the polymorphic `member` in a single pass so the per-row check
+    // below ($insurance->member instanceof Individual) does not trigger a
+    // lazy-loading violation when preventLazyLoading is enabled. $insurances
+    // arrives as a base collection gathered across member subscriptions, so wrap
+    // it as an Eloquent collection to batch the morphTo load; loadMissing is a
+    // no-op for models that already have the relation loaded.
+    \Illuminate\Database\Eloquent\Collection::make($insurances->all())->loadMissing('member');
+@endphp
+
 <div class="bg-white shadow-sm rounded-lg border border-gray-200 overflow-hidden">
     <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
         <div class="flex items-center justify-between">

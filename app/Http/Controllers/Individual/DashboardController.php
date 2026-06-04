@@ -26,6 +26,7 @@ class DashboardController extends Controller
             'licensesScientificAttributed.license',
             'licensesSportAttributed.license',
             'memberSubscriptions.insurances.insurancePlan',
+            'memberSubscriptions.insurances.member',
             'memberSubscriptions.affiliations.federation',
             'memberSubscriptions.membershipPackage.affiliationPlans',
         ]);
