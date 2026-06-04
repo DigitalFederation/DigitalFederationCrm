@@ -11,6 +11,7 @@ use Domain\Entities\Models\Entity;
 use Domain\Federations\Models\Federation;
 use Domain\Geographic\Models\District;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -188,9 +189,37 @@ class DivingLocationsMap extends Component
         });
     }
 
+    /**
+     * Coerce the multi-select filter properties into flat lists of scalar values.
+     *
+     * Livewire can hydrate these `array` properties with nested arrays from
+     * malformed query strings; passing those straight to whereIn() throws
+     * "Nested arrays may not be passed to whereIn method." Normalising here keeps
+     * every query path safe regardless of how the value was hydrated.
+     */
+    private function normaliseSelectedFilters(): void
+    {
+        $this->selectedWaterTypes = $this->normaliseFilterValues($this->selectedWaterTypes);
+        $this->selectedLevels = $this->normaliseFilterValues($this->selectedLevels);
+        $this->selectedDiveTypes = $this->normaliseFilterValues($this->selectedDiveTypes);
+    }
+
+    /**
+     * Flatten a Livewire array filter into a de-duplicated list of non-empty scalars.
+     */
+    private function normaliseFilterValues(mixed $values): array
+    {
+        return array_values(array_unique(array_filter(
+            Arr::flatten(Arr::wrap($values)),
+            static fn ($value) => is_scalar($value) && $value !== '',
+        )));
+    }
+
     #[Computed]
     public function mapLocations(): array
     {
+        $this->normaliseSelectedFilters();
+
         $cacheKey = 'diving_locations_v6_' . md5(json_encode([
             $this->selectedCountry,
             $this->selectedDistrict,
@@ -364,6 +393,8 @@ class DivingLocationsMap extends Component
     #[Computed]
     public function totalLocations(): int
     {
+        $this->normaliseSelectedFilters();
+
         $cacheKey = 'diving_locations_count_v5_' . md5(json_encode([
             $this->selectedCountry,
             $this->selectedDistrict,
