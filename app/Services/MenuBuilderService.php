@@ -215,13 +215,13 @@ class MenuBuilderService
      */
     protected function attachChildren(MenuItem $item, Collection $grouped): MenuItem
     {
-        $children = $grouped->get($item->id, collect());
-
-        if ($children->isNotEmpty()) {
-            $item->children = $children->map(function ($child) use ($grouped) {
+        // Always set `children` (even when empty) so every node carries it
+        // explicitly. filterMenuItemsForUser() and the menu views then never need
+        // to lazy-load the relation, which throws under preventLazyLoading.
+        $item->children = $grouped->get($item->id, collect())
+            ->map(function ($child) use ($grouped) {
                 return $this->attachChildren($child, $grouped);
             });
-        }
 
         return $item;
     }
@@ -239,18 +239,39 @@ class MenuBuilderService
                 return false;
             }
 
-            // Recursively filter children
-            if (isset($item->children) && $item->children instanceof Collection) {
-                $item->children = $this->filterMenuItemsForUser($item->children, $user);
+            // Recursively filter children, resolving them WITHOUT triggering a lazy
+            // load (attachChildren stores them as an attribute; structures cached
+            // before this fix may carry them as an eager-loaded relation instead).
+            $children = $this->resolveChildrenWithoutLazyLoad($item);
+            if ($children instanceof Collection) {
+                $children = $this->filterMenuItemsForUser($children, $user);
+                $item->children = $children;
 
                 // If item has no children and no route, hide it
-                if ($item->children->isEmpty() && ! $item->route_name) {
+                if ($children->isEmpty() && ! $item->route_name) {
                     return false;
                 }
             }
 
             return true;
         });
+    }
+
+    /**
+     * Resolve an item's already-known children without triggering a lazy load.
+     *
+     * attachChildren() stores children as a plain attribute; structures cached
+     * before that change may carry them as an eager-loaded relation. Returns null
+     * when neither is present so the caller skips recursion instead of lazy-loading
+     * the relation (which throws under preventLazyLoading).
+     */
+    protected function resolveChildrenWithoutLazyLoad(MenuItem $item): ?Collection
+    {
+        $children = array_key_exists('children', $item->getAttributes())
+            ? $item->getAttributes()['children']
+            : ($item->relationLoaded('children') ? $item->getRelation('children') : null);
+
+        return $children instanceof Collection ? $children : null;
     }
 
     /**
