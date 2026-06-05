@@ -8,7 +8,7 @@
             $membershipPackage = $memberSubscription?->membershipPackage;
             $isActive = $affiliation->isActive();
             $isExpired = $affiliation->end_date && $affiliation->end_date->isPast();
-            $filiadoId = $individual->federations->first()?->pivot?->national_federation_number ?? $individual->code_internal ?? null;
+            $memberId = $individual->federations->first()?->pivot?->national_federation_number ?? $individual->code_internal ?? null;
             $address = $individual->address ?? null;
             $postalCode = $individual->postal_code ?? null;
             $district = $individual->district?->name ?? $individual->location ?? null;
@@ -93,7 +93,7 @@
                             </div>
                             <div>
                                 <dt class="text-xs font-medium text-slate-500 uppercase tracking-wider">{{ __('main.membership_id') }}</dt>
-                                <dd class="mt-1 text-sm font-mono font-semibold text-slate-900">{{ $filiadoId ?: __('main.not_available') }}</dd>
+                                <dd class="mt-1 text-sm font-mono font-semibold text-slate-900">{{ $memberId ?: __('main.not_available') }}</dd>
                             </div>
                             <div>
                                 <dt class="text-xs font-medium text-slate-500 uppercase tracking-wider">{{ __('main.birthdate') }}</dt>

@@ -47,7 +47,7 @@ class SeparatedLicenseAttributedController extends Controller
      * International recreational diving professional licenses.
      * Committee: DIVING, International: true
      */
-    public function divingCmas(): View
+    public function divingInternational(): View
     {
         return $this->renderLicensesPage(
             CommitteeCodeEnum::Diving->value,

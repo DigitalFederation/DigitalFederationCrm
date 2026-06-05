@@ -19,12 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('check.api_token', 'throttle:20,1')->group(function () {
 
-    // SportsData API
+    // Athlete lookup endpoint (external integration)
     Route::get('/individuals/athletes', [AthleteLicenseIndividualsController::class, 'index'])
         ->name('api.individuals.athletes');
 
     // Certifications API
-    Route::get('/certifications/{code_cmas}', [CertificationAttributedApiController::class, 'show'])
+    Route::get('/certifications/{code}', [CertificationAttributedApiController::class, 'show'])
         ->name('api.certifications.show');
 
     // Events API

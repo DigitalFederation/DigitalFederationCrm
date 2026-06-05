@@ -21,7 +21,7 @@
                     $purchaseRoute = match(true) {
                         $committee === 'SPORT' && !$isInternational => 'individual.sport-license-purchase.index',
                         $committee === 'DIVINGSERVICES' && !$isInternational => 'individual.national-diving-license-purchase.index',
-                        $committee === 'DIVING' && $isInternational => 'individual.cmas-diving-license-purchase.index',
+                        $committee === 'DIVING' && $isInternational => 'individual.international-diving-license-purchase.index',
                         $committee === 'SCIENTIFIC' && $isInternational => 'individual.scientific-license-purchase.index',
                         default => 'individual.sport-license-purchase.index',
                     };

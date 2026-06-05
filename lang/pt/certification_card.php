@@ -3,8 +3,8 @@
 return [
     'my_certifications' => 'As Minhas Certificações',
     'my_international_certifications' => 'As Minhas Certificações Internacionais',
-    'cmas_certifications' => 'Certificações da CMAS',
-    'international_certifications_subtitle' => 'Certificações CMAS Diving e Scientific',
+    'cmas_certifications' => 'Certificações Internacionais',
+    'international_certifications_subtitle' => 'Certificações de Mergulho Internacional e Científico',
     'total_certifications' => 'certificações no total',
     'filter' => 'Filtrar',
     'category' => 'Categoria',

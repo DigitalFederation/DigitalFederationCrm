@@ -121,5 +121,5 @@ return [
     'activity_canceled_invitation' => 'Entity \':entity\' canceled athlete invitation',
     'activity_left_entity' => 'Individual removed themselves from entity \':entity\' as an athlete',
     'activity_invitation_sent' => 'Athlete invitation sent to :code_cmas',
-    'activity_athlete_removed' => 'Athlete relationship with CMAS code :code_cmas removed',
+    'activity_athlete_removed' => 'Athlete relationship with International code :code_cmas removed',
 ];

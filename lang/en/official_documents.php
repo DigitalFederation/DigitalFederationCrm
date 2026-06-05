@@ -157,7 +157,7 @@ return [
     'entity_name' => 'Entity Name',
     'entity_code' => 'Entity Code',
     'individual_name' => 'Individual Name',
-    'cmas_code' => 'CMAS Code',
+    'cmas_code' => 'International Code',
     'document_status' => 'Document Status',
     'current_status' => 'Current Status',
     'activated_at' => 'Activated At',

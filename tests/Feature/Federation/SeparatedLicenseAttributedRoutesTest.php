@@ -78,10 +78,10 @@ it('can access national diving individual licenses route as federation admin', f
     $response->assertViewHas('isInternational', false);
 });
 
-it('can access CMAS diving entity licenses route as federation admin', function () {
+it('can access International diving entity licenses route as federation admin', function () {
     $this->actingAs($this->federationAdmin);
 
-    $response = $this->get(route('federation.cmas-diving-entity-licenses-attributed.index'));
+    $response = $this->get(route('federation.international-diving-entity-licenses-attributed.index'));
 
     $response->assertStatus(200);
     $response->assertViewIs('web.federation.license_attributed.separated');
@@ -90,10 +90,10 @@ it('can access CMAS diving entity licenses route as federation admin', function 
     $response->assertViewHas('isInternational', true);
 });
 
-it('can access CMAS diving individual licenses route as federation admin', function () {
+it('can access International diving individual licenses route as federation admin', function () {
     $this->actingAs($this->federationAdmin);
 
-    $response = $this->get(route('federation.cmas-diving-individual-licenses-attributed.index'));
+    $response = $this->get(route('federation.international-diving-individual-licenses-attributed.index'));
 
     $response->assertStatus(200);
     $response->assertViewIs('web.federation.license_attributed.separated');
@@ -140,8 +140,8 @@ it('returns correct page title for each route', function () {
         'federation.sport-individual-licenses-attributed.index' => __('licenses.federation_sport_individual_licenses_title'),
         'federation.national-diving-entity-licenses-attributed.index' => __('licenses.federation_national_diving_entity_licenses_title'),
         'federation.national-diving-individual-licenses-attributed.index' => __('licenses.federation_national_diving_individual_licenses_title'),
-        'federation.cmas-diving-entity-licenses-attributed.index' => __('licenses.federation_cmas_diving_entity_licenses_title'),
-        'federation.cmas-diving-individual-licenses-attributed.index' => __('licenses.federation_cmas_diving_individual_licenses_title'),
+        'federation.international-diving-entity-licenses-attributed.index' => __('licenses.federation_cmas_diving_entity_licenses_title'),
+        'federation.international-diving-individual-licenses-attributed.index' => __('licenses.federation_cmas_diving_individual_licenses_title'),
         'federation.scientific-entity-licenses-attributed.index' => __('licenses.federation_scientific_entity_licenses_title'),
         'federation.scientific-individual-licenses-attributed.index' => __('licenses.federation_scientific_individual_licenses_title'),
     ];

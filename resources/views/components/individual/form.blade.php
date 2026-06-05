@@ -40,7 +40,7 @@
                                        type="text" name="member_number"
                                        value="{{ old('member_number', $individual->member_number ?? '') }}" />
 
-                                <div class="text-xs mt-1"> {{ __('*Only CMAS can edit this information') }} </div>
+                                <div class="text-xs mt-1"> {{ __('*Only the International Federation can edit this information') }} </div>
                                 @if($errors->has('member_number'))
                                     <div class="text-xs mt-1 text-rose-500 h-2">
                                         {{ $errors->first('member_number') }}

@@ -93,7 +93,7 @@
                                         </dd>
                                     </div>
                                     <div>
-                                        <dt class="text-sm text-gray-500">{{ __('CMAS International Code') }}</dt>
+                                        <dt class="text-sm text-gray-500">{{ __('International Code') }}</dt>
                                         <dd class="text-sm font-medium text-gray-900">{{ $license->license_number ?: __('Not assigned') }}</dd>
                                     </div>
                                     <div>

@@ -46,7 +46,7 @@ class StaffFederationEnrollmentsExport implements FromCollection, WithHeadings, 
         $headers = [
             'Event Name',
             'Staff Name',
-            'CMAS Code',
+            'International Code',
             'Role',
             'Registration Date',
             'Federation',

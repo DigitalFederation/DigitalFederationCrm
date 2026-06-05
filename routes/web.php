@@ -192,40 +192,6 @@ Route::middleware(['web', 'throttle:60,1'])->group(function () {
     Route::get('/diving-service-providers', \App\Livewire\Public\DivingServiceProviderRegistry::class)->name('public.diving-service-providers');
 });
 
-// TEMPORARY: Insurance PDF preview route
-Route::get('/insurance-preview/{id}', function ($id) {
-
-    $insurance = \Domain\Insurance\Models\Insurance::with(['member', 'insurancePlan', 'memberSubscription.membershipPackage', 'requester'])
-        ->findOrFail($id);
-
-    // Check for both possible values of member_type (morph map key and full class name)
-    if ($insurance->member_type !== 'individual' && $insurance->member_type !== \Domain\Individuals\Models\Individual::class) {
-        abort(404, 'Insurance document is only applicable to Individual members.');
-    }
-
-    $individual = $insurance->member;
-    $individual->load('federations'); // Load federations relationship
-    $insurancePlan = $insurance->insurancePlan;
-    $policyNumber = $insurance->policy_number ?? $insurancePlan->policy_number;
-    $activity = $insurancePlan->insured_activity ?? __('main.not_available');
-    $scope = $insurancePlan->territorial_scope ?? __('main.not_available');
-
-    return view('shared.insurance.document-pdf', [
-        'insurance' => $insurance,
-        'individual' => $individual,
-        'insurancePlan' => $insurancePlan,
-        'policyNumber' => $policyNumber,
-        'filiadoId' => $individual->code_internal,
-        'address' => $individual->address,
-        'postalCode' => $individual->postal_code,
-        'district' => $individual->location,
-        'insuredActivity' => $activity,
-        'territorialScope' => $scope,
-        'startDateFormatted' => $insurance->start_date->format('d/m/Y'),
-        'endDateFormatted' => $insurance->end_date->format('d/m/Y'),
-    ]);
-})->middleware('auth')->name('insurance.preview');
-
 // Secure media routes - outside auth middleware, authorization handled by controller
 Route::prefix('secure-media')->name('secure-media.')->group(function () {
     Route::get('/profile/{individual}/{media}', [\App\Http\Controllers\SecureMediaController::class, 'serveProfileImage'])
@@ -248,38 +214,18 @@ Route::middleware(['auth', 'check.active.user', 'verified', 'user.relations', 'e
 
     Route::get('/changelog', [\App\Http\Controllers\Common\VersionController::class, 'index'])->name('changelog');
 
-    require __DIR__ . '/routes_admin.php';
-    require __DIR__ . '/routes_federation.php';
-    require __DIR__ . '/routes_entity.php';
-    require __DIR__ . '/routes_individual.php';
-    require __DIR__ . '/routes_cmas.php';
-
     /* ------------------------------------------------------------------------ */
-    /*  Backward Compatibility Redirects - Old International Routes → CMAS */
+    /*  Backward-compatibility redirects: legacy international URLs → International namespace */
     /* ------------------------------------------------------------------------ */
 
-    // Individual: Redirect old international routes to new CMAS namespace
+    // Redirect legacy individual international URLs to the International namespace
     Route::permanentRedirect(
         'individual/international-license-purchase',
-        'cmas/individual/license-purchase'
+        'international/individual/license-purchase'
     );
     Route::permanentRedirect(
         'individual/international-licenses-attributed',
-        'cmas/individual/licenses-attributed'
-    );
-
-    // Entity: Redirect old international routes to new CMAS namespace
-    Route::permanentRedirect(
-        'entity/international-license-purchase',
-        'cmas/entity/license-purchase'
-    );
-    Route::permanentRedirect(
-        'entity/international-licenses-attributed',
-        'cmas/entity/licenses-attributed'
-    );
-    Route::permanentRedirect(
-        'entity/international-licenses-attributed/individuals',
-        'cmas/entity/member-licenses'
+        'international/individual/licenses-attributed'
     );
 
     Route::get('/dashboard', function (Request $request) {
@@ -298,9 +244,3 @@ Route::middleware(['auth', 'check.active.user', 'verified', 'user.relations', 'e
         Route::get('/notifications/{id}/read', 'markAsRead')->name('notifications.read');
     });
 });
-
-// Old CMAS to Admin redirects removed - /cmas now used for international namespace
-// Route::redirect('/cmas', '/admin', 301);
-// Route::any('/cmas/{any}', function ($any) {
-//     return redirect("/admin/{$any}", 301);
-// })->where('any', '.*');

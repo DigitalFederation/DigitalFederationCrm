@@ -743,7 +743,7 @@ $menu = [
             'icon' => 'globe-alt',
             'route' => '',
             'can' => 'access international licenses',
-            'active' => ['licenses-attributed', 'certifications-attributed', 'license-attributed', 'certification-attributed', 'diving-instructors', 'diving-courses', 'diving-licenses', 'diving-location', 'cmas-diving-instructors'],
+            'active' => ['licenses-attributed', 'certifications-attributed', 'license-attributed', 'certification-attributed', 'diving-instructors', 'diving-courses', 'diving-licenses', 'diving-location', 'international-diving-instructors'],
             'children' => [
                 [
                     'name' => 'menu.entity.entity_licenses',
@@ -762,8 +762,8 @@ $menu = [
                 ],
                 [
                     'name' => 'menu.entity.cmas_diving_instructors',
-                    'route' => ['entity.cmas-diving-instructor.index'],
-                    'active' => ['cmas-diving-instructors'],
+                    'route' => ['entity.international-diving-instructor.index'],
+                    'active' => ['international-diving-instructors'],
                 ],
             ],
         ],
@@ -778,17 +778,17 @@ $menu = [
             'icon' => 'shopping-cart',
             'route' => '',
             'can' => 'access licenses',
-            'active' => ['sport-license-purchase', 'cmas-diving-license-purchase', 'scientific-license-purchase', 'sport-member-license-purchase', 'cmas-diving-member-license-purchase', 'scientific-member-license-purchase', 'national-diving-member-license-purchase'],
+            'active' => ['sport-license-purchase', 'international-diving-license-purchase', 'scientific-license-purchase', 'sport-member-license-purchase', 'international-diving-member-license-purchase', 'scientific-member-license-purchase', 'national-diving-member-license-purchase'],
             'children' => [
                 [
                     'name' => 'menu.entity.purchase_entity_license',
                     'route' => 'entity.sport-license-purchase.index',
-                    'active' => ['sport-license-purchase', 'cmas-diving-license-purchase', 'scientific-license-purchase'],
+                    'active' => ['sport-license-purchase', 'international-diving-license-purchase', 'scientific-license-purchase'],
                 ],
                 [
                     'name' => 'menu.entity.purchase_member_licenses',
                     'route' => 'entity.sport-member-license-purchase.index',
-                    'active' => ['sport-member-license-purchase', 'cmas-diving-member-license-purchase', 'scientific-member-license-purchase', 'national-diving-member-license-purchase'],
+                    'active' => ['sport-member-license-purchase', 'international-diving-member-license-purchase', 'scientific-member-license-purchase', 'national-diving-member-license-purchase'],
                 ],
             ],
         ],

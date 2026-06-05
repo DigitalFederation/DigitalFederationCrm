@@ -11,7 +11,7 @@ return [
     'my_dives' => 'Os Meus Mergulhos',
     'add_dive' => 'Adicionar Mergulho',
     'submission_and_validation' => 'Submissão e Validação de Diário de Mergulho',
-    'submission_instructions' => 'Adicione mergulhos ao seu diário aqui. Valide com um Código CMAS de um instrutor, líder de mergulho, escola ou centro. Os mergulhos podem estar Pendentes, Confirmados ou Rejeitados. Elimine ou reenvie mergulhos a qualquer momento para aprovação.',
+    'submission_instructions' => 'Adicione mergulhos ao seu diário aqui. Valide com um Código Internacional de um instrutor, líder de mergulho, escola ou centro. Os mergulhos podem estar Pendentes, Confirmados ou Rejeitados. Elimine ou reenvie mergulhos a qualquer momento para aprovação.',
     'buddies' => 'Companheiros',
 
     // Filters
@@ -66,7 +66,7 @@ return [
 
     // Verification
     'how_to_request_verification' => 'Como solicitar uma verificação?',
-    'how_to_request_verification_body' => 'Utilize o código CMAS do seu instrutor, líder de mergulho ou entidade de mergulho para solicitar uma verificação de mergulho.',
+    'how_to_request_verification_body' => 'Utilize o código internacional do seu instrutor, líder de mergulho ou entidade de mergulho para solicitar uma verificação de mergulho.',
     'insert_code_here' => 'Inserir código aqui',
     'verify_dive' => 'Verificar Mergulho',
     'or_scan_qr_code' => 'Ou digitalizar um código QR',

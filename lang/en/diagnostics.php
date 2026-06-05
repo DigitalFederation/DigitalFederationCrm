@@ -13,7 +13,7 @@ return [
     // Individual Profile Tab
     'individual_profile_title' => 'Individual Profile Diagnostic',
     'individual_profile_description' => 'Search for an individual to see their complete eligibility profile and understand why they can or cannot be enrolled for different roles.',
-    'search_placeholder' => 'Search by CMAS code, name, or email...',
+    'search_placeholder' => 'Search by international code, name, or email...',
     'no_individual_selected' => 'No Individual Selected',
     'search_to_start' => 'Search for an individual to view their eligibility profile.',
     'quick_status' => 'Quick Status',

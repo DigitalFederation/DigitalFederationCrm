@@ -84,10 +84,10 @@ describe('Sport Licenses Attributed Routes', function () {
     });
 });
 
-describe('CMAS Diving Licenses Attributed Routes', function () {
-    it('can access cmas diving entity licenses attributed page', function () {
+describe('International Diving Licenses Attributed Routes', function () {
+    it('can access international diving entity licenses attributed page', function () {
         $response = $this->actingAs($this->user)
-            ->get(route('entity.cmas-diving-licenses-attributed.index'));
+            ->get(route('entity.international-diving-licenses-attributed.index'));
 
         $response->assertOk()
             ->assertViewIs('web.entity.license_attributed.index')
@@ -96,9 +96,9 @@ describe('CMAS Diving Licenses Attributed Routes', function () {
             ->assertViewHas('type', 'entity');
     });
 
-    it('can access cmas diving member licenses attributed page', function () {
+    it('can access international diving member licenses attributed page', function () {
         $response = $this->actingAs($this->user)
-            ->get(route('entity.cmas-diving-member-licenses-attributed.index'));
+            ->get(route('entity.international-diving-member-licenses-attributed.index'));
 
         $response->assertOk()
             ->assertViewIs('web.entity.license_attributed.index')
@@ -192,7 +192,7 @@ describe('License Filtering by Committee and isInternational', function () {
         expect($licenses->first()->license->name)->toBe('National Sport License');
     });
 
-    it('cmas diving route shows only international diving licenses', function () {
+    it('international diving route shows only international diving licenses', function () {
         // Create international diving license
         // Diving committee has is_international = true, so this license is international
         $internationalLicense = License::factory()->create([
@@ -228,7 +228,7 @@ describe('License Filtering by Committee and isInternational', function () {
         ]);
 
         $response = $this->actingAs($this->user)
-            ->get(route('entity.cmas-diving-licenses-attributed.index'));
+            ->get(route('entity.international-diving-licenses-attributed.index'));
 
         $response->assertOk();
 
@@ -256,20 +256,20 @@ describe('Purchase License Action Button', function () {
             ->assertSee(route('entity.sport-member-license-purchase.index'));
     });
 
-    it('cmas diving entity page has correct purchase button link', function () {
+    it('international diving entity page has correct purchase button link', function () {
         $response = $this->actingAs($this->user)
-            ->get(route('entity.cmas-diving-licenses-attributed.index'));
+            ->get(route('entity.international-diving-licenses-attributed.index'));
 
         $response->assertOk()
-            ->assertSee(route('entity.cmas-diving-license-purchase.index'));
+            ->assertSee(route('entity.international-diving-license-purchase.index'));
     });
 
-    it('cmas diving members page has correct purchase button link', function () {
+    it('international diving members page has correct purchase button link', function () {
         $response = $this->actingAs($this->user)
-            ->get(route('entity.cmas-diving-member-licenses-attributed.index'));
+            ->get(route('entity.international-diving-member-licenses-attributed.index'));
 
         $response->assertOk()
-            ->assertSee(route('entity.cmas-diving-member-license-purchase.index'));
+            ->assertSee(route('entity.international-diving-member-license-purchase.index'));
     });
 
     it('scientific entity page has correct purchase button link', function () {
@@ -301,10 +301,10 @@ describe('Route Access Control', function () {
     it('requires authentication for all routes', function () {
         $routes = [
             'entity.sport-licenses-attributed.index',
-            'entity.cmas-diving-licenses-attributed.index',
+            'entity.international-diving-licenses-attributed.index',
             'entity.scientific-licenses-attributed.index',
             'entity.sport-member-licenses-attributed.index',
-            'entity.cmas-diving-member-licenses-attributed.index',
+            'entity.international-diving-member-licenses-attributed.index',
             'entity.scientific-member-licenses-attributed.index',
             'entity.national-diving-member-licenses-attributed.index',
         ];

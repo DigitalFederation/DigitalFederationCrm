@@ -71,7 +71,7 @@ class FederationLicensesExport implements FromQuery, ShouldQueue, WithHeadings, 
     {
         return [
             'Holder Name',
-            'CMAS International Code',
+            'International Code',
             'License Name',
             'Federation Name',
             'Activated At',

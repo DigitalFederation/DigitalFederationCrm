@@ -45,9 +45,9 @@ return [
     'entities_list' => 'Administrative - Entities List',
     'coaches_list' => 'Sport - Coaches',
     'technical_officials_list' => 'Sport - Technical Officials',
-    'cmas_diving_certifications_list' => 'CMAS - Diving Certifications',
+    'cmas_diving_certifications_list' => 'International - Diving Certifications',
     'athletes_list' => 'Sport - Athletes',
-    'cmas_scientific_certifications_list' => 'CMAS - Scientific Certifications',
+    'cmas_scientific_certifications_list' => 'International - Scientific Certifications',
 
     // Column headers
     'columns' => [
@@ -75,7 +75,7 @@ return [
         'x' => 'X',
         'instagram' => 'Instagram',
         'linkedin' => 'LinkedIn',
-        'cmas_portal' => 'CMAS Portal Account',
+        'cmas_portal' => 'International Portal Account',
         'affiliation_status' => 'Affiliation Status',
         'activation_date' => 'Activation Date',
         'birth_date' => 'Birth Date',

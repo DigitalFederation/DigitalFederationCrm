@@ -87,7 +87,7 @@ class FederationCreateAthleteEnrollment extends Component implements HasForms, H
                     ->label('Gender'),
                 TextColumn::make('code_cmas')
                     ->searchable()
-                    ->label('CMAS Code'),
+                    ->label('International Code'),
             ])
             ->bulkActions([
                 BulkAction::make('updateSelectedIndividuals')

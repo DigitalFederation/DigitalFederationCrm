@@ -56,7 +56,7 @@ class FederationVotingRightsExport implements FromCollection, WithHeadings, With
     {
         return [
             'Year',
-            'CMAS Code',
+            'International Code',
             'Federation Name',
             'General Assembly',
             'Technical Committee',

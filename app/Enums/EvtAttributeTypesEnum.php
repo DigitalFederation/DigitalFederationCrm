@@ -35,7 +35,7 @@ enum EvtAttributeTypesEnum: string
             self::TEXTAREA => 'Text Area',
             self::SELECT => 'Select List',
             self::COUNTRY => 'Country',
-            self::CMASCODE => 'CMAS Code',
+            self::CMASCODE => 'International Code',
             self::BESTTIME => 'Best Time',
             self::BIRTHDATE => 'Date of Birth',
             self::TIME => 'Time',

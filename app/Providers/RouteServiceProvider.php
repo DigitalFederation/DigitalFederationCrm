@@ -36,6 +36,23 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
+            // Authenticated, area-specific route groups. Previously require()-d
+            // inside routes/web.php; registered here as first-class groups so each
+            // area owns its prefix/name while sharing the authenticated stack.
+            $authenticated = [
+                'web',
+                'auth',
+                'check.active.user',
+                'verified',
+                'user.relations',
+                'ensure.profile.photo',
+            ];
+
+            Route::middleware($authenticated)->group(base_path('routes/admin.php'));
+            Route::middleware($authenticated)->group(base_path('routes/federation.php'));
+            Route::middleware($authenticated)->group(base_path('routes/entity.php'));
+            Route::middleware($authenticated)->group(base_path('routes/individual.php'));
+            Route::middleware($authenticated)->group(base_path('routes/international.php'));
         });
     }
 

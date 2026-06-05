@@ -324,7 +324,7 @@ class EventMasterListColumnDefinitionService
                         },
                     ],
                     [
-                        'title' => 'CMAS Code',
+                        'title' => 'International Code',
                         'field' => 'competition.technical_delegates.0.code_cmas_delegate_federation',
                         'editor' => 'input',
                         'formatter' => function ($cell, $formatterParams, $onRendered) {

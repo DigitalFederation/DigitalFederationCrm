@@ -30,8 +30,7 @@
 
             <!-- CMAS Badge -->
             <div class="mb-4 flex items-center">
-                <img src="{{ asset('images/cmas-logo.png') }}" alt="CMAS" class="h-8 w-auto mr-2">
-                <span class="text-sm text-blue-600 font-medium">{{ __('CMAS International License') }}</span>
+                <span class="text-sm text-blue-600 font-medium">{{ __('International License') }}</span>
             </div>
 
             <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">

@@ -45,7 +45,7 @@ class LicensePurchaseController extends Controller
     /**
      * International recreational diving professional license purchase.
      */
-    public function divingCmas()
+    public function divingInternational()
     {
         return $this->renderPurchasePage(
             CommitteeCodeEnum::Diving->value,

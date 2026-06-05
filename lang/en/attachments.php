@@ -66,16 +66,16 @@ return [
     // Admin-specific committee file titles
     'admin_committee_titles' => [
         'SPORT' => 'Sport Documents',
-        'SCIENTIFIC' => 'CMAS Scientific Diving Documents',
-        'DIVING' => 'CMAS Diving Documents',
+        'SCIENTIFIC' => 'International Scientific Diving Documents',
+        'DIVING' => 'International Diving Documents',
         'DIVINGSERVICES' => 'Recreational Diving Documents',
     ],
 
     // Entity-specific committee file titles
     'entity_committee_titles' => [
         'SPORT' => 'Sport Files',
-        'SCIENTIFIC' => 'CMAS Scientific Diving Files',
-        'DIVING' => 'CMAS Diving Files',
+        'SCIENTIFIC' => 'International Scientific Diving Files',
+        'DIVING' => 'International Diving Files',
         'DIVINGSERVICES' => 'Diving Services Files',
     ],
 

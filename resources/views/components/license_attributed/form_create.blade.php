@@ -103,7 +103,7 @@
                                 <input type="text" name="cmas_license_code" id="cmas_license_code"
                                        class="form-input w-full {{ $errors->has('cmas_license_code') ? 'border-rose-300' : '' }}"
                                        value="{{ old('cmas_license_code') }}" min="{{ Date('Y-m-d') }}">
-                                <div class="text-xs mt-1"> {{ __('Internal CMAS code') }} </div>
+                                <div class="text-xs mt-1"> {{ __('Internal international code') }} </div>
                                 @if($errors->has('cmas_license_code'))
                                     <div class="text-xs mt-1 text-rose-500 h-2">
                                         {{ $errors->first('cmas_license_code') }}

@@ -526,7 +526,7 @@ class EventRegistration extends Component implements HasForms, HasTable
                     ->label('Name')
                     ->searchable(['name', 'surname']),
                 TextColumn::make('code_cmas')
-                    ->label('CMAS Code')
+                    ->label('International Code')
                     ->searchable(),
                 TextColumn::make('birthdate')
                     ->date()

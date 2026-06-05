@@ -89,7 +89,7 @@ class AthleteEntityEnrollmentsExport implements FromQuery, ShouldQueue, WithHead
     {
         $headers = [
             'Name',
-            'CMAS Code',
+            'International Code',
             'Gender',
             'Date of Birth',
             'Discipline',

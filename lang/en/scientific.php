@@ -44,8 +44,8 @@ return [
     'invite_instructor' => 'Invite Scientific Instructor',
     'invite_new_instructors' => 'Invite New Scientific Instructors',
     'select_instructor' => 'Select Instructor',
-    'enter_member_or_cmas_code' => 'Enter the member number or CMAS code of the instructor you want to invite',
-    'member_number_placeholder' => 'Enter member number or CMAS code',
+    'enter_member_or_cmas_code' => 'Enter the member number or international code of the instructor you want to invite',
+    'member_number_placeholder' => 'Enter member number or international code',
     'select_role' => 'Select Role',
     'select_role_description' => 'Select the professional role for this instructor',
     'select_role_placeholder' => 'Select a role',
@@ -56,7 +56,7 @@ return [
 
     // Error messages
     'professional_role_not_found' => 'Scientific professional role not configured in the system',
-    'invalid_member_number' => 'Invalid member number or CMAS code',
+    'invalid_member_number' => 'Invalid member number or international code',
     'individual_must_have_certification' => 'Individual must have an active certification or license',
     'invitation_already_sent' => 'An invitation has already been sent to this instructor',
     'professional_already_associated' => 'This instructor is already associated with your entity',

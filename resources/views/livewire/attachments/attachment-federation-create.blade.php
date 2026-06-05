@@ -11,7 +11,7 @@
 
     <x-information-box
         title="Attention"
-        :body="__('The file size limit is 50MB. If you need to upload a larger file, please contact the CMAS IT Department.')" />
+        :body="__('The file size limit is 50MB. If you need to upload a larger file, please contact the IT Department.')" />
 
 
     <h2 class="font-bold"> {{ __('File Upload Form') }}</h2>

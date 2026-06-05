@@ -21,7 +21,7 @@
 
         @php
             $instructions_string_step_1 = __('Select the license you want to attribute.');
-            $instructions_string_step_2 = __('Add the individuals to be licensed by entering each CMAS code and clicking Insert.');
+            $instructions_string_step_2 = __('Add the individuals to be licensed by entering each international code and clicking Insert.');
             $instructions_string_step_3 = __('Click on Save request to submit the request. A document will be generated after submission.');
             $instructions_complete = '<strong>1. </strong>'.$instructions_string_step_1 . '<br><strong>2. </strong>' . $instructions_string_step_2 . '<br><strong>3. </strong>' . $instructions_string_step_3;
         @endphp

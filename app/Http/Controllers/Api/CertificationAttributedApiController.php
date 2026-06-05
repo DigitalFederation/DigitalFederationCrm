@@ -10,11 +10,11 @@ use Illuminate\Http\Request;
 
 class CertificationAttributedApiController extends Controller
 {
-    public function show(Request $request, $code_cmas): JsonResponse
+    public function show(Request $request, $code): JsonResponse
     {
 
         // Fetch the individual
-        $individual = Individual::where('code_cmas', $code_cmas)->first();
+        $individual = Individual::where('code_cmas', $code)->first();
         if (! $individual) {
             return response()->json(['error' => 'Individual not found'], 404);
         }

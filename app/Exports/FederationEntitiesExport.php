@@ -58,7 +58,7 @@ class FederationEntitiesExport implements FromQuery, ShouldQueue, WithHeadings, 
             'Address',
             'Location',
             'Email',
-            'CMAS Code',
+            'International Code',
         ];
     }
 }

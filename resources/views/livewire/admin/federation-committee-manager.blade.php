@@ -77,9 +77,9 @@
                                 @elseif($committee->code === 'DIVINGSERVICES')
                                     {{ __('Diving services certifications and licenses (non-international)') }}
                                 @elseif($committee->code === 'DIVING')
-                                    {{ __('CMAS Diving certifications and licenses (international)') }}
+                                    {{ __('Diving certifications and licenses (international)') }}
                                 @elseif($committee->code === 'SCIENTIFIC')
-                                    {{ __('CMAS Scientific certifications and licenses (international)') }}
+                                    {{ __('Scientific certifications and licenses (international)') }}
                                 @else
                                     {{ $committee->code }}
                                 @endif
@@ -100,7 +100,7 @@
                 </div>
                 <div class="ml-3">
                     <p class="text-sm text-blue-700">
-                        <strong>{{ __('Note:') }}</strong> {{ __('International committees (DIVING, SCIENTIFIC) are managed by CMAS. National committees (SPORT, DIVINGSERVICES) are managed by national federations.') }}
+                        <strong>{{ __('Note:') }}</strong> {{ __('International committees (DIVING, SCIENTIFIC) are managed by the International Federation. National committees (SPORT, DIVINGSERVICES) are managed by national federations.') }}
                     </p>
                 </div>
             </div>

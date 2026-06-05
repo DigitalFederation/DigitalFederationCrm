@@ -11,7 +11,7 @@ return [
     'my_dives' => 'My Dives',
     'add_dive' => 'Add Dive',
     'submission_and_validation' => 'Dive Log Submission and Validation',
-    'submission_instructions' => 'Add dives to your logbook here. Validate with a CMAS Code from an instructor, dive leader, school, or center. Dives may be Pending, Confirmed, or Rejected. Delete or resubmit dives anytime for approval.',
+    'submission_instructions' => 'Add dives to your logbook here. Validate with an International Code from an instructor, dive leader, school, or center. Dives may be Pending, Confirmed, or Rejected. Delete or resubmit dives anytime for approval.',
     'buddies' => 'Buddies',
 
     // Filters
@@ -66,7 +66,7 @@ return [
 
     // Verification
     'how_to_request_verification' => 'How to request a verification?',
-    'how_to_request_verification_body' => 'Use CMAS code of your instructor, dive leader or diving entity to request a dive verification.',
+    'how_to_request_verification_body' => 'Use the International code of your instructor, dive leader or diving entity to request a dive verification.',
     'insert_code_here' => 'Insert code here',
     'verify_dive' => 'Verify Dive',
     'or_scan_qr_code' => 'Or scan a QR Code',

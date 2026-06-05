@@ -64,8 +64,8 @@
                         } elseif ($committee === 'DIVING' && ($isInternational ?? false)) {
                             // CMAS Diving (international)
                             $purchaseRoute = $isMembers
-                                ? route('entity.cmas-diving-member-license-purchase.index')
-                                : route('entity.cmas-diving-license-purchase.index');
+                                ? route('entity.international-diving-member-license-purchase.index')
+                                : route('entity.international-diving-license-purchase.index');
                         } elseif ($committee === 'DIVINGSERVICES' && !($isInternational ?? false)) {
                             // National diving services: entity uses wizard, members use purchase route.
                             $purchaseRoute = $isMembers

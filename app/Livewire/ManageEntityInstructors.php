@@ -177,7 +177,7 @@ class ManageEntityInstructors extends Component implements HasForms, HasTable
             )
             ->columns([
                 TextColumn::make('code_cmas')
-                    ->label(__('CMAS Code'))
+                    ->label(__('International Code'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('full_name') // Assuming an accessor exists, otherwise use name/surname

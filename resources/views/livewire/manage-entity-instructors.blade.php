@@ -13,7 +13,7 @@
                     <thead class="bg-gray-50 dark:bg-gray-700">
                     <tr>
                         <th scope="col"
-                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">{{ __('CMAS Code') }}</th>
+                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">{{ __('International Code') }}</th>
                         <th scope="col"
                             class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">{{ __('Name') }}</th>
                         <th scope="col"

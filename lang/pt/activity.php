@@ -30,7 +30,7 @@ return [
     // Certification activity logs
     'certification_activated_after_payment' => 'Certificação ativada após pagamento',
     'certification_activated_by_federation' => 'Certificação ativada pela Federação',
-    'certification_activated_by_cmas' => 'Certificação ativada pela CMAS',
+    'certification_activated_by_cmas' => 'Certificação ativada internacionalmente',
     'certification_set_to_provisional_state' => 'Certificação definida como estado Provisório',
     'certification_activated_by_ntc_approval/date' => 'Certificação ativada por aprovação do CTN/Data',
     'certification_created_by_entity,_remains_pending' => 'Certificação criada pela Entidade, permanece Pendente',
@@ -44,5 +44,5 @@ return [
     'diving_certification_deleted' => 'Certificação de mergulho eliminada',
     'updated_diving_professional_certification_details' => 'Detalhes da certificação profissional de mergulho atualizados',
     'certification_updated_by_federation_admin' => 'Certificação atualizada pelo administrador da Federação',
-    'certification_updated_by_cmas_admin' => 'Certificação atualizada pelo administrador CMAS',
+    'certification_updated_by_cmas_admin' => 'Certificação atualizada pelo administrador internacional',
 ];

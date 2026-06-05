@@ -850,7 +850,7 @@ describe('PurchaseLicenseAction', function () {
             $license = License::factory()->create([
                 'committee_id' => $this->divingCommittee->id, // DIVING (international)
                 'type_id' => $this->licenseType->id,
-                'name' => 'CMAS Diving Entity License',
+                'name' => 'International Diving Entity License',
                 'license_code' => 'DIVING-ENT-001',
                 'requester_model' => ['Entity'],
                 'unit_value_entity' => 300,
@@ -1034,7 +1034,7 @@ describe('PurchaseLicenseAction', function () {
             $license = License::factory()->create([
                 'committee_id' => $this->divingCommittee->id, // DIVING (international)
                 'type_id' => $this->licenseType->id,
-                'name' => 'CMAS Diving Individual License',
+                'name' => 'International Diving Individual License',
                 'license_code' => 'DIVING-IND-001',
                 'requester_model' => ['Individual'],
                 'unit_value_individual' => 200,

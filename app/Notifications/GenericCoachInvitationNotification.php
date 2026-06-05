@@ -97,7 +97,7 @@ class GenericCoachInvitationNotification extends Notification implements ShouldQ
                 'entityName' => $entityName,
                 'sport' => $this->sportName ?? 'the selected sport',
             ])
-            : __('Accepting this invitation will automatically associate your account with :entityName for all relevant Coach roles within the :committee committee for which you currently hold an active CMAS certification and license.', [
+            : __('Accepting this invitation will automatically associate your account with :entityName for all relevant Coach roles within the :committee committee for which you currently hold an active certification and license.', [
                 'entityName' => $entityName,
                 'committee' => $committeeDisplay,
             ]);
