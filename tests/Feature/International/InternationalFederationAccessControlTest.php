@@ -20,7 +20,7 @@ uses(RefreshDatabase::class);
 
 beforeEach(function () {
     // Create permission
-    Permission::create(['name' => 'access international licenses', 'guard_name' => 'web']);
+    Permission::findOrCreate('access international licenses', 'web');
 
     // Create FEDERATION group
     $this->federationGroup = Group::firstOrCreate(['code' => 'FEDERATION'], ['name' => 'Federation']);

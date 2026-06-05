@@ -23,7 +23,7 @@ it('activates an official document', function () {
     $user = UserFactory::new()->create([
         'group_id' => $this->group->id,
     ]);
-    Permission::create(['name' => 'access official documents']);
+    Permission::findOrCreate('access official documents');
     $user->givePermissionTo('access official documents');
 
     $document = OfficialDocument::factory()->create([
@@ -55,7 +55,7 @@ it('rejects an official document', function () {
     $user = UserFactory::new()->create([
         'group_id' => $this->group->id,
     ]);
-    Permission::create(['name' => 'access official documents']);
+    Permission::findOrCreate('access official documents');
     $user->givePermissionTo('access official documents');
 
     $document = OfficialDocument::factory()->create([
