@@ -90,9 +90,10 @@ it('correctly calculates total cost and creates payment document for multiple di
         'event_id' => $this->event->id,
         'federation_id' => $this->federation->id,
         'discipline_id' => $this->discipline1->id,
-        'pricing_id' => $this->pricingPerPerson->id,
-        'price_type' => 'PER_PERSON',
-        'price' => 10.00,
+        'per_person_pricing_id' => $this->pricingPerPerson->id,
+        'per_person_price' => 10.00,
+        'event_fee_pricing_id' => $this->eventFee->id,
+        'event_fee' => 1000.00,
         'discipline_pricing_id' => $this->disciplinePricing1->id,
         'discipline_price' => 7.00,
     ]);
@@ -103,9 +104,10 @@ it('correctly calculates total cost and creates payment document for multiple di
         'event_id' => $this->event->id,
         'federation_id' => $this->federation->id,
         'discipline_id' => $this->discipline2->id,
-        'pricing_id' => $this->pricingPerPerson->id,
-        'price_type' => 'PER_PERSON',
-        'price' => 10.00,
+        'per_person_pricing_id' => $this->pricingPerPerson->id,
+        'per_person_price' => 10.00,
+        'event_fee_pricing_id' => $this->eventFee->id,
+        'event_fee' => 1000.00,
         'discipline_pricing_id' => $this->disciplinePricing2->id,
         'discipline_price' => 5.00,
     ]);
@@ -116,9 +118,10 @@ it('correctly calculates total cost and creates payment document for multiple di
         'event_id' => $this->event->id,
         'federation_id' => $this->federation->id,
         'discipline_id' => $this->discipline3->id,
-        'pricing_id' => $this->pricingPerPerson->id,
-        'price_type' => 'PER_PERSON',
-        'price' => 10.00,
+        'per_person_pricing_id' => $this->pricingPerPerson->id,
+        'per_person_price' => 10.00,
+        'event_fee_pricing_id' => $this->eventFee->id,
+        'event_fee' => 1000.00,
         'discipline_pricing_id' => $this->disciplinePricing3->id,
         'discipline_price' => 9.00,
     ]);
@@ -160,14 +163,16 @@ it('correctly calculates total cost and creates payment document for multiple di
     $documentAction = new CreateEnrollmentPaymentDocumentAction;
     $document = $documentAction->execute(
         $this->event,
-        $this->federation->id,
+        $this->enrollment,
+        (string) $this->federation->id,
+        Federation::class,
         $selectedIndividuals,
         $totalCost,
         null
     );
 
     $this->assertDatabaseHas('document', [
-        'owner_type' => Federation::class,
+        'owner_type' => 'federation',
         'owner_id' => $this->federation->id,
     ]);
 
@@ -199,27 +204,24 @@ it('correctly calculates total cost and creates payment document for multiple di
     // Verify athlete enrollments
     $this->assertDatabaseHas('evt_athletes_enrollment', [
         'individual_id' => $this->individual1->id,
-        'price_type' => 'PER_PERSON',
-        'price' => 10.00,
-        'pricing_id' => $this->pricingPerPerson->id,
+        'per_person_price' => 10.00,
+        'per_person_pricing_id' => $this->pricingPerPerson->id,
         'discipline_price' => 7.00,
         'discipline_pricing_id' => $this->disciplinePricing1->id,
     ]);
 
     $this->assertDatabaseHas('evt_athletes_enrollment', [
         'individual_id' => $this->individual2->id,
-        'price_type' => 'PER_PERSON',
-        'price' => 10.00,
-        'pricing_id' => $this->pricingPerPerson->id,
+        'per_person_price' => 10.00,
+        'per_person_pricing_id' => $this->pricingPerPerson->id,
         'discipline_price' => 5.00,
         'discipline_pricing_id' => $this->disciplinePricing2->id,
     ]);
 
     $this->assertDatabaseHas('evt_athletes_enrollment', [
         'individual_id' => $this->individual3->id,
-        'price_type' => 'PER_PERSON',
-        'price' => 10.00,
-        'pricing_id' => $this->pricingPerPerson->id,
+        'per_person_price' => 10.00,
+        'per_person_pricing_id' => $this->pricingPerPerson->id,
         'discipline_price' => 9.00,
         'discipline_pricing_id' => $this->disciplinePricing3->id,
     ]);
