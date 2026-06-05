@@ -31,8 +31,31 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
+ * @property int $id
+ * @property string|null $name
  * @property string|null $event_fee_type
+ * @property string|null $event_type
+ * @property string|null $event_category
+ * @property string|null $location
+ * @property string|null $venue
+ * @property string|null $venue_address
+ * @property string|null $venue_city
+ * @property \Illuminate\Support\Carbon|null $start_date
+ * @property \Illuminate\Support\Carbon|null $end_date
+ * @property \Illuminate\Support\Carbon|null $start_registration
+ * @property \Illuminate\Support\Carbon|null $end_registration
+ * @property array<string, mixed>|null $other_deadlines
+ * @property string|null $featured_image
+ * @property string|null $description
+ * @property string|null $external_url
+ * @property bool|null $is_visible
+ * @property bool|null $allow_coach_enrollment
+ * @property bool|null $allow_individual_enrollment
+ * @property bool|null $allow_referee_enrollment
  * @property int|null $organizer_id
+ * @property Country|null $venueCountry
+ * @property Competition|null $competition
+ * @property OrganizerDetail|null $organizerDetails
  */
 class Event extends Model implements HasMedia
 {

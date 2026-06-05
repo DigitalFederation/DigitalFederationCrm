@@ -7,7 +7,7 @@ use Domain\Entities\Models\Entity;
 use Domain\Individuals\Models\IndividualEntity;
 use Domain\Licenses\States\ActiveLicenseAttributedState;
 use Domain\Memberships\States\ActiveAffiliationState;
-use Domain\Memberships\States\PendingAffiliationState;
+use Domain\Memberships\States\PendingPaymentAffiliationState;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -30,7 +30,7 @@ class DashboardController extends Controller
                     ->with(['federation', 'memberSubscription.membershipPackage.affiliationPlans'])
                     ->whereIn('status_class', [
                         ActiveAffiliationState::class,
-                        PendingAffiliationState::class,
+                        PendingPaymentAffiliationState::class,
                     ])
                     ->latest()
                     ->take(5)
@@ -87,7 +87,7 @@ class DashboardController extends Controller
                 $affiliationsCount = $entity->affiliations()
                     ->whereIn('status_class', [
                         ActiveAffiliationState::class,
-                        PendingAffiliationState::class,
+                        PendingPaymentAffiliationState::class,
                     ])
                     ->count();
 

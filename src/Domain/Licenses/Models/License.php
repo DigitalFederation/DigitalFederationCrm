@@ -37,6 +37,7 @@ use Spatie\Permission\Models\Role;
  * @property int|null $license_id
  * @property int|null $professional_role_id
  * @property int|null $sport_id
+ * @property bool|null $is_international
  * @property string|null $interval_unit
  * @property string|null $license_code
  * @property string|null $moloni_reference

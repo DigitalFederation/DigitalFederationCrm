@@ -244,7 +244,7 @@ class CertificationValidateController extends Controller
             DB::beginTransaction();
 
             // verify current state? Is it already active?
-            if (! empty($certificationAttributed) && ! $certificationAttributed->isActive()) {
+            if (! $certificationAttributed->isActive()) {
 
                 $certificationApproved = $approveCertification($certificationAttributed);
 

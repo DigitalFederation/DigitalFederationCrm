@@ -80,6 +80,7 @@ use Support\Traits\HasQrCode;
  * @property string $surname
  * @property string|null $user_id
  * @property string|null $vat_number
+ * @property bool|null $visible_in_coach_registry
  */
 class Individual extends Model implements HasMedia
 {

@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property mixed $state
  * @property mixed $status_class
  * @property mixed $processedAttributes
+ * @property int|null $document_id
+ * @property \Domain\Documents\Models\Document|null $document
  */
 class IndividualEnrollment extends Model
 {

@@ -59,7 +59,7 @@ class AthleteController extends Controller
             ->whereHas('individual')
             ->paginate();
 
-        $sports_filter = Sport::select('id', 'name')->get()->pluck('name', 'id')->toArray();
+        $sports_filter = Sport::query()->pluck('name', 'id')->toArray();
 
         return view('web.entity.athlete.index', compact(
             'entity',

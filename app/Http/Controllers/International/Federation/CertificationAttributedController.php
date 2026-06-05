@@ -7,7 +7,7 @@ use App\Models\Country;
 use App\Models\Sport;
 use Domain\Certifications\Models\Certification;
 use Domain\Certifications\Models\CertificationAttributed;
-use Domain\Certifications\Scopes\ExcludeInternationalScope;
+use Domain\Licenses\Scopes\ExcludeInternationalScope;
 use Domain\Federations\Models\Federation;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;

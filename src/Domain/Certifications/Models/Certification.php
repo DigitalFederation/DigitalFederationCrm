@@ -28,6 +28,7 @@ use Spatie\Permission\Models\Role;
  * @property int|null $committee_id
  * @property string|null $certification_view
  * @property bool $allow_entity_group_request
+ * @property bool|null $is_international
  * @property int|null $license_id
  * @property int|null $professional_role_id
  * @property string|null $acronym

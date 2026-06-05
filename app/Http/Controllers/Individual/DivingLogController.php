@@ -32,7 +32,7 @@ class DivingLogController extends Controller
             ->orderByDesc('date_and_time')
             ->paginate(15);
 
-        $divingLogsByYear = $divingLogs->groupBy(function ($item) {
+        $divingLogsByYear = $divingLogs->groupBy(function (DivingLog $item) {
             return date('Y', strtotime($item->date_and_time));
         });
 

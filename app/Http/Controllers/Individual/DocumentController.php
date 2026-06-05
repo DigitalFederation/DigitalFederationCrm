@@ -39,7 +39,7 @@ class DocumentController extends Controller
             ->appends(request()->query());
 
         // Attach the readable owner types to each document
-        $documents->getCollection()->transform(function ($document) {
+        $documents->getCollection()->transform(function (Document $document) {
             $document->owner_type_names = $document->details->pluck('readable_owner_type')->unique();
 
             return $document;

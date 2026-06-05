@@ -73,7 +73,7 @@ jobs:
         run: php artisan config:clear
 
       - name: Run Larastan domain analysis
-        run: ./vendor/bin/phpstan analyse app/Models src/Domain/*/Models src/Domain/*/Actions src/Domain/*/Services -c phpstan.neon --no-progress
+        run: ./vendor/bin/phpstan analyse app/Models app/Http src/Domain/*/Models src/Domain/*/Actions src/Domain/*/Services -c phpstan.neon --no-progress
 
       - name: Install Browsershot dependency
         env:

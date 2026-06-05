@@ -5,7 +5,7 @@ namespace App\Http\Controllers\International\Individual;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
 use Domain\Certifications\Models\CertificationAttributed;
-use Domain\Certifications\Scopes\ExcludeInternationalScope;
+use Domain\Licenses\Scopes\ExcludeInternationalScope;
 use Domain\Individuals\Models\ProfessionalRole;
 use Illuminate\Contracts\View\View;
 use Spatie\QueryBuilder\AllowedFilter;

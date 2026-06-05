@@ -27,6 +27,8 @@ class IndividualMembershipController extends Controller
      */
     public function index(): View
     {
+        $federation = null;
+
         try {
             // Ensure user is authenticated and is a federation user
             $user = Auth::user();
@@ -222,7 +224,7 @@ class IndividualMembershipController extends Controller
     /**
      * Show the preview/confirmation page for bulk individual subscriptions.
      */
-    public function preview(MembershipPackage $package): View
+    public function preview(MembershipPackage $package): View|\Illuminate\Http\RedirectResponse
     {
         $user = Auth::user();
         if (! $user || ! $user->isFederation()) {

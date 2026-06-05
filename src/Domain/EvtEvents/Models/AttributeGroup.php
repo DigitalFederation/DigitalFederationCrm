@@ -4,6 +4,7 @@ namespace Domain\EvtEvents\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * The AttributeGroup model is used to organize Attributes into logical groups.
@@ -37,17 +38,17 @@ class AttributeGroup extends Model
 
     protected $fillable = ['name'];
 
-    public function attributes()
+    public function attributes(): BelongsToMany
     {
         return $this->belongsToMany(Attribute::class, 'evt_attribute_groups_attribute');
     }
 
-    public function events()
+    public function events(): BelongsToMany
     {
         return $this->belongsToMany(Event::class, 'evt_event_attribute_groups', 'attribute_group_id', 'event_id');
     }
 
-    public function sports()
+    public function sports(): BelongsToMany
     {
         return $this->belongsToMany(Sport::class, 'evt_sport_attribute_group');
     }

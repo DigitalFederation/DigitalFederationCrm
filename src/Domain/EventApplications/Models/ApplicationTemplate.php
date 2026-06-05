@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string|null $state
+ * @property bool|null $hasEntityApplied
+ * @property EventApplication|null $existingApplication
  */
 class ApplicationTemplate extends Model
 {

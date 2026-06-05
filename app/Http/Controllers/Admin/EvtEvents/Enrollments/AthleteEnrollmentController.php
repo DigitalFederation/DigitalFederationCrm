@@ -146,8 +146,7 @@ class AthleteEnrollmentController extends BaseEnrollmentController
     /**
      * Export athlete enrollments by discipline.
      *
-     * @param  Discipline  $discipline
-     * @return RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|RedirectResponse
      */
     public function exportByDiscipline(Request $request, Event $event)
     {

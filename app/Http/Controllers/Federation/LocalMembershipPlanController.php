@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Notifications\CreateMembershipNotification;
 use Domain\Federations\Models\Federation;
 use Domain\Memberships\Actions\AssignLocalMembershipPlanAction;
+use Domain\Memberships\Models\LocalMembershipPlan;
 use Domain\Memberships\Models\MembershipPlan;
 use Domain\Memberships\States\ActiveMembershipState;
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -99,7 +101,7 @@ class LocalMembershipPlanController extends Controller
         AssignLocalMembershipPlanAction $action
     ) {
         // Validate the request data
-        $request->validate([
+        $validated = $request->validate([
             'membership_plan_id' => ['sometimes', 'array'],
             'membership_plan_id.*' => 'integer|exists:membership_plan,id',
         ]);
@@ -132,7 +134,7 @@ class LocalMembershipPlanController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $association = LocalMembershipAssociation::findOrFail($id);
+        $association = LocalMembershipPlan::findOrFail($id);
         $association->delete();
 
         return redirect()->route('localMembershipAssociation.index')->with('success', 'Membership association deleted successfully.');

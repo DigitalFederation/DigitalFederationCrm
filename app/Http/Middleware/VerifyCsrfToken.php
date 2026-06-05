@@ -14,15 +14,4 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
     ];
-
-    protected function tokensMatch($request)
-    {
-
-        if (parent::tokensMatch($request)) {
-            return true;
-        }
-
-        return redirect()->route('login')->with('error', 'Your session has expired. Please log in again.');
-
-    }
 }

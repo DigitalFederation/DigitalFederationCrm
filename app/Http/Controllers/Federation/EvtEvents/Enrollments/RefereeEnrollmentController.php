@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Federation\EvtEvents\Enrollments;
 use App\Http\Controllers\Common\BaseEnrollmentController;
 use Domain\EvtEvents\Models\Event;
 use Domain\EvtEvents\Models\RefereeEnrollment;
-use Domain\EvtEvents\States\RefereeEnrollment\CanceledRefereeEnrollmentState;
+use Domain\EvtEvents\States\CanceledRefereeEnrollmentState;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;

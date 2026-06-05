@@ -97,7 +97,7 @@ class DivingLog extends Model
         return $this->HasOne(DivingLogRebreatherScr::class);
     }
 
-    public function sequence()
+    public function sequence(): HasOne
     {
         return $this->hasOne(DivingLogIndividualSequence::class);
     }

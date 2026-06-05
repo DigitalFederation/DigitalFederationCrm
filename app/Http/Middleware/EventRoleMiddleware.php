@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Domain\EvtEvents\Models\Event;
 use Domain\EvtEvents\Models\EventRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class EventRoleMiddleware
         // Get the event from the route
         $event = $request->route('event');
 
-        if (! $event) {
+        if (! $event instanceof Event) {
             abort(404, 'Event not found');
         }
 

@@ -7,6 +7,7 @@ use App\Models\Committee;
 use App\Models\Language;
 use App\Traits\StreamsMediaFromStorage;
 use Domain\Attachments\Actions\GetIndividualAttachmentsAction;
+use Domain\Attachments\Models\Attachment;
 use Domain\Attachments\Models\AttachmentCategory;
 use Domain\Individuals\Models\Individual;
 use Domain\Users\Actions\GetUserTypeAction;
@@ -92,13 +93,17 @@ class AttachmentsController extends Controller
 
         // Check if the media item's parent attachment is accessible by the individual
         $attachment = $mediaItem->model()->first();
-        if ($attachment && ($attachment->owner_type === Individual::class && $attachment->owner_id == $individualId)) {
+        if (! $attachment instanceof Attachment) {
+            return back()->with('error', 'File not found');
+        }
+
+        if ($attachment->owner_type === Individual::class && $attachment->owner_id == $individualId) {
             // The file belongs to the individual
             return $this->streamMediaDownload($mediaItem, $downloadFilename);
         }
 
         // Check if the attachment is for all individuals or all entities & individuals
-        if ($attachment && in_array($attachment->recipient_name, ['all', 'all_individuals', 'all_entities_&_individuals', 'individual'])) {
+        if (in_array($attachment->recipient_name, ['all', 'all_individuals', 'all_entities_&_individuals', 'individual'], true)) {
             // The file is accessible to all individuals
             return $this->streamMediaDownload($mediaItem, $downloadFilename);
         }

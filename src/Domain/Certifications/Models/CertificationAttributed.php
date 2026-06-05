@@ -51,6 +51,7 @@ use Support\Traits\HasDocumentPaymentStatus;
      * @property string|null $federation_name
      * @property string|null $holder_name
      * @property string|null $national_code
+     * @property string|null $notes
      * @property string|null $price_option
      * @property CertificationAttributedState $state
      * @property class-string<CertificationAttributedState>|null $status_class

@@ -119,7 +119,7 @@ class DivingLicensesController extends Controller
 
         // Get pending invitations
         $pendingInvitations = \Domain\Diving\Models\DivingEntityTechnicalDirector::where('entity_id', $entity->id)
-            ->where('status_class', \Domain\Diving\States\PendingDivingTechnicalDirectorInvitationState::class)
+            ->where('status_class', \Domain\Diving\States\AssignedDivingTechnicalDirectorState::class)
             ->with(['individual', 'licenseAttributed.license'])
             ->orderBy('created_at', 'desc')
             ->paginate(10);
@@ -140,7 +140,7 @@ class DivingLicensesController extends Controller
         }
 
         // Verify it's a pending invitation
-        if ($invitation->status_class !== \Domain\Diving\States\PendingDivingTechnicalDirectorInvitationState::class) {
+        if ($invitation->status_class !== \Domain\Diving\States\AssignedDivingTechnicalDirectorState::class) {
             return back()->with('error', __('diving.cannot_cancel_invitation'));
         }
 
@@ -294,7 +294,7 @@ class DivingLicensesController extends Controller
                 'individual_id' => $individual->id,
                 'license_id' => $licenseAttributed->license_id,
                 'certification_systems' => $validated['certification_systems'],
-                'status_class' => \Domain\Diving\States\PendingDivingTechnicalDirectorInvitationState::class,
+                'status_class' => \Domain\Diving\States\AssignedDivingTechnicalDirectorState::class,
                 'assigned_at' => now(),
                 'invitation_message' => $validated['message'] ?? null,
             ]);

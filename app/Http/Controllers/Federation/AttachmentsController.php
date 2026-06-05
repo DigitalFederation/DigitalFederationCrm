@@ -103,7 +103,7 @@ class AttachmentsController extends Controller
 
         // Check if the media item's parent attachment belongs to the user's federation
         $attachment = $mediaItem->model()->first();
-        if ($attachment && $attachment->owner_type === Federation::class && $attachment->owner_id == $federationId) {
+        if ($attachment instanceof Attachment && $attachment->owner_type === Federation::class && $attachment->owner_id == $federationId) {
             // The file belongs to the federation
             return $this->streamMediaDownload($mediaItem, $downloadFilename);
         }
@@ -113,7 +113,7 @@ class AttachmentsController extends Controller
         }
 
         // If the attachment is not specific to a federation, check if it's for all federations
-        if ($attachment && in_array($attachment->recipient_name, ['all', 'all_federations'])) {
+        if ($attachment instanceof Attachment && in_array($attachment->recipient_name, ['all', 'all_federations'], true)) {
             // The file is accessible to all federations
             return $this->streamMediaDownload($mediaItem, $downloadFilename);
         }

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property string $driver
  * @property bool $is_enabled
+ * @property string|null $name
  */
 class PaymentMethod extends Model
 {

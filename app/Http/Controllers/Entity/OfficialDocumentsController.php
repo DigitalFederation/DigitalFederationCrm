@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class OfficialDocumentsController extends Controller
 {
@@ -75,7 +76,7 @@ class OfficialDocumentsController extends Controller
 
             $mediaItem = $officialDocument->media()->first();
 
-            if (! $mediaItem) {
+            if (! $mediaItem instanceof Media) {
                 return back()->with('error', __('official_documents.file_not_found'));
             }
 

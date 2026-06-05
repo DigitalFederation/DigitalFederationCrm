@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property float|int|string|null $price
+ * @property float|null $calculated_price
  */
 class MembershipPackage extends Model
 {

@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string|null $category
+ * @property string|null $description
+ * @property string|null $display_name
+ * @property int|null $users_count
+ * @property int|null $permissions_count
+ * @property bool|null $is_protected
+ * @property string|null $protection_level
+ */
 class Role extends \Spatie\Permission\Models\Role
 {
     use CreatedUpdatedBy;

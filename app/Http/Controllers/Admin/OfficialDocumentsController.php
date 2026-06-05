@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -268,7 +269,7 @@ class OfficialDocumentsController extends Controller
 
         $mediaItem = $officialDocument->media()->first();
 
-        if (! $mediaItem) {
+        if (! $mediaItem instanceof Media) {
             return back()->with('error', __('official_documents.file_not_found'));
         }
 
@@ -295,7 +296,7 @@ class OfficialDocumentsController extends Controller
 
         $mediaItem = $officialDocument->media()->first();
 
-        if (! $mediaItem) {
+        if (! $mediaItem instanceof Media) {
             return response(__('official_documents.file_not_found'), 404)
                 ->header('Content-Type', 'text/plain');
         }

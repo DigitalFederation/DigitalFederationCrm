@@ -41,9 +41,8 @@ class EntityController extends Controller
         $divingLocations = [];
         $featuredLocationIds = [];
         if (Auth::user()->hasRole('entity-diving-services')) {
-            $divingLocations = DivingLocation::select('id', 'name', 'country_id')
-                ->with('country:id,name')
-                ->orderBy('name')->get()
+            $divingLocations = DivingLocation::query()
+                ->orderBy('name')
                 ->pluck('name', 'id')
                 ->toArray();
 

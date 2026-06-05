@@ -193,7 +193,7 @@ class CertificationAttributedController extends BaseCertificationAttributedContr
                 throw new Exception(__('federation.cannot_issue_certifications'));
             }
 
-            $activateAction($certification_attributed, $request->quantity);
+            $activateAction($certification_attributed);
             DB::commit();
 
             return back()->with('success', 'Certification activated with success.');

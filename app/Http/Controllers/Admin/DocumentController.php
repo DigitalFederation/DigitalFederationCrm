@@ -96,14 +96,14 @@ class DocumentController extends Controller
             ->appends(request()->query());
 
         // Manually load entityFederations for each owner if it's an Entity
-        $documents->getCollection()->each(function ($document) {
+        $documents->getCollection()->each(function (Document $document) {
             if ($document->owner instanceof \Domain\Entities\Models\Entity) {
                 $document->owner->load('entityFederations');
             }
         });
 
         // Attach the readable owner types to each document
-        $documents->getCollection()->transform(function ($document) {
+        $documents->getCollection()->transform(function (Document $document) {
             $document->owner_type_names = $document->details->pluck('readable_owner_type')->unique();
 
             return $document;
@@ -433,7 +433,7 @@ class DocumentController extends Controller
                         \Domain\Federations\Models\Federation::class => ['country:id,name'],
                         \Domain\Memberships\Models\Membership::class => ['plans.licenses'],
                         \Domain\Licenses\Models\LicenseAttributed::class => ['license'],
-                        \Domain\Certifications\Models\CertificationSlot::class => ['certification', 'slotType'],
+                        'Domain\\Certifications\\Models\\CertificationSlot' => ['certification', 'slotType'],
                         \Domain\EvtEvents\Models\Event::class => [],
                         \Domain\EvtEvents\Models\IndividualEnrollment::class => ['event'],
                         \Domain\EvtEvents\Models\AthleteEnrollment::class => ['event'],

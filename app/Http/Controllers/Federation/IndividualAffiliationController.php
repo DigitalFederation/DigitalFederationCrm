@@ -193,32 +193,25 @@ class IndividualAffiliationController extends Controller
                 return redirect()->back()->with('error', __('federation.individuals_not_in_entity'));
             }
 
-            // Create subscriptions for each individual
-            foreach ($individuals as $individual) {
-                $memberSubscriptionData = [
-                    'membership_package_id' => $package->id,
-                    'member_type' => 'individual',
-                    'member_id' => $individual->id,
-                    'requester_type' => Entity::class,
-                    'requester_id' => $entity->id,
-                    'request_type' => 'federation_facilitated',
-                    'start_date' => now(),
-                    'end_date' => MemberSubscription::calculateAnnualEndDate(),
-                ];
+            $result = $action->execute(
+                $package,
+                $individuals->pluck('id')->all(),
+                $entity,
+                'federation_facilitated'
+            );
 
-                // Create the subscription (which will create affiliations)
-                $result = $action->execute($memberSubscriptionData);
+            if (! empty($result['failed'])) {
+                DB::rollback();
+                $message = collect($result['failed'])->pluck('error')->filter()->first()
+                    ?? __('federation.error_creating_subscription');
 
-                if (! $result['success']) {
-                    DB::rollback();
-                    Notification::make()
-                        ->title(__('federation.error_creating_subscription'))
-                        ->body($result['message'])
-                        ->danger()
-                        ->send();
+                Notification::make()
+                    ->title(__('federation.error_creating_subscription'))
+                    ->body($message)
+                    ->danger()
+                    ->send();
 
-                    return redirect()->back()->with('error', $result['message']);
-                }
+                return redirect()->back()->with('error', $message);
             }
 
             DB::commit();

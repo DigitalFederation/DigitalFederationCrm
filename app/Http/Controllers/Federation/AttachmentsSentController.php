@@ -35,7 +35,7 @@ class AttachmentsSentController extends Controller
                 ->where(function (Builder $query) use ($federationId) {
                     $query->where('owner_type', Federation::class)
                         ->where('owner_id', $federationId);
-                })->when(! empty($committee), fn (Builder $query) => $query->where('committee_id', $committee->id));
+                })->where('committee_id', $committee->id);
 
             // Use QueryBuilder for additional filters
             return QueryBuilder::for($baseQuery)
@@ -67,9 +67,9 @@ class AttachmentsSentController extends Controller
     {
         $federation_id = auth()->user()->federations()->first()->id;
 
-        $countries = Country::all()->pluck('name', 'id');
+        $countries = Country::query()->pluck('name', 'id');
 
-        $categories = AttachmentCategory::all()->pluck('name', 'id');
+        $categories = AttachmentCategory::query()->pluck('name', 'id');
 
         $licenses = $certifications = $entity_licenses = $individual_licenses = collect();
         $license_type_entity = Cache::remember('license_type_entity'.$federation_id, 120, function () {
@@ -102,7 +102,7 @@ class AttachmentsSentController extends Controller
                     ->pluck('name', 'id');
             });
         } else {
-            $professional_roles = ProfessionalRole::all()->pluck('name', 'id');
+            $professional_roles = ProfessionalRole::query()->pluck('name', 'id');
             // Get licenses for Entities based on LicenseType
             if ($license_type_entity) {
                 $entity_licenses = Cache::remember('entityLicenses_for_federation_'.$federation_id, 120, function () use ($license_type_entity) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Domain\Documents\Actions\ManuallyMarkDocumentAsPaidAction;
 use Exception;
 use Illuminate\Http\RedirectResponse;

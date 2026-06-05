@@ -3,6 +3,7 @@
 namespace Domain\Memberships\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LocalMembershipPlan extends Model
 {
@@ -13,7 +14,7 @@ class LocalMembershipPlan extends Model
         'membership_plan_id',
     ];
 
-    public function membershipPlan()
+    public function membershipPlan(): BelongsTo
     {
         return $this->belongsTo(MembershipPlan::class, 'membership_plan_id');
     }

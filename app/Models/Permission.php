@@ -6,6 +6,15 @@ use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string|null $category
+ * @property string|null $description
+ * @property string $display_name
+ * @property int $roles_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \App\Models\Role> $roles
+ */
 class Permission extends \Spatie\Permission\Models\Permission
 {
     use CreatedUpdatedBy;

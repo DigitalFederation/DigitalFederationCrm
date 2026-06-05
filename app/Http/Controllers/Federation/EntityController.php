@@ -124,14 +124,7 @@ class EntityController extends Controller
 
             DB::commit();
 
-            if (! empty($entity)) {
-                return redirect(route('federation.entity.index'))->with('success', 'Entity created with success.');
-            } else {
-                DB::rollBack();
-                Log::error('Entity wasnt created: ' . json_encode($request->validated()));
-
-                return back()->with('error', 'Error creating this record.');
-            }
+            return redirect(route('federation.entity.index'))->with('success', 'Entity created with success.');
         } catch (Exception $ex) {
             DB::rollBack();
             Log::error($ex->getCode() . ': ' . $ex->getMessage());

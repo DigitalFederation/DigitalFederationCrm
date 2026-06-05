@@ -27,6 +27,8 @@ use Support\Traits\HasDocumentPaymentStatus;
  * @property MembershipPackage|null $membershipPackage
  * @property \Illuminate\Database\Eloquent\Collection<int, Affiliation> $affiliations
  * @property \Illuminate\Database\Eloquent\Collection<int, \Domain\Insurance\Models\Insurance> $insurances
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Domain\Documents\Models\Document> $documents
+ * @property \Domain\Documents\Models\Document|null $pendingDocument
  */
 class MemberSubscription extends Model
 {

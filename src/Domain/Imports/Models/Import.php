@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property \Illuminate\Database\Eloquent\Collection<int, ImportError> $errorMessages
+ */
 class Import extends Model
 {
     use HasFactory;

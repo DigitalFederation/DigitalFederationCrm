@@ -123,6 +123,7 @@ class LicenseAttributedController extends BaseLicenseAttributedController
             request()->merge(['filter_holder_type' => 'individual']);
         }
 
+        $professional = '';
         if (! empty(request()->input('filter')['filter_professional'])) {
             if (request()->input('filter')['filter_professional'] == 'refereejudge') {
                 $professional = 'Referee & Judge';
@@ -222,7 +223,7 @@ class LicenseAttributedController extends BaseLicenseAttributedController
     {
         try {
             DB::beginTransaction();
-            $deletedResponse = $deleteLicenseAttributed($id);
+            $deleteLicenseAttributed($id);
             DB::commit();
         } catch (Exception $ex) {
             DB::rollBack();
@@ -231,7 +232,7 @@ class LicenseAttributedController extends BaseLicenseAttributedController
             return redirect()->back()->with('error', $ex->getMessage());
         }
 
-        return redirect()->back()->with('success', $deletedResponse);
+        return redirect()->back()->with('success', __('licenses.license_deleted_successfully'));
     }
 
     /**
@@ -322,7 +323,7 @@ class LicenseAttributedController extends BaseLicenseAttributedController
                 } else {
                     // No payment required, activate directly
                     $activateAction = app(\Domain\Licenses\Actions\ActivateLicenseAttributedAction::class);
-                    $activateAction($licenseAttributed);
+                    $activateAction($licenseAttributed, null, true);
                 }
 
                 // Log the validation

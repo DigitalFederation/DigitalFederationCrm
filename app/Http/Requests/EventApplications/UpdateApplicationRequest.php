@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\EventApplications;
 
+use Domain\EventApplications\Models\EventApplication;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateApplicationRequest extends FormRequest
@@ -10,14 +11,14 @@ class UpdateApplicationRequest extends FormRequest
     {
         $application = $this->route('application');
 
-        if (! $application) {
+        if (! $application instanceof EventApplication) {
             return false;
         }
 
         return in_array($application->status_class, [
             'Domain\EventApplications\States\DraftApplicationState',
             'Domain\EventApplications\States\ReturnedApplicationState',
-        ]);
+        ], true);
     }
 
     public function rules(): array

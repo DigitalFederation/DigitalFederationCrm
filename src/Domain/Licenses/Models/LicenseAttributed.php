@@ -40,6 +40,7 @@ use Support\Traits\HasDocumentPaymentStatus;
  * @property \Illuminate\Support\Carbon|null $current_term_starts_at
  * @property \Illuminate\Support\Carbon|null $date_expire
  * @property int|null $license_id
+ * @property int|null $federation_id
  * @property int|string|null $model_id
  * @property int|null $requested_by_id
  * @property string|null $federation_name
@@ -47,7 +48,11 @@ use Support\Traits\HasDocumentPaymentStatus;
  * @property string|null $license_name
  * @property string|null $model_type
  * @property string|null $notes
+ * @property string|null $owner_type
  * @property string|null $requester_model_type
+ * @property string|null $validation_notes
+ * @property int|string|null $validated_by
+ * @property \Illuminate\Support\Carbon|null $validated_at
  * @property string|float|int|null $total_value
  * @property class-string<LicenseAttributedState>|null $status_class
  * @property LicenseAttributedState $state

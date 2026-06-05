@@ -49,8 +49,12 @@ use Spatie\Permission\Models\Role;
  * @property string|null $category
  * @property string|null $code_cmas
  * @property int|null $country_id
+ * @property bool|null $is_default_federation
  * @property bool|null $is_local
  * @property string|null $address
+ * @property string|null $country_name
+ * @property string|null $couuntry_name
+ * @property string|null $legal_name
  * @property string|null $location
  * @property string|null $name
  * @property int|null $parent_id
@@ -209,7 +213,7 @@ class Federation extends Model implements HasMedia
         return $this->code_cmas;
     }
 
-    public function localMembershipPlan()
+    public function localMembershipPlan(): HasMany
     {
         return $this->hasMany(LocalMembershipPlan::class, 'local_federation_id');
     }

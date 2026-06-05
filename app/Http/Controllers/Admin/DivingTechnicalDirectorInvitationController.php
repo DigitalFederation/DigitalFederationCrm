@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Domain\Diving\Models\DivingTechnicalDirectorInvitation;
-use Domain\Diving\States\AcceptedDivingTechnicalDirectorInvitationState;
-use Domain\Diving\States\CanceledDivingTechnicalDirectorInvitationState;
-use Domain\Diving\States\PendingDivingTechnicalDirectorInvitationState;
-use Domain\Diving\States\RejectedDivingTechnicalDirectorInvitationState;
+use Domain\Diving\Models\DivingEntityTechnicalDirector as DivingTechnicalDirectorInvitation;
+use Domain\Diving\States\AssignedDivingTechnicalDirectorState;
+use Domain\Diving\States\RemovedDivingTechnicalDirectorState;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,7 +20,7 @@ class DivingTechnicalDirectorInvitationController extends Controller
 
         // Filter by status
         if ($request->filled('status')) {
-            $query->whereState('status_class', $request->status);
+            $query->where('status_class', $request->status);
         }
 
         // Filter by entity
@@ -47,10 +45,8 @@ class DivingTechnicalDirectorInvitationController extends Controller
         $invitations = $query->paginate(20);
 
         $statusOptions = [
-            PendingDivingTechnicalDirectorInvitationState::class => __('diving.pending'),
-            AcceptedDivingTechnicalDirectorInvitationState::class => __('diving.accepted'),
-            RejectedDivingTechnicalDirectorInvitationState::class => __('diving.rejected'),
-            CanceledDivingTechnicalDirectorInvitationState::class => __('diving.canceled'),
+            AssignedDivingTechnicalDirectorState::class => __('diving.assigned'),
+            RemovedDivingTechnicalDirectorState::class => __('diving.removed'),
         ];
 
         return view('web.admin.diving_technical_director_invitations.index', compact(
@@ -75,12 +71,11 @@ class DivingTechnicalDirectorInvitationController extends Controller
 
     public function cancel(DivingTechnicalDirectorInvitation $invitation): RedirectResponse
     {
-        if (! $invitation->status()->canTransitionTo(CanceledDivingTechnicalDirectorInvitationState::class)) {
+        if (! $invitation->canBeRemoved()) {
             return back()->with('error', __('diving.cannot_cancel_invitation'));
         }
 
-        $invitation->status_class = CanceledDivingTechnicalDirectorInvitationState::class;
-        $invitation->save();
+        $invitation->remove(__('diving.invitation_canceled_successfully'));
 
         return redirect()->route('admin.diving_technical_director_invitations.show', $invitation)
             ->with('success', __('diving.invitation_canceled_successfully'));

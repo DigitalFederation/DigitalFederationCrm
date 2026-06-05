@@ -265,7 +265,7 @@ class RoleManagementController extends Controller
         $roles = $this->roleService->searchRoles($query, $category);
 
         return response()->json([
-            'roles' => $roles->map(function ($role) {
+            'roles' => $roles->map(function (Role $role) {
                 return [
                     'id' => $role->id,
                     'name' => $role->name,

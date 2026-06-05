@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Domain\Entities\Models\Entity;
 use Domain\Entities\States\ActiveEntityProfessionalRoleState;
 use Domain\Licenses\States\ActiveLicenseAttributedState;
+use Illuminate\Contracts\View\View;
 
 class EntityController extends Controller
 {
@@ -13,9 +14,8 @@ class EntityController extends Controller
      * Display the public profile of a specific entity.
      *
      * @param  Entity  $entity  The entity model instance resolved via route model binding.
-     * @return \\Illuminate\\Contracts\\View\\View
      */
-    public function show(Entity $entity)
+    public function show(Entity $entity): View
     {
         // Define instructor/dive leader role identifiers (UPDATE THESE WITH ACTUAL VALUES if different)
         // $instructorRoleIdentifiers = ['INSTRUCTOR', 'LEADER']; // Using the 'role' field from ProfessionalRole // Removed

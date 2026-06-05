@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Domain\Geographic\Models\District;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -14,7 +15,8 @@ class DistrictRequest extends FormRequest
 
     public function rules(): array
     {
-        $districtId = $this->route('district')?->id;
+        $district = $this->route('district');
+        $districtId = $district instanceof District ? $district->id : null;
 
         return [
             'name' => ['required', 'string', 'max:255'],

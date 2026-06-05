@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int|null $row_number
+ * @property string|null $error_message
+ * @property string|null $severity
+ * @property array<string, mixed>|null $row_data
+ */
 class ImportError extends Model
 {
     use HasFactory;

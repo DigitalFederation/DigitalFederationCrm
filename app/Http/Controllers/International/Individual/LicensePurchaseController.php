@@ -144,7 +144,7 @@ class LicensePurchaseController extends Controller
         $document = null;
 
         // Get the document (invoice) created for this license
-        if ($individual && $licenseAttributed) {
+        if ($individual instanceof Individual) {
             // Find document through document_details relationship
             $document = \Domain\Documents\Models\Document::where('owner_type', 'individual')
                 ->where('owner_id', $individual->id)

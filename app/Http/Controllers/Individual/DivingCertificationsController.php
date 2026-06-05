@@ -134,7 +134,7 @@ class DivingCertificationsController extends Controller
         return view('web.individual.diving_certifications.show', compact('certification'));
     }
 
-    public function edit(DivingProfessionalCertification $certification): View
+    public function edit(DivingProfessionalCertification $certification): View|RedirectResponse
     {
         $this->authorize('update', $certification);
 

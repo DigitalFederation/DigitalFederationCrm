@@ -23,7 +23,7 @@ class RegistrationController extends Controller
         return view('web.federation.evt_event.registration.index', compact('event', 'registrations'));
     }
 
-    public function create(Event $event): View
+    public function create(Event $event): View|\Illuminate\Http\RedirectResponse
     {
         $entityId = auth()->user()->getEntityId();
         $entity = Entity::findOrFail($entityId);
