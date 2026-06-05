@@ -5,6 +5,7 @@ use App\Models\Group;
 use App\Models\User;
 use Domain\EvtEvents\Models\Event;
 use Domain\EvtEvents\States\ActiveEventState;
+use Domain\EvtEvents\States\ArchiveEventState;
 use Domain\Federations\Models\Federation;
 
 beforeEach(function () {
@@ -45,20 +46,23 @@ it('displays events open to federations', function () {
         ->assertSee('Event for Federations');
 });
 
-it('does not display past events', function () {
+it('does not display archived events', function () {
+    // Federation event visibility is controlled by archived status (the table's default
+    // filter hides ArchiveEventState), not by event date — a past-but-active event still
+    // appears, so hiding is asserted via the archived state rather than a past date.
     Event::factory()->create([
-        'status_class' => ActiveEventState::class,
+        'status_class' => ArchiveEventState::class,
         'enrollment_type' => 'all',
-        'name' => 'Past Event',
+        'name' => 'Archived Event',
         'event_geographical_coverage' => 'international',
-        'start_date' => now()->subDays(10),
-        'end_date' => now()->subDays(5),
+        'start_date' => now()->addDays(1),
+        'end_date' => now()->addDays(2),
     ]);
 
     $response = $this->get(route('federation.evt-events.events.index'));
 
     $response->assertStatus(200)
-        ->assertDontSee('Past Event');
+        ->assertDontSee('Archived Event');
 });
 it('does not display national events outside user federation country', function () {
     $foreignCountryId = 999; // ID of a country that is not the user's federation country
