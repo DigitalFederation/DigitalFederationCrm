@@ -14,6 +14,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * @property array<string, mixed>|null $form_data
+ * @property class-string<\Domain\EventApplications\States\ApplicationState>|null $status_class
+ * @property int|null $id
+ * @property int|string|null $entity_id
+ * @property string|null $entity_type
+ * @property string|null $event_name
+ * @property string|null $event_type
+ * @property \Illuminate\Support\Carbon|null $start_date
+ * @property \Illuminate\Support\Carbon|null $end_date
+ * @property \Illuminate\Support\Carbon|null $submitted_at
+ * @property string|null $responsible_name
+ * @property string|null $responsible_phone
+ */
 class EventApplication extends Model implements HasMedia
 {
     use HasFactory;

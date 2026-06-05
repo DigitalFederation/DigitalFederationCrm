@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Log;
 
 class MemberSubscriptionController extends Controller
 {
-    public function index(): View
+    public function index(): View|RedirectResponse
     {
         $individual = auth()->user()->individuals()->first();
 
@@ -47,7 +47,7 @@ class MemberSubscriptionController extends Controller
             ->get();
 
         // Add document information to each subscription
-        $currentSubscription->each(function ($subscription) use ($individual) {
+        $currentSubscription->each(function (MemberSubscription $subscription) use ($individual) {
             // Documents are owned by the individual, but their details reference the subscription
             $subscription->documents = \Domain\Documents\Models\Document::where('owner_type', 'individual')
                 ->where('owner_id', $individual->id)
@@ -80,7 +80,7 @@ class MemberSubscriptionController extends Controller
         return view('web.individual.subscriptions.index', compact('individual', 'currentSubscription', 'subscriptionHistory', 'availablePackages'));
     }
 
-    public function create(Request $request): View
+    public function create(Request $request): View|RedirectResponse
     {
         $individual = auth()->user()->individuals()->first();
 
@@ -309,7 +309,7 @@ class MemberSubscriptionController extends Controller
         }
     }
 
-    public function history(): View
+    public function history(): View|RedirectResponse
     {
         $individual = auth()->user()->individuals()->first();
 

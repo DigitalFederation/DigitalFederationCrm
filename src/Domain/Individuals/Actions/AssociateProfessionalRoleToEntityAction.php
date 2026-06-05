@@ -26,13 +26,11 @@ class AssociateProfessionalRoleToEntityAction
             if ($canBeInstructor(Individual::where('id', $data->individual_id), $data->professional_role_id, $role)) {
                 $entity_professional_role = EntityProfessionalRole::firstOrCreate($data->toArray());
 
-                if (! empty($entity_professional_role)) {
-                    activity(ucfirst(strtolower($data->role_name)).' To Entity')
-                        ->performedOn($entity_professional_role)
-                        ->event('associate')
-                        ->withProperties($entity_professional_role->toArray())
-                        ->log(ucfirst(strtolower($data->role_name)).' associated to entity '.$entity_professional_role->entity_name);
-                }
+                activity(ucfirst(strtolower($data->role_name)).' To Entity')
+                    ->performedOn($entity_professional_role)
+                    ->event('associate')
+                    ->withProperties($entity_professional_role->toArray())
+                    ->log(ucfirst(strtolower($data->role_name)).' associated to entity '.$entity_professional_role->entity_name);
 
                 $entity_professional_role->load('professionalRole.committee');
 

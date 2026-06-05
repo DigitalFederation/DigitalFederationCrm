@@ -30,6 +30,27 @@ use Spatie\Permission\Models\Role;
 /**
  * @method static select(string ...$columns)
  * @method static find(int $id)
+ *
+ * @property bool $allow_entity_group_request
+ * @property int|null $committee_id
+ * @property int|null $interval
+ * @property int|null $license_id
+ * @property int|null $professional_role_id
+ * @property int|null $sport_id
+ * @property bool|null $is_international
+ * @property string|null $interval_unit
+ * @property string|null $license_code
+ * @property string|null $moloni_reference
+ * @property string|null $name
+ * @property object{status: string|null} $pivot
+ * @property array<int, string>|string|null $requester_model
+ * @property bool $requires_official_documents
+ * @property string|float|int|null $tax_percentage
+ * @property string|float|int|null $tax_value
+ * @property string|float|int|null $unit_value
+ * @property string|float|int|null $unit_value_entity
+ * @property string|float|int|null $unit_value_federation
+ * @property string|float|int|null $unit_value_individual
  */
 class License extends Model implements HasMedia
 {

@@ -67,6 +67,7 @@ class RoleTemplate extends Model
 
     public function createRoleFromTemplate(string $roleName, ?string $roleDescription = null): Role
     {
+        /** @var Role $role */
         $role = Role::create([
             'name' => $roleName,
             'guard_name' => 'web',

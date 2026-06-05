@@ -35,7 +35,7 @@ class ShippingZoneController extends Controller
     public function create(): View
     {
         // Get countries to use in the form
-        $subZones = ShippingSubZone::with('country')->get()->pluck('name', 'id');
+        $subZones = ShippingSubZone::query()->pluck('name', 'id');
 
         return view('web.admin.shipping.zones.create', compact('subZones'));
     }
@@ -65,7 +65,7 @@ class ShippingZoneController extends Controller
      */
     public function edit(ShippingZone $zone): View
     {
-        $subZones = ShippingSubZone::with('country')->get()->pluck('name', 'id');
+        $subZones = ShippingSubZone::query()->pluck('name', 'id');
 
         $zone->load('subZones');
 

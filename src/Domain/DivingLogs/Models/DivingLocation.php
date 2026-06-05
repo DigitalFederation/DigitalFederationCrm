@@ -98,19 +98,19 @@ class DivingLocation extends Model implements HasMedia
         switch (Auth::user()->group()->first()->code) {
             case 'INDIVIDUAL':
                 $this->owner_type = Individual::class;
-                $this->owner_id = Auth::user()->individuals()->first()->id;
+                $this->owner_id = (string) Auth::user()->individuals()->first()->id;
                 break;
             case 'ENTITY':
                 $this->owner_type = Entity::class;
-                $this->owner_id = Auth::user()->entities()->first()->id;
+                $this->owner_id = (string) Auth::user()->entities()->first()->id;
                 break;
             case 'FEDERATION':
                 $this->owner_type = Federation::class;
-                $this->owner_id = Auth::user()->federations()->first()->id;
+                $this->owner_id = (string) Auth::user()->federations()->first()->id;
                 break;
             case 'CMAS':
                 $this->owner_type = User::class;
-                $this->owner_id = Auth::user()->id;
+                $this->owner_id = (string) Auth::user()->id;
                 break;
         }
     }

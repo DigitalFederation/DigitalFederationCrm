@@ -16,7 +16,7 @@ class SendAdminCreateLicenseAttributedNotificationAction
         $notificationUsers = User::role('cmas-notifications')->permission('access email notifications')->get();
 
         // Check if there are users to notify
-        if (! empty($notificationUsers)) {
+        if ($notificationUsers->isNotEmpty()) {
             foreach ($notificationUsers as $user) {
                 // Send notification
                 foreach ($license_attributed_array as $license_attributed) {

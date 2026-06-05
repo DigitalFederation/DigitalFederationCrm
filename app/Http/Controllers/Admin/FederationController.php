@@ -11,9 +11,9 @@ use App\Models\Country;
 use App\Models\GeoZone;
 use App\Models\SubRegion;
 use Carbon\Carbon;
-use Domain\Certifications\Models\ActiveCertificationAttributedState;
-use Domain\Certifications\Models\ExpiredCertificationAttributedState;
-use Domain\Certifications\Models\PendingCertificationAttributedState;
+use Domain\Certifications\States\ActiveCertificationAttributedState;
+use Domain\Certifications\States\ExpiredCertificationAttributedState;
+use Domain\Certifications\States\PendingCertificationAttributedState;
 use Domain\Documents\Actions\CalculateInvoiceAccountSummaryAction;
 use Domain\Documents\Models\Document;
 use Domain\Documents\Models\DocumentType;
@@ -334,7 +334,7 @@ class FederationController extends Controller
         ];
         // get payment id
 
-        $payment_type_id = DocumentType::select('id')->where('code', 'PAY')->pluck('id')->first();
+        $payment_type_id = DocumentType::query()->where('code', 'PAY')->value('id');
 
         $invoicesQuery = Document::with('type', 'transactions', 'details')
             ->whereIn('owner_type', Document::ownerTypeValuesFor(Federation::class))

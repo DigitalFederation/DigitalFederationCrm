@@ -2,8 +2,9 @@
 
 namespace Domain\Licenses\Actions;
 
-use Carbon\Carbon;
+use Carbon\Carbon as BaseCarbon;
 use Domain\Licenses\Models\License;
+use Illuminate\Support\Carbon;
 
 class CalculateLicenseValidityDatesAction
 {
@@ -11,17 +12,20 @@ class CalculateLicenseValidityDatesAction
      * Calculate license validity start and end dates based on the license configuration
      *
      * @param  License  $license  The license to calculate dates for
-     * @param  Carbon|null  $startDate  Optional start date, defaults to today
+     * @param  BaseCarbon|null  $startDate  Optional start date, defaults to today
      * @return array{start_date: Carbon, end_date: Carbon|null} Array with calculated start and end dates
      */
-    public function execute(License $license, ?Carbon $startDate = null): array
+    public function execute(License $license, ?BaseCarbon $startDate = null): array
     {
-        $startDate = $startDate ?? Carbon::now();
+        $startDate = $startDate
+            ? Carbon::instance($startDate->copy())
+            : now();
+        $validFrom = $startDate->copy()->startOfDay();
 
         // Handle licenses without expiration (no interval set)
         if (! $license->interval || ! $license->interval_unit) {
             return [
-                'start_date' => $startDate,
+                'start_date' => $validFrom,
                 'end_date' => null, // No expiration
             ];
         }
@@ -43,7 +47,7 @@ class CalculateLicenseValidityDatesAction
             }
 
             return [
-                'start_date' => $startDate->startOfDay(),
+                'start_date' => $validFrom,
                 'end_date' => $endDate,
             ];
         }
@@ -57,7 +61,7 @@ class CalculateLicenseValidityDatesAction
         };
 
         return [
-            'start_date' => $startDate->startOfDay(),
+            'start_date' => $validFrom,
             'end_date' => $endDate,
         ];
     }

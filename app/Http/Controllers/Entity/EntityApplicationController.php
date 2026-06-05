@@ -68,7 +68,7 @@ class EntityApplicationController extends Controller
             ->orderBy('event_start_date')
             ->get();
 
-        $templates->each(function ($template) use ($entity) {
+        $templates->each(function (ApplicationTemplate $template) use ($entity) {
             $template->hasEntityApplied = $template->hasApplied($entity->id);
             if ($template->hasEntityApplied) {
                 $template->existingApplication = $template->getEntityApplication($entity->id);
@@ -353,7 +353,7 @@ class EntityApplicationController extends Controller
             ->get();
 
         // Check if entity has applied to each template
-        $templates->each(function ($template) use ($entity) {
+        $templates->each(function (ApplicationTemplate $template) use ($entity) {
             $template->hasEntityApplied = $template->hasApplied($entity->id);
             if ($template->hasEntityApplied) {
                 $template->existingApplication = $template->getEntityApplication($entity->id);

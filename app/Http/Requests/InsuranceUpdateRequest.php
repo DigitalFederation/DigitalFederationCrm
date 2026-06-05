@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Domain\Insurance\Models\Insurance;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InsuranceUpdateRequest extends FormRequest
@@ -35,6 +36,10 @@ class InsuranceUpdateRequest extends FormRequest
                 'max:255',
                 function ($attribute, $value, $fail) {
                     $insurance = $this->route('insurance');
+                    if (! $insurance instanceof Insurance) {
+                        return;
+                    }
+
                     if ($insurance->insurancePlan->isGroupPlan() && $value !== $insurance->insurancePlan->policy_number) {
                         $fail('The policy number cannot be changed for group insurance plans.');
                     }

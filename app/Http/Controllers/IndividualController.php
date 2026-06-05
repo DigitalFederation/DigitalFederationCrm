@@ -24,13 +24,13 @@ class IndividualController extends Controller
     public function create(): View
     {
         // List of sports
-        $sports = Sport::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
+        $sports = Sport::query()->orderBy('name')->pluck('name', 'id');
         // List of Committees
-        $committees = Committee::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
+        $committees = Committee::query()->orderBy('name')->pluck('name', 'id');
         // Countries - still needed for individual nationality
-        $countries = Country::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
+        $countries = Country::query()->orderBy('name')->pluck('name', 'id');
         // Districts
-        $districts = District::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
+        $districts = District::query()->orderBy('name')->pluck('name', 'id');
         // List of active entities (entities with active federation status)
         $entities = Entity::whereHas('federations', function ($query) {
             $query->where('entity_federation.status_class', \Domain\Entities\States\ActiveEntityFederationState::class);
@@ -130,7 +130,7 @@ class IndividualController extends Controller
         }
 
         // Adjust success message based on whether email was sent
-        if (isset($emailSent) && ! $emailSent) {
+        if (! $emailSent) {
             return redirect()->route('public.individual.create')->with('success', 'Individual created successfully. Please contact support if you did not receive the verification email.');
         }
 

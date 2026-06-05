@@ -129,7 +129,6 @@ class CreateInsuranceAction
             \Domain\Memberships\States\ActiveMemberSubscriptionState::class => ActiveInsuranceState::class,
             \Domain\Memberships\States\PendingPaymentMemberSubscriptionState::class => PendingPaymentInsuranceState::class,
             \Domain\Memberships\States\ExpiredMemberSubscriptionState::class => \Domain\Insurance\States\ExpiredInsuranceState::class,
-            \Domain\Memberships\States\CanceledMemberSubscriptionState::class => \Domain\Insurance\States\ExpiredInsuranceState::class,
         ];
 
         return $statusMap[$subscriptionStatusClass] ?? InactiveInsuranceState::class;
@@ -144,8 +143,6 @@ class CreateInsuranceAction
         $morphMap = [
             \Domain\Entities\Models\Entity::class => 'entity',
             \Domain\Individuals\Models\Individual::class => 'individual',
-            'Domain\\Entities\\Models\\Entity' => 'entity',
-            'Domain\\Individuals\\Models\\Individual' => 'individual',
         ];
 
         // If already a morph alias, return as is

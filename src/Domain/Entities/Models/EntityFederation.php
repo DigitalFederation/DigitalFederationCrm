@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property class-string<EntityFederationState>|null $status_class
+ * @property EntityFederationState $state
+ * @property int $federation_id
+ */
 class EntityFederation extends Model
 {
     use HasFactory;

@@ -5,15 +5,9 @@ namespace Domain\Federations\Models;
 use App\Models\Committee;
 use App\Models\Country;
 use App\Models\User;
-use App\Packages\MantaRayLms\Domain\Courses\Models\Course;
-use App\Packages\MantaRayLms\Domain\Courses\Models\CourseSeat;
-use App\Packages\MantaRayLms\Domain\Courses\Models\FederationAccess;
-use App\Packages\MantaRayLms\Domain\Courses\Models\FederationCoursePurchase;
-use App\Packages\MantaRayLms\Enums\PurchaseSeatStatusEnum;
 use Database\Factories\FederationFactory;
 use Domain\Certifications\Models\Certification;
 use Domain\Certifications\Models\CertificationAttributed;
-use Domain\Certifications\Models\CertificationSlot;
 use Domain\Documents\Models\Document;
 use Domain\Entities\Models\Entity;
 use Domain\Entities\Models\EntityFederation;
@@ -34,7 +28,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
@@ -51,6 +44,20 @@ use Spatie\Permission\Models\Role;
  * @method static select(string ...$column)
  * @method static insert(array $federations)
  * @method static findOrFail(int $id)
+ *
+ * @property bool|null $can_issue_certifications
+ * @property string|null $category
+ * @property string|null $code_cmas
+ * @property int|null $country_id
+ * @property bool|null $is_default_federation
+ * @property bool|null $is_local
+ * @property string|null $address
+ * @property string|null $country_name
+ * @property string|null $couuntry_name
+ * @property string|null $legal_name
+ * @property string|null $location
+ * @property string|null $name
+ * @property int|null $parent_id
  */
 class Federation extends Model implements HasMedia
 {
@@ -158,11 +165,6 @@ class Federation extends Model implements HasMedia
         return $this->hasMany(CertificationAttributed::class);
     }
 
-    public function certificationSlots(): HasMany
-    {
-        return $this->hasMany(CertificationSlot::class);
-    }
-
     public function licensesAttributed(): HasMany
     {
         return $this->hasMany(LicenseAttributed::class);
@@ -211,7 +213,7 @@ class Federation extends Model implements HasMedia
         return $this->code_cmas;
     }
 
-    public function localMembershipPlan()
+    public function localMembershipPlan(): HasMany
     {
         return $this->hasMany(LocalMembershipPlan::class, 'local_federation_id');
     }
@@ -287,75 +289,6 @@ class Federation extends Model implements HasMedia
                 $subQ->where('membership_plan.id', $membership_plan_id);
             });
         });
-    }
-
-    /**
-     * LMS methods
-     */
-    public function coursePurchases()
-    {
-        return $this->hasMany(FederationCoursePurchase::class);
-    }
-
-    public function courseSeats()
-    {
-        return $this->hasMany(CourseSeat::class);
-    }
-
-    public function getAvailableSeatsForCourse($courseId)
-    {
-        $totalPurchased = $this->coursePurchases()
-            ->where('course_id', $courseId)
-            ->where('status', PurchaseSeatStatusEnum::APPROVED)
-            ->sum('quantity_purchased');
-
-        $totalAllocated = $this->courseSeats()
-            ->where('course_id', $courseId)
-            ->sum('quantity');
-
-        return $totalPurchased - $totalAllocated;
-    }
-
-    public function allocateSeatsToEntity(Course $course, $entityId, int $quantity)
-    {
-        $availableSeats = $this->getAvailableSeatsForCourse($course->id);
-
-        if ($quantity > $availableSeats) {
-            throw new \Exception("Not enough seats available. Available: {$availableSeats}, Requested: {$quantity}");
-        }
-
-        return CourseSeat::updateOrCreate(
-            [
-                'course_id' => $course->id,
-                'entity_id' => $entityId,
-                'federation_id' => $this->id,
-            ],
-            [
-                'quantity' => \DB::raw('quantity + ' . $quantity),
-            ]
-        );
-    }
-
-    public function lmsAccess(): HasOne
-    {
-        return $this->hasOne(FederationAccess::class, 'federation_id');
-    }
-    /**
-     * Scope to federations that have active LMS access
-     */
-    public function scopeHasLmsAccess(Builder $query): Builder
-    {
-        return $query->whereHas('lmsAccess', function ($query) {
-            $query->where('is_active', true);
-        });
-    }
-
-    /**
-     * Check if federation has active LMS access
-     */
-    public function hasActiveLmsAccess(): bool
-    {
-        return $this->lmsAccess()->where('is_active', true)->exists();
     }
 
     /**

@@ -6,13 +6,14 @@ use Domain\Documents\DataTransferObject\DocumentData;
 use Domain\Documents\Models\Document;
 use Domain\Documents\Models\DocumentType;
 use Domain\Documents\States\DraftDocumentState;
+use Exception;
 
 class UpdateDocumentAction
 {
     public function __invoke(Document $document, DocumentData $data): Document
     {
         // Ensure the document is in a Draft state before updating
-        if (! $document->status_class == DraftDocumentState::class) {
+        if ($document->status_class !== DraftDocumentState::class) {
             throw new Exception('The document must be in a Draft state to be updated.');
         }
 

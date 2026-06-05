@@ -15,6 +15,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id
+ * @property int $event_id
+ * @property float|null $price
+ * @property string|null $price_type
+ * @property Event|null $event
+ * @property Enrollment|null $enrollment
+ * @property Pricing|null $pricing
+ */
 class RefereeEnrollment extends Model
 {
     use HasFactory;

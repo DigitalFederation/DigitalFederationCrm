@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * @property InsurancePlan $insurancePlan
+ * @property \Domain\Individuals\Models\Individual|\Domain\Entities\Models\Entity|null $member
+ */
 class Insurance extends Model
 {
     use HasFactory, LogsActivity;

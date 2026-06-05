@@ -89,8 +89,6 @@ class CreateMemberSubscriptionAction
         $morphMap = [
             Entity::class => 'entity',
             Individual::class => 'individual',
-            'Domain\\Entities\\Models\\Entity' => 'entity',
-            'Domain\\Individuals\\Models\\Individual' => 'individual',
         ];
 
         // If already a morph alias, return as is

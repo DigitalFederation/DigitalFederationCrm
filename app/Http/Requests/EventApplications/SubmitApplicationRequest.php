@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\EventApplications;
 
+use Domain\EventApplications\Models\EventApplication;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SubmitApplicationRequest extends FormRequest
@@ -10,14 +11,14 @@ class SubmitApplicationRequest extends FormRequest
     {
         $application = $this->route('application');
 
-        if (! $application) {
+        if (! $application instanceof EventApplication) {
             return false;
         }
 
         return in_array($application->status_class, [
             'Domain\EventApplications\States\DraftApplicationState',
             'Domain\EventApplications\States\ReturnedForCorrectionApplicationState',
-        ]);
+        ], true);
     }
 
     public function rules(): array
@@ -29,6 +30,9 @@ class SubmitApplicationRequest extends FormRequest
     {
         $validator->after(function ($validator) {
             $application = $this->route('application');
+            if (! $application instanceof EventApplication) {
+                return;
+            }
 
             if (! $application->event_name) {
                 $validator->errors()->add('event_name', __('event_applications.validation.event_name_required'));

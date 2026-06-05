@@ -22,7 +22,7 @@ class EntityController extends Controller
     public function create(): View
     {
         $federations = Federation::select('id', 'name')->orderBy('name')->get();
-        $sports = Sport::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
+        $sports = Sport::query()->pluck('name', 'id');
 
         return view('web.public.entity.create', compact('federations', 'sports'));
     }

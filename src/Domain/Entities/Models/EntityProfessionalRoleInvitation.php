@@ -20,6 +20,8 @@ use Illuminate\Support\Carbon;
  * @property int $individual_id
  * @property int $professional_role_id
  * @property string $status_class
+ * @property string|null $accept_url
+ * @property string|null $reject_url
  * @property string|null $message
  * @property Carbon $created_at
  * @property Carbon $updated_at

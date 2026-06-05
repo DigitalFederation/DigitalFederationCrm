@@ -16,6 +16,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static create(array $array)
  * @method static find(int $id)
  * @method static select(string ...$column)
+ *
+ * @property int|null $interval
+ * @property string|null $interval_unit
+ * @property string|null $name
+ * @property string|float|int|null $price
+ * @property string|float|int|null $tax_percentage
+ * @property string|float|int|null $tax_value
  */
 class MembershipPlan extends Model
 {

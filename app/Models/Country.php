@@ -18,6 +18,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @method static create(array $country)
  * @method static select(string ...$column)
+ *
+ * @property int $id
+ * @property string|null $ioc
+ * @property string|null $name
+ * @property string|null $region_name
+ * @property string|null $sub_region_name
+ * @property bool|null $supported
+ * @property float|null $lat
+ * @property float|null $lng
  */
 class Country extends Model
 {

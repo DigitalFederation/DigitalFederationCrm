@@ -7,6 +7,7 @@ use App\Models\Committee;
 use App\Models\Language;
 use App\Traits\StreamsMediaFromStorage;
 use Domain\Attachments\Actions\GetEntityAttachmentsAction;
+use Domain\Attachments\Models\Attachment;
 use Domain\Attachments\Models\AttachmentCategory;
 use Domain\Entities\Models\Entity;
 use Domain\Users\Actions\GetUserTypeAction;
@@ -77,13 +78,16 @@ class AttachmentsController extends Controller
 
         // Check if the media item's parent attachment is accessible by the entity
         $attachment = $mediaItem->model()->first();
+        if (! $attachment instanceof Attachment) {
+            return back()->with('error', 'File not found');
+        }
 
         // Check if attachment is for all entities or specifically for this entity
-        if ($attachment && (
-            in_array($attachment->recipient_name, ['all', 'all_entities', 'all_entities_&_individuals']) ||
+        if (
+            in_array($attachment->recipient_name, ['all', 'all_entities', 'all_entities_&_individuals'], true) ||
             ($attachment->recipient_name === 'entity' && $attachment->recipient_id == $entityId) ||
             ($attachment->recipient_type === Entity::class && $attachment->recipient_id == $entityId)
-        )) {
+        ) {
             return $this->streamMediaDownload($mediaItem, $downloadFilename);
         }
 

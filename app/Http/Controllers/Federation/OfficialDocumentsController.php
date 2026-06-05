@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -71,7 +72,7 @@ class OfficialDocumentsController extends Controller
         if ($officialDocument->federation_id == $federation->id) {
             $mediaItem = $officialDocument->media()->first();
 
-            if (! $mediaItem) {
+            if (! $mediaItem instanceof Media) {
                 return back()->with('error', 'File not found');
             }
 

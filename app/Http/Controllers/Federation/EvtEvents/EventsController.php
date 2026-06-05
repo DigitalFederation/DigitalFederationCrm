@@ -135,14 +135,14 @@ class EventsController extends Controller
     {
         $event = new Event;
 
-        $federations_list = Federation::all()->pluck('code_cmas', 'id');
-        $entities_list = Entity::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
-        $sports = \Domain\EvtEvents\Models\Sport::select('id', 'name')->get()->pluck('name', 'id');
-        $country_options = Country::select('id', 'name')->get()->pluck('name', 'id');
-        $district_options = District::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
-        $zone_options = Zone::select('id', 'name')->where('is_active', true)->orderBy('name')->get()->pluck('name', 'id');
+        $federations_list = Federation::query()->pluck('code_cmas', 'id');
+        $entities_list = Entity::query()->orderBy('name')->pluck('name', 'id');
+        $sports = \Domain\EvtEvents\Models\Sport::query()->pluck('name', 'id');
+        $country_options = Country::query()->pluck('name', 'id');
+        $district_options = District::query()->orderBy('name')->pluck('name', 'id');
+        $zone_options = Zone::query()->where('is_active', true)->orderBy('name')->pluck('name', 'id');
         $discipline_templates = DisciplineTemplate::all();
-        $professional_roles = ProfessionalRole::select('id', 'name')->get()->pluck('name', 'id');
+        $professional_roles = ProfessionalRole::query()->pluck('name', 'id');
         $attributes = Attribute::all()->groupBy('enrollment_type');
         $anti_doping = new AntiDoping;
 
@@ -448,16 +448,16 @@ class EventsController extends Controller
             'officialAttributes',
         ]);
 
-        $federations_list = Federation::all()->pluck('code_cmas', 'id');
-        $entities_list = Entity::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
-        $sports = \Domain\EvtEvents\Models\Sport::select('id', 'name')->get()->pluck('name', 'id');
-        $country_options = Country::select('id', 'name')->get()->pluck('name', 'id');
-        $district_options = District::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
-        $zone_options = Zone::select('id', 'name')->where('is_active', true)->orderBy('name')->get()->pluck('name', 'id');
-        $organizerDetails = $event->organizerDetail;
+        $federations_list = Federation::query()->pluck('code_cmas', 'id');
+        $entities_list = Entity::query()->orderBy('name')->pluck('name', 'id');
+        $sports = \Domain\EvtEvents\Models\Sport::query()->pluck('name', 'id');
+        $country_options = Country::query()->pluck('name', 'id');
+        $district_options = District::query()->orderBy('name')->pluck('name', 'id');
+        $zone_options = Zone::query()->where('is_active', true)->orderBy('name')->pluck('name', 'id');
+        $organizerDetails = $event->organizerDetails;
         $category = $event->event_category;
         $discipline_templates = DisciplineTemplate::all();
-        $professional_roles = ProfessionalRole::select('id', 'name')->get()->pluck('name', 'id');
+        $professional_roles = ProfessionalRole::query()->pluck('name', 'id');
 
         $anti_doping = $event->competition?->antiDopingRecord ?? new AntiDoping;
 
@@ -580,7 +580,7 @@ class EventsController extends Controller
                 }
             }
 
-            if ($validatedData['event_category'] === 'competition' && isset($competition)) {
+            if ($validatedData['event_category'] === 'competition') {
                 CompetitionType::where('competition_id', $competition->id)->delete();
                 if (isset($validatedData['competition']['types']) && is_array($validatedData['competition']['types'])) {
                     foreach ($validatedData['competition']['types'] as $type) {

@@ -183,13 +183,8 @@ class IndividualController extends Controller
 
             // Create entity affiliation if selected
             if (! empty($validatedData['entity_id'])) {
-                $createIndividualEntity = new \Domain\Entities\Actions\CreateIndividualEntityAction;
-                $createIndividualEntity(\Domain\Entities\Data\CreateIndividualEntityData::fromArray([
-                    'individual_code_cmas' => $individual->code_cmas,
-                    'entity_id' => $validatedData['entity_id'],
-                    'created_by' => $user->id,
-                    'request_from' => 'federation',
-                ]));
+                $createIndividualEntity = new \Domain\Individuals\Actions\CreateIndividualEntityAction;
+                $createIndividualEntity->execute($individual->code_cmas, (int) $validatedData['entity_id']);
             }
 
             DB::commit();

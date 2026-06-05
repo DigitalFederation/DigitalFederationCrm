@@ -321,12 +321,11 @@ class PreRegisterParticipantsAction
             $document = $createEnrollmentPaymentDocumentAction->execute(
                 $event,
                 $enrollment,
-                $enrollable->id,
+                (string) $enrollable->getKey(),
                 get_class($enrollable),
                 $selectedIndividuals,
                 $totalCost,
-                null, // No single pricing ID as we handle multiple roles
-                $creditApplied // Pass total credit applied
+                null // No single pricing ID as we handle multiple roles
             );
 
             $enrollment->update([

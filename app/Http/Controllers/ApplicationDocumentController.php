@@ -18,12 +18,11 @@ class ApplicationDocumentController extends Controller
         UploadApplicationDocumentAction $action
     ): RedirectResponse {
         try {
-            $document = $action->execute(
-                $request->input('application_id'),
-                $request->file('file'),
-                $request->input('document_type'),
-                $request->input('description')
-            );
+            $document = $action->execute([
+                'application_id' => $request->input('application_id'),
+                'file' => $request->file('file'),
+                'document_type' => $request->input('document_type'),
+            ]);
 
             return back()->with('success', __('event_applications.document_uploaded_success'));
         } catch (Exception $ex) {

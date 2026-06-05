@@ -60,7 +60,7 @@ class MergeUserAccountsAction
                 $targetUser->individual->forceDelete();
 
                 // Transfer source user's individual to target user
-                $sourceUser->individual->user_id = $targetUser->id;
+                $sourceUser->individual->user_id = (string) $targetUser->id;
                 $sourceUser->individual->save();
 
                 // Transfer related data
@@ -74,7 +74,7 @@ class MergeUserAccountsAction
             }
         } elseif ($sourceUser->individual) {
             // Transfer source user's individual to target user
-            $sourceUser->individual->user_id = $targetUser->id;
+            $sourceUser->individual->user_id = (string) $targetUser->id;
             $sourceUser->individual->save();
 
             // Transfer related data

@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 /**
  * @method static create(mixed $data)
+ *
+ * @property object{custom_value: mixed} $pivot
  */
 class Attribute extends Model
 {
@@ -79,26 +81,26 @@ class Attribute extends Model
         return $this->hasMany(AttributeRules::class);
     }
 
-    public function attributeGroups()
+    public function attributeGroups(): BelongsToMany
     {
         return $this->belongsToMany(AttributeGroup::class, 'evt_attribute_groups_attribute');
     }
 
-    public function athleteEnrollments()
+    public function athleteEnrollments(): HasMany
     {
         return $this->hasMany(AthleteEnrollmentAttributes::class, 'attribute_id');
     }
 
-    public function individualEnrollments()
+    public function individualEnrollments(): HasMany
     {
         return $this->hasMany(IndividualEnrollmentAttribute::class, 'attribute_id');
     }
-    public function officialsEnrollments()
+    public function officialsEnrollments(): HasMany
     {
         return $this->hasMany(OfficialsEnrollmentAttributes::class, 'attribute_id');
     }
 
-    public function coachEnrollments()
+    public function coachEnrollments(): HasMany
     {
         return $this->hasMany(CoachEnrollmentAttributes::class, 'attribute_id');
     }

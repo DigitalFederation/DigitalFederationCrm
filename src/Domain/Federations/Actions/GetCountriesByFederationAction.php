@@ -2,6 +2,7 @@
 
 namespace Domain\Federations\Actions;
 
+use App\Models\User;
 use Illuminate\Support\Collection;
 
 class GetCountriesByFederationAction
@@ -9,7 +10,9 @@ class GetCountriesByFederationAction
     public static function execute(): Collection
     {
         $countries = collect([]);
-        $federations = \Auth::user()->federations;
+        /** @var User|null $user */
+        $user = \Auth::user();
+        $federations = $user?->federations ?? collect([]);
         foreach ($federations as $federation) {
             $countries->push($federation->country);
         }

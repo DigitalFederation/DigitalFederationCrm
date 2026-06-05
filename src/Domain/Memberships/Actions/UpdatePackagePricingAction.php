@@ -12,10 +12,7 @@ class UpdatePackagePricingAction
     {
         return DB::transaction(function () use ($packagePricing, $data) {
             $packagePricing->update([
-                'membership_package_id' => $data->membership_package_id,
-                'name' => $data->name,
-                'duration' => $data->duration,
-                'duration_unit' => $data->duration_unit,
+                'package_id' => $data->membership_package_id,
                 'price' => $data->price,
             ]);
 

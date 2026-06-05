@@ -6,6 +6,7 @@ use App\Enums\OfficialDocumentTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Notifications\OfficialDocumentActivatedNotification;
 use App\Notifications\OfficialDocumentDeletedNotification;
+use Exception;
 use Domain\Individuals\Models\Individual;
 use Domain\OfficialDocuments\Models\OfficialDocument;
 use Domain\OfficialDocuments\States\ActiveOfficialDocumentState;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -179,7 +181,7 @@ class OfficialDocumentsFromIndividualController extends Controller
 
             $mediaItem = $officialDocument->media()->first();
 
-            if (! $mediaItem) {
+            if (! $mediaItem instanceof Media) {
                 return back()->with('error', __('official_documents.file_not_found'));
             }
 
@@ -240,6 +242,10 @@ class OfficialDocumentsFromIndividualController extends Controller
             // 1. First detach/delete media files
             $mediaItems = $officialDocument->media()->get();
             foreach ($mediaItems as $mediaItem) {
+                if (! $mediaItem instanceof Media) {
+                    continue;
+                }
+
                 try {
                     $mediaItem->delete();
                 } catch (Exception $e) {

@@ -122,7 +122,7 @@ class Affiliation extends Model
     /**
      * Get the activation date from the paid document's transaction
      */
-    public function getActivationDateAttribute(): ?Carbon
+    public function getActivationDateAttribute(): ?\Carbon\Carbon
     {
         $subscription = $this->memberSubscription;
 

@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property string $driver
+ * @property bool $is_enabled
+ * @property string|null $name
+ */
 class PaymentMethod extends Model
 {
     use HasFactory;

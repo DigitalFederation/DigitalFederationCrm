@@ -579,7 +579,7 @@ class CertificationCardGeneratorService
         try {
             // Skip temp directory and write directly to public storage
             if (! Storage::disk('public')->exists($directory)) {
-                Storage::disk('public')->makeDirectory($directory, 0775);
+                Storage::disk('public')->makeDirectory($directory);
             }
 
             // Generate and save the image directly

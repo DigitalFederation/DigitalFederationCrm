@@ -37,7 +37,7 @@ class PendingEnrollmentsController extends Controller
 
         $event = $pendingEnrollments->first()->event;
 
-        $createEnrollmentOrder = new CreateIndividualEnrollmentOrderAction;
+        $createEnrollmentOrder = app(CreateIndividualEnrollmentOrderAction::class);
         $createEnrollmentOrder->batchConfirmEnrollments($event, $pendingEnrollments, $individual->id, Individual::class);
 
         return redirect()->route('individual.evt-events.pending-enrollments.index')

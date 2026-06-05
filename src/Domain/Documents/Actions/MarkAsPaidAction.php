@@ -9,8 +9,9 @@ use Domain\Documents\DataTransferObject\DocumentDetailData;
 use Domain\Documents\Models\Document;
 use Domain\Documents\Models\DocumentType;
 use Domain\Documents\States\PaidDocumentState;
+use Domain\Entities\Models\Entity;
+use Domain\Individuals\Models\Individual;
 use Exception;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -69,7 +70,7 @@ class MarkAsPaidAction
                     if (method_exists($document->owner, 'users')) {
                         // Entity - has multiple users
                         $user = $document->owner->users()->first();
-                    } elseif (method_exists($document->owner, 'user')) {
+                    } elseif ($document->owner instanceof Individual) {
                         // Individual - has single user
                         $user = $document->owner->user;
                     } else {
@@ -114,7 +115,7 @@ class MarkAsPaidAction
      * @throws Exception
      */
     public function createPaymentDocumentWithDetail(
-        Model $document,
+        Document $document,
         ?string $reason = null
     ): Document {
         // Document type
@@ -134,11 +135,11 @@ class MarkAsPaidAction
             'status_class' => PaidDocumentState::class,
             'owner_id' => $document->id,
             'owner_type' => Document::class,
-            'customer_name' => ! empty($document->owner) ? $document->owner->first()->name : $document->customer_name,
-            'net_value' => -$document->net_value, // negative operator
-            'tax_value' => -$document->tax_value, // negative operator
+            'customer_name' => $document->owner?->name ?? $document->customer_name,
+            'net_value' => -(float) $document->net_value,
+            'tax_value' => -(float) $document->tax_value,
             'tax_percentage' => $document->tax_percentage,
-            'total_value' => -$document->total_value, // negative operator
+            'total_value' => -(float) $document->total_value,
             'method_id' => $document->method_id,
             'number' => $generatedNumber['number'],
             'number_pad' => $generatedNumber['number_pad'],
@@ -172,7 +173,7 @@ class MarkAsPaidAction
      *
      * @param  Document  $document  The document that we want to change the state of.
      */
-    private function changeDocumentToPaidState(Model $document): void
+    private function changeDocumentToPaidState(Document $document): void
     {
         $document->status_class = PaidDocumentState::class;
         $document->save();

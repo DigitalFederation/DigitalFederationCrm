@@ -117,11 +117,7 @@ class CreateCertificationAttributedAction
                 }
 
                 if (auth()->user()?->isFederation()) {
-                    if (date('Y', strtotime($certificationAttributedData->current_term_starts_at)) < 2024) {
-                        $this->activateCertificationByFederationAction->__invoke($certificationAttributed, 1, false);
-                    } else {
-                        $this->activateCertificationByFederationAction->__invoke($certificationAttributed);
-                    }
+                    $this->activateCertificationByFederationAction->__invoke($certificationAttributed);
                     activity('CertificationAttributed')->performedOn($certificationAttributed)->event('activated')->log('Certification activated by Federation');
 
                     continue;
@@ -129,11 +125,7 @@ class CreateCertificationAttributedAction
 
                 // Handle CMAS users - automatically activate certifications
                 if (auth()->user()?->isCmas()) {
-                    if (date('Y', strtotime($certificationAttributedData->current_term_starts_at)) < 2024) {
-                        $this->activateCertificationByFederationAction->__invoke($certificationAttributed, 1, false);
-                    } else {
-                        $this->activateCertificationByFederationAction->__invoke($certificationAttributed);
-                    }
+                    $this->activateCertificationByFederationAction->__invoke($certificationAttributed);
                     activity('CertificationAttributed')->performedOn($certificationAttributed)->event('activated')->log('Certification activated by CMAS');
 
                     continue;
@@ -149,11 +141,7 @@ class CreateCertificationAttributedAction
 
                         activity('CertificationAttributed')->performedOn($certificationAttributed)->event('provisional')->log('Certification set to Provisional state');
                     } else {
-                        if ($certificationAttributedData->approve_without_slots || date('Y', strtotime($certificationAttributedData->current_term_starts_at)) < 2024) {
-                            $this->activateCertificationByFederationAction->__invoke($certificationAttributed, 1, false);
-                        } else {
-                            $this->activateCertificationByFederationAction->__invoke($certificationAttributed);
-                        }
+                        $this->activateCertificationByFederationAction->__invoke($certificationAttributed);
                         activity('CertificationAttributed')->performedOn($certificationAttributed)->event('activated')->log('Certification activated by NTC approval/Date');
                     }
                 } elseif ($source_type === 'entity' && $individualCertData['status_class'] === PendingCertificationAttributedState::class) {

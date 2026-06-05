@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Domain\Geographic\Models\Zone;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -14,7 +15,8 @@ class ZoneRequest extends FormRequest
 
     public function rules(): array
     {
-        $zoneId = $this->route('zone')?->id;
+        $zone = $this->route('zone');
+        $zoneId = $zone instanceof Zone ? $zone->id : null;
 
         return [
             'name' => ['required', 'string', 'max:255'],

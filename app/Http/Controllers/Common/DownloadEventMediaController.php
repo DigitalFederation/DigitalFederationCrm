@@ -124,6 +124,9 @@ class DownloadEventMediaController extends Controller
         }
 
         $event = $mediaItem->model;
+        if (! $event instanceof Event) {
+            return back()->with('error', 'File not found.');
+        }
 
         // Check permissions for single file download
         if (! Auth::user()->isAdmin()) {

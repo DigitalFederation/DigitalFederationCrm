@@ -112,13 +112,13 @@ class DocumentController extends Controller
 
         // Precompute the IDs that the federation owns (to flag the others as view-only).
         $federationOwnedIds = $documents->getCollection()
-            ->filter(fn ($doc) => in_array($doc->owner_type, $federationOwnerTypes, true)
+            ->filter(fn (Document $doc) => in_array($doc->owner_type, $federationOwnerTypes, true)
                 && in_array($doc->owner_id, auth()->user()->federations()->pluck('federation.id')->toArray(), true))
             ->pluck('id')
             ->all();
 
         // Attach the readable owner types to each document
-        $documents->getCollection()->transform(function ($document) use ($isMainFederation, $federationOwnedIds) {
+        $documents->getCollection()->transform(function (Document $document) use ($isMainFederation, $federationOwnedIds) {
             $document->owner_type_names = $document->details->pluck('readable_owner_type')->unique();
             $document->is_view_only = ! $isMainFederation && ! in_array($document->id, $federationOwnedIds, true);
 

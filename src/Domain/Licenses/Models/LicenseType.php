@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * @property bool $is_individual
+ *
  * @method static select(string ...$columns)
  */
 class LicenseType extends Model

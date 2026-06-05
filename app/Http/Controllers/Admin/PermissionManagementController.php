@@ -53,7 +53,7 @@ class PermissionManagementController extends Controller
 
         $statistics = [
             'total_permissions' => $allPermissions->count(),
-            'system_permissions' => $allPermissions->filter(fn ($p) => $this->permissionService->isSystemPermission($p->name))->count(),
+            'system_permissions' => $allPermissions->filter(fn (Permission $permission) => $this->permissionService->isSystemPermission($permission->name))->count(),
             'permissions_with_roles' => $permissionsWithRoles->count(),
             'unused_permissions' => $unusedPermissions->count(),
             'by_category' => $allPermissions->groupBy('category')->map->count(),
@@ -127,7 +127,7 @@ class PermissionManagementController extends Controller
 
         // Count routes that have this permission in middleware
         $routesWithMiddleware = 0;
-        foreach (app('router')->getRoutes() as $route) {
+        foreach (app('router')->getRoutes()->getRoutes() as $route) {
             $middleware = $route->gatherMiddleware();
             foreach ($middleware as $mw) {
                 // Skip if middleware is not a string (could be a Closure)
@@ -317,7 +317,7 @@ class PermissionManagementController extends Controller
         $permissions = $this->permissionService->getAllPermissions($filters);
 
         return response()->json([
-            'permissions' => $permissions->map(function ($permission) {
+            'permissions' => $permissions->map(function (Permission $permission) {
                 return [
                     'id' => $permission->id,
                     'name' => $permission->name,
@@ -339,7 +339,7 @@ class PermissionManagementController extends Controller
         $statistics = [
             'total' => $permissions->count(),
             'by_category' => $permissions->groupBy('category')->map->count(),
-            'system' => $permissions->filter(fn ($p) => $this->permissionService->isSystemPermission($p->name))->count(),
+            'system' => $permissions->filter(fn (Permission $permission) => $this->permissionService->isSystemPermission($permission->name))->count(),
         ];
 
         return response()->json($statistics);

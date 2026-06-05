@@ -16,6 +16,20 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Support\Traits\HasDocumentPaymentStatus;
 
+/**
+ * @property \Illuminate\Support\Carbon|null $end_date
+ * @property \Illuminate\Support\Carbon|null $start_date
+ * @property int $id
+ * @property int|string|null $member_id
+ * @property string|null $member_type
+ * @property class-string<MemberSubscriptionState>|null $status_class
+ * @property \Domain\Individuals\Models\Individual|\Domain\Entities\Models\Entity|null $member
+ * @property MembershipPackage|null $membershipPackage
+ * @property \Illuminate\Database\Eloquent\Collection<int, Affiliation> $affiliations
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Domain\Insurance\Models\Insurance> $insurances
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Domain\Documents\Models\Document> $documents
+ * @property \Domain\Documents\Models\Document|null $pendingDocument
+ */
 class MemberSubscription extends Model
 {
     use HasDocumentPaymentStatus;

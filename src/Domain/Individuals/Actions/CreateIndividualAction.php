@@ -22,9 +22,12 @@ class CreateIndividualAction
 
         try {
 
-            $individualData->code_cmas = UtilityMethods::generateUniqueIndividualCode();
+            $data = [
+                ...(array) $individualData,
+                'code_cmas' => UtilityMethods::generateUniqueIndividualCode(),
+            ];
 
-            $individual = Individual::create((array) $individualData);
+            $individual = Individual::create($data);
 
             $federationId = $individualData->federation_id;
             // If no federation is provided, get the Special Federation's ID

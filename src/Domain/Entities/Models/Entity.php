@@ -5,13 +5,12 @@ namespace Domain\Entities\Models;
 use App\Models\Committee;
 use App\Models\Country;
 use App\Models\User;
-use App\Packages\MantaRayLms\Domain\ClassGroups\Models\ClassGroup;
-use App\Packages\MantaRayLms\Domain\Courses\Models\CourseSeat;
 use Database\Factories\EntityFactory;
 use Domain\Certifications\Models\CertificationAttributed;
 use Domain\DivingLogs\Models\DivingCourse;
 use Domain\DivingLogs\Models\DivingLocation;
 use Domain\Documents\Models\Document;
+use Domain\Entities\States\PendingEntityFederationState;
 use Domain\Federations\Models\Federation;
 use Domain\Geographic\Models\District;
 use Domain\Geographic\Models\Zone;
@@ -45,6 +44,14 @@ use Support\Traits\HasQrCode;
  * @method static find(int $id)
  * @method static whereDoesntHave(string $foreignRelation)
  * @method static findOrFail(int $id)
+ *
+ * @property int|null $country_id
+ * @property int|null $member_number
+ * @property string|null $address
+ * @property string|null $code_cmas
+ * @property string|null $email
+ * @property string|null $location
+ * @property string $name
  */
 class Entity extends Model implements HasMedia
 {
@@ -236,11 +243,6 @@ class Entity extends Model implements HasMedia
     public function individualEntities(): HasMany
     {
         return $this->HasMany(IndividualEntity::class);
-    }
-
-    public function groups()
-    {
-        return $this->hasMany(ClassGroup::class);
     }
 
     public function documents()
@@ -498,23 +500,6 @@ class Entity extends Model implements HasMedia
     {
         return $this->hasMany(\Domain\Diving\Models\DivingEntityTechnicalDirector::class);
     }
-    /**
-     * LMS methods
-     */
-    public function seatAllocations()
-    {
-        return $this->hasMany(CourseSeat::class);
-    }
-
-    public function getAvailableSeatsForCourse($courseId)
-    {
-        $allocation = $this->seatAllocations()
-            ->where('course_id', $courseId)
-            ->first();
-
-        return $allocation ? $allocation->available_seats : 0;
-    }
-
     public function getNationalFederationNumber(): ?string
     {
         if (! $this->relationLoaded('entityFederations')) {

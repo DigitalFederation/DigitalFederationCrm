@@ -31,6 +31,24 @@ use Illuminate\Support\Facades\DB;
 use Mpociot\Versionable\VersionableTrait;
 
 /**
+ * @property int|null $invoice_number
+ * @property int|null $invoice_year
+ * @property int|null $method_id
+ * @property int|null $type_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property bool|null $is_view_only
+ * @property string|float|int|null $amount_paid
+ * @property string|null $customer_name
+ * @property string|float|int|null $net_value
+ * @property string|null $number_extended
+ * @property string|null $number_pad
+ * @property string|int|null $owner_id
+ * @property string|null $owner_type
+ * @property \Illuminate\Support\Collection<int, string> $owner_type_names
+ * @property string|null $reference
+ * @property string|float|int|null $tax_percentage
+ * @property string|float|int|null $tax_value
+ * @property string|float|int|null $total_value
  * @property mixed $status_class
  * @property mixed $state
  *

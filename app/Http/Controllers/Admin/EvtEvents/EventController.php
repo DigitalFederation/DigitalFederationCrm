@@ -108,21 +108,21 @@ class EventController extends Controller
     {
         $event = new Event;
 
-        $federations_list = Federation::all()->pluck('code_cmas', 'id');
-        $entities_list = Entity::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
-        $sports = Sport::select('id', 'name')->get()->pluck('name', 'id');
-        $country_options = Country::select('id', 'name')->get()->pluck('name', 'id');
-        $district_options = District::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
-        $zone_options = Zone::select('id', 'name')->where('is_active', true)->orderBy('name')->get()->pluck('name', 'id');
+        $federations_list = Federation::query()->pluck('code_cmas', 'id');
+        $entities_list = Entity::query()->orderBy('name')->pluck('name', 'id');
+        $sports = Sport::query()->pluck('name', 'id');
+        $country_options = Country::query()->pluck('name', 'id');
+        $district_options = District::query()->orderBy('name')->pluck('name', 'id');
+        $zone_options = Zone::query()->where('is_active', true)->orderBy('name')->pluck('name', 'id');
         $discipline_templates = DisciplineTemplate::all();
-        $professional_roles = ProfessionalRole::select('id', 'name')->get()->pluck('name', 'id');
+        $professional_roles = ProfessionalRole::query()->pluck('name', 'id');
         $attributes = Attribute::all()->groupBy('enrollment_type');
         $anti_doping = new AntiDoping;
         $availableStates = Event::availableStates();
 
         // For filtering enrollments purposes
-        $licenses = License::select('id', 'name')->get()->pluck('name', 'id');
-        $certifications = Certification::select('id', 'name')->get()->pluck('name', 'id');
+        $licenses = License::query()->pluck('name', 'id');
+        $certifications = Certification::query()->pluck('name', 'id');
 
         // Fetch all attributes in a single query and group them by enrollment type
         $referee_attributes = $attributes->get('REFEREE', collect());
@@ -385,17 +385,17 @@ class EventController extends Controller
             'officialAttributes',
         ]);
 
-        $federations_list = Federation::all()->pluck('code_cmas', 'id');
-        $entities_list = Entity::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
-        $sports = Sport::select('id', 'name')->get()->pluck('name', 'id');
-        $country_options = Country::select('id', 'name')->get()->pluck('name', 'id');
-        $district_options = District::select('id', 'name')->orderBy('name')->get()->pluck('name', 'id');
-        $zone_options = Zone::select('id', 'name')->where('is_active', true)->orderBy('name')->get()->pluck('name', 'id');
-        $geo_zone_options = GeoZone::select('id', 'name')->get()->pluck('name', 'id');
-        $organizerDetails = $event->organizerDetail;
+        $federations_list = Federation::query()->pluck('code_cmas', 'id');
+        $entities_list = Entity::query()->orderBy('name')->pluck('name', 'id');
+        $sports = Sport::query()->pluck('name', 'id');
+        $country_options = Country::query()->pluck('name', 'id');
+        $district_options = District::query()->orderBy('name')->pluck('name', 'id');
+        $zone_options = Zone::query()->where('is_active', true)->orderBy('name')->pluck('name', 'id');
+        $geo_zone_options = GeoZone::query()->pluck('name', 'id');
+        $organizerDetails = $event->organizerDetails;
         $category = $event->event_category;
         $discipline_templates = DisciplineTemplate::all();
-        $professional_roles = ProfessionalRole::select('id', 'name')->get()->pluck('name', 'id');
+        $professional_roles = ProfessionalRole::query()->pluck('name', 'id');
 
         $anti_doping = $event->competition?->antiDopingRecord ?? new AntiDoping;
 
@@ -550,7 +550,7 @@ class EventController extends Controller
             }
 
             // Check if it's a competition and Competition Types are provided
-            if ($validatedData['event_category'] === 'competition' && isset($competition)) {
+            if ($validatedData['event_category'] === 'competition') {
                 // Always clear existing CompetitionTypes for this competition to avoid duplicates or stale data.
                 CompetitionType::where('competition_id', $competition->id)->delete();
                 // Only re-create CompetitionTypes if types are provided and is an array.

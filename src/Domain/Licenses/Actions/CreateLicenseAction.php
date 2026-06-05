@@ -35,7 +35,7 @@ class CreateLicenseAction
 
         // Upload Image
         if (! empty($data->logo)) {
-            UtilityMethods::saveAndResizePublicImage($license, 'profile', $data->logo, 250, 250);
+            UtilityMethods::addUploadedImageToMediaCollection($license, 'profile', $data->logo);
         }
 
         // Sync required certifications

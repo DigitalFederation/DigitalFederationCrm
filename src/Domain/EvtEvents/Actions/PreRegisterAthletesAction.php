@@ -12,7 +12,6 @@ use Domain\EvtEvents\Models\Enrollment;
 use Domain\EvtEvents\Models\Event;
 use Domain\EvtEvents\Models\Pricing;
 use Domain\Federations\Models\Federation;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -29,13 +28,13 @@ class PreRegisterAthletesAction
      * Execute the pre-registration process for athletes.
      *
      * @param  Event  $event  The event for which athletes are being pre-registered.
-     * @param  Model  $enrollable  The enrollable entity, either a Federation or Entity.
+     * @param  Federation|Entity  $enrollable  The enrollable entity, either a Federation or Entity.
      * @param  array  $athletes  An array of athletes to be pre-registered.
      * @return Enrollment The created enrollment record.
      *
      * @throws EnrollmentValidationException If validation fails.
      */
-    public function execute(Event $event, Model $enrollable, array $athletes)
+    public function execute(Event $event, Federation|Entity $enrollable, array $athletes)
     {
         try {
             $this->validateInput($event, $enrollable, $athletes);
@@ -79,12 +78,12 @@ class PreRegisterAthletesAction
      * Validate the input data for pre-registration.
      *
      * @param  Event  $event  The event being validated.
-     * @param  Model  $enrollable  The enrollable entity.
+     * @param  Federation|Entity  $enrollable  The enrollable entity.
      * @param  array  $athletes  The athletes to be validated.
      *
      * @throws EnrollmentValidationException If validation fails.
      */
-    private function validateInput(Event $event, Model $enrollable, array $athletes): void
+    private function validateInput(Event $event, Federation|Entity $enrollable, array $athletes): void
     {
         if (! ($enrollable instanceof Federation || $enrollable instanceof Entity)) {
             throw new EnrollmentValidationException('Invalid enrollable type. Must be Federation or Entity.');
@@ -131,10 +130,10 @@ class PreRegisterAthletesAction
      * Create an enrollment record for the event.
      *
      * @param  Event  $event  The event for which to create the enrollment.
-     * @param  Model  $enrollable  The enrollable entity.
+     * @param  Federation|Entity  $enrollable  The enrollable entity.
      * @return Enrollment The created enrollment record.
      */
-    private function createEnrollment(Event $event, Model $enrollable): Enrollment
+    private function createEnrollment(Event $event, Federation|Entity $enrollable): Enrollment
     {
         return Enrollment::create([
             'payment_status' => EvtEventPaymentStatusEnum::PENDING,
@@ -150,10 +149,10 @@ class PreRegisterAthletesAction
      *
      * @param  Enrollment  $enrollment  The enrollment record.
      * @param  array  $athlete  The athlete data.
-     * @param  Model  $enrollable  The enrollable entity.
+     * @param  Federation|Entity  $enrollable  The enrollable entity.
      * @param  Pricing|null  $perPersonPricing  The per-person pricing.
      */
-    private function createAthleteEnrollment(Enrollment $enrollment, array $athlete, Model $enrollable, ?Pricing $perPersonPricing): void
+    private function createAthleteEnrollment(Enrollment $enrollment, array $athlete, Federation|Entity $enrollable, ?Pricing $perPersonPricing): void
     {
         $athleteData = [
             'enrollment_id' => $enrollment->id,
@@ -178,11 +177,11 @@ class PreRegisterAthletesAction
      *
      * @param  Event  $event  The event for which to create the document.
      * @param  Enrollment  $enrollment  The enrollment record.
-     * @param  Model  $enrollable  The enrollable entity.
+     * @param  Federation|Entity  $enrollable  The enrollable entity.
      * @param  array  $athletes  The athletes being enrolled.
      * @param  Pricing  $perPersonPricing  The per-person pricing.
      */
-    private function createPaymentDocument(Event $event, Enrollment $enrollment, Model $enrollable, array $athletes, Pricing $perPersonPricing): void
+    private function createPaymentDocument(Event $event, Enrollment $enrollment, Federation|Entity $enrollable, array $athletes, Pricing $perPersonPricing): void
     {
         $totalCost = $perPersonPricing->price * count($athletes);
 

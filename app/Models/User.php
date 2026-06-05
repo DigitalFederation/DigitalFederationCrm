@@ -5,9 +5,7 @@ namespace App\Models;
 use App\Enums\UserGroupEnum;
 use Domain\Documents\Models\Document;
 use Domain\Entities\Models\Entity;
-use Domain\Events\Models\EventApplication;
-use Domain\Events\Models\EventSubscriptionEntity;
-use Domain\Events\Models\EventSubscriptionIndividual;
+use Domain\EventApplications\Models\EventApplication;
 use Domain\Federations\Models\Federation;
 use Domain\Individuals\Models\Individual;
 use Domain\Licenses\Models\LicenseAttributed;
@@ -41,7 +39,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * The attributes that are mass assignable.
      *
-     * @var string[]
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
@@ -57,7 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -71,7 +69,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
@@ -180,26 +178,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function eventsApplicationUpdated(): HasMany
     {
         return $this->hasMany(EventApplication::class, 'updated_by');
-    }
-
-    public function eventsSubscriptionEntityCreated(): HasMany
-    {
-        return $this->hasMany(EventSubscriptionEntity::class, 'created_by');
-    }
-
-    public function eventsSubscriptionEntityUpdated(): HasMany
-    {
-        return $this->hasMany(EventSubscriptionEntity::class, 'updated_by');
-    }
-
-    public function eventsSubscriptionIndividualCreated(): HasMany
-    {
-        return $this->hasMany(EventSubscriptionIndividual::class, 'created_by');
-    }
-
-    public function eventsSubscriptionIndividualUpdated(): HasMany
-    {
-        return $this->hasMany(EventSubscriptionIndividual::class, 'updated_by');
     }
 
     public function individualsCreated(): HasMany

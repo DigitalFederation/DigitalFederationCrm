@@ -8,8 +8,8 @@ use Domain\Documents\Models\DocumentDetail;
 class DocumentDetailData
 {
     public function __construct(
-        public ?string $document_id,
-        public string $owner_id,
+        public int|string|null $document_id,
+        public int|string $owner_id,
         public string $owner_type,
         public int $quantity = 1,
         public ?string $description = null,

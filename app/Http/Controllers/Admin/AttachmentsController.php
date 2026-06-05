@@ -51,17 +51,17 @@ class AttachmentsController extends Controller
     public function create(?Committee $committee = null)
     {
 
-        $countries = Country::all()->pluck('name', 'id');
-        $languages = Language::all()->pluck('name', 'id');
-        $categories = AttachmentCategory::all()->pluck('name', 'id');
+        $countries = Country::query()->pluck('name', 'id');
+        $languages = Language::query()->pluck('name', 'id');
+        $categories = AttachmentCategory::query()->pluck('name', 'id');
 
         $licenses = $certifications = $entity_licenses = $individual_licenses = collect();
-        $federations = Federation::all()->pluck('name', 'id');
+        $federations = Federation::query()->pluck('name', 'id');
 
         if ($committee) {
             $professional_roles = ProfessionalRole::where('committee_id', $committee->id)->pluck('name', 'id');
-            $licenses = $committee->licenses()->get()->pluck('name', 'id');
-            $certifications = $committee->certifications()->get()->pluck('name', 'id');
+            $licenses = $committee->licenses()->pluck('name', 'id');
+            $certifications = $committee->certifications()->pluck('name', 'id');
 
             $cacheDuration = 60;
 
@@ -84,7 +84,7 @@ class AttachmentsController extends Controller
                     ->pluck('name', 'id');
             });
         } else {
-            $professional_roles = ProfessionalRole::all()->pluck('name', 'id');
+            $professional_roles = ProfessionalRole::query()->pluck('name', 'id');
         }
 
         return view('web.admin.attachments.create', compact(
@@ -103,7 +103,7 @@ class AttachmentsController extends Controller
 
     public function edit(Attachment $attachment): View
     {
-        $categories = AttachmentCategory::all()->pluck('name', 'id');
+        $categories = AttachmentCategory::query()->pluck('name', 'id');
         $languages = Language::orderBy('name')->pluck('name', 'id');
 
         return view('web.admin.attachments.edit', compact('attachment', 'categories', 'languages'));

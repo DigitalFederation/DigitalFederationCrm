@@ -12,10 +12,7 @@ class CreatePackagePricingAction
     {
         return DB::transaction(function () use ($data) {
             return PackagePricing::create([
-                'membership_package_id' => $data->membership_package_id,
-                'name' => $data->name,
-                'duration' => $data->duration,
-                'duration_unit' => $data->duration_unit,
+                'package_id' => $data->membership_package_id,
                 'price' => $data->price,
             ]);
         });

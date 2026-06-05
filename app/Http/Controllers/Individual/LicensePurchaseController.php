@@ -110,11 +110,7 @@ class LicensePurchaseController extends Controller
 
         $license = License::find($request->license_id);
 
-        $purchaseAction = new PurchaseLicenseAction(
-            new CreateLicenseAttributedAction,
-            new CalculateLicensePriceAction,
-            new ValidationPlanPrivilegeService
-        );
+        $purchaseAction = app(PurchaseLicenseAction::class);
 
         try {
             $licenseAttributed = $purchaseAction($license, $individual);
@@ -154,7 +150,7 @@ class LicensePurchaseController extends Controller
         $individual = $licenseAttributed->owner;
         $document = null;
 
-        if ($individual && $licenseAttributed) {
+        if ($individual instanceof Individual) {
             // Find document through document_details relationship
             $document = \Domain\Documents\Models\Document::where('owner_type', 'individual')
                 ->where('owner_id', $individual->id)

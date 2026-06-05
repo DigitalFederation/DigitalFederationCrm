@@ -6,7 +6,8 @@ use Domain\Certifications\Models\CertificationAttributed;
 use Domain\Documents\DataTransferObject\DocumentData;
 use Domain\Documents\Models\Document;
 use Domain\Documents\States\PendingDocumentState;
-use Illuminate\Database\Eloquent\Model;
+use Domain\Entities\Models\Entity;
+use Domain\Individuals\Models\Individual;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -44,7 +45,7 @@ class AddCertificationDetailToDocumentAction
 
     private function handleBatchGrouping(
         CertificationAttributed $certificationAttributed,
-        Model $owner,
+        Entity|Individual $owner,
         float $price,
         string $batchId
     ): void {
@@ -97,7 +98,7 @@ class AddCertificationDetailToDocumentAction
 
     private function createNewDocument(
         CertificationAttributed $certificationAttributed,
-        Model $owner,
+        Entity|Individual $owner,
         float $price
     ): void {
         $documentData = DocumentData::fromArray([

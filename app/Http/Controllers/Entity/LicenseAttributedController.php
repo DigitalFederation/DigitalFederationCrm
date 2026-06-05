@@ -118,10 +118,6 @@ class LicenseAttributedController extends BaseLicenseAttributedController
 
         $license = $query->firstOrFail();
 
-        if (empty($license)) {
-            return redirect()->back()->with('error', __('Record does not exist'));
-        }
-
         return view('web.entity.license_attributed.show', compact('license'));
     }
 }

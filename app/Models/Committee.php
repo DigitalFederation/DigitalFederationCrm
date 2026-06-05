@@ -5,7 +5,6 @@ namespace App\Models;
 use Database\Factories\CommitteeFactory;
 use Domain\Attachments\Models\Attachment;
 use Domain\Certifications\Models\Certification;
-use Domain\Certifications\Models\CertificationSlot;
 use Domain\Federations\Models\Federation;
 use Domain\Individuals\Models\ProfessionalRole;
 use Domain\Licenses\Models\License;
@@ -15,7 +14,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * @method static create(array $committee)
@@ -54,11 +52,6 @@ class Committee extends Model
     public function membershipPlans(): HasMany
     {
         return $this->hasMany(MembershipPlan::class);
-    }
-
-    public function certificationsSlots(): HasManyThrough
-    {
-        return $this->hasManyThrough(CertificationSlot::class, Certification::class);
     }
 
     public function professionalRoles(): HasMany

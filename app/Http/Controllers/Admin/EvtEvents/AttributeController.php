@@ -113,9 +113,8 @@ class AttributeController extends Controller
     /**
      * Display the specified attribute.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function show(Attribute $attribute)
+    public function show(Attribute $attribute): View
     {
         return view('web.admin.evt_events.attributes.show', compact('attribute'));
     }
@@ -125,7 +124,7 @@ class AttributeController extends Controller
      *
      * @return View
      */
-    public function edit(Attribute $attribute)
+    public function edit(Attribute $attribute): View
     {
         $attribute_types = EvtAttributeTypesEnum::cases();
         $attribute_fillable_types = EvtAttributeFillableTypeEnum::cases();

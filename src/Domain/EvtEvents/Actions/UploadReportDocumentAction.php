@@ -3,8 +3,9 @@
 namespace Domain\EvtEvents\Actions;
 
 use Domain\EvtEvents\Models\EventReportDocument;
+use Domain\EvtEvents\Models\ChiefJudgeReport;
+use Domain\EvtEvents\Models\TechnicalDelegateReport;
 use Domain\Individuals\Models\Individual;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -15,15 +16,15 @@ class UploadReportDocumentAction
     /**
      * Upload a document to a report (TD or CJ)
      *
-     * @param  Model  $report  TechnicalDelegateReport or ChiefJudgeReport
+     * @param  TechnicalDelegateReport|ChiefJudgeReport  $report
      */
-    public function execute(Model $report, UploadedFile $file, Individual $uploadedBy): EventReportDocument
+    public function execute(TechnicalDelegateReport|ChiefJudgeReport $report, UploadedFile $file, Individual $uploadedBy): EventReportDocument
     {
         DB::beginTransaction();
 
         try {
             $fileName = $file->getClientOriginalName();
-            $path = $file->store('report-documents/' . $report->event_id, 'local');
+            $path = (string) $file->store('report-documents/' . $report->event_id, 'local');
 
             $document = EventReportDocument::create([
                 'documentable_type' => get_class($report),
@@ -48,9 +49,7 @@ class UploadReportDocumentAction
         } catch (\Exception $e) {
             DB::rollBack();
             // Clean up the file if it was uploaded
-            if (isset($path)) {
-                Storage::disk('local')->delete($path);
-            }
+            Storage::disk('local')->delete($path);
             Log::error('Failed to upload report document', [
                 'report_id' => $report->id,
                 'error' => $e->getMessage(),

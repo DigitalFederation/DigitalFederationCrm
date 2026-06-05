@@ -5,6 +5,8 @@ namespace Domain\EvtEvents\Models;
 use Database\Factories\OrganizerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Organizer extends Model
 {
@@ -21,12 +23,12 @@ class Organizer extends Model
     {
         return OrganizerFactory::new();
     }
-    public function organizable()
+    public function organizable(): MorphTo
     {
         return $this->morphTo();
     }
 
-    public function event()
+    public function event(): BelongsTo
     {
         return $this->belongsTo(Event::class, 'event_id');
     }

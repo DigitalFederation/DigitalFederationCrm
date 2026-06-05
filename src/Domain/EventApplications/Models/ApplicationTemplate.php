@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property string|null $state
+ * @property bool|null $hasEntityApplied
+ * @property EventApplication|null $existingApplication
+ */
 class ApplicationTemplate extends Model
 {
     use HasFactory;
@@ -94,9 +99,12 @@ class ApplicationTemplate extends Model
 
     public function getEntityApplication(int $entityId): ?EventApplication
     {
-        return $this->activeApplications()
+        /** @var EventApplication|null $application */
+        $application = $this->activeApplications()
             ->where('entity_id', $entityId)
             ->first();
+
+        return $application;
     }
 
     public function isOpen(): bool

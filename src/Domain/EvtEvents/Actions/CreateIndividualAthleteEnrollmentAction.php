@@ -5,6 +5,7 @@ namespace Domain\EvtEvents\Actions;
 use App\Enums\EvtAthleteEnrollmentStatusEnum;
 use Domain\EvtEvents\Models\AthleteEnrollment;
 use Domain\EvtEvents\Models\AthleteEnrollmentAttributes;
+use Domain\Entities\Models\Entity;
 use Domain\EvtEvents\Models\Enrollment;
 use Domain\EvtEvents\Models\Event;
 use Domain\EvtEvents\Models\Pricing;
@@ -139,9 +140,7 @@ class CreateIndividualAthleteEnrollmentAction
             ];
         }
 
-        if (! empty($attributesData)) {
-            AthleteEnrollmentAttributes::insert($attributesData);
-        }
+        AthleteEnrollmentAttributes::insert($attributesData);
     }
 
     /**

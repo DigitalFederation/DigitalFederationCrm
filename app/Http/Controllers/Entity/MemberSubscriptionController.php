@@ -76,7 +76,7 @@ class MemberSubscriptionController extends Controller
         return view('web.entity.subscriptions.index', compact('entity', 'currentSubscription', 'subscriptionHistory', 'availablePackages'));
     }
 
-    private function getAvailablePackagesForEntity(Entity $entity, array $excludePackageIds = [], array $excludeAffiliationPlanIds = []): \Illuminate\Database\Eloquent\Collection
+    private function getAvailablePackagesForEntity(Entity $entity, array $excludePackageIds = [], array $excludeAffiliationPlanIds = []): \Illuminate\Support\Collection
     {
         $entityFederationIds = $entity->federations()->pluck('federation.id')->toArray();
 

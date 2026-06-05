@@ -77,8 +77,13 @@ class RejectTechnicalDirectorLicenseAction
             $transition->handle();
 
             // Send notification to entity
-            if ($licenseAttributed->owner && method_exists($licenseAttributed->owner, 'notify')) {
-                $licenseAttributed->owner->notify(new \App\Notifications\TechnicalDirectorRejectedLicenseNotification(
+            $notificationClass = 'App\\Notifications\\TechnicalDirectorRejectedLicenseNotification';
+            if (
+                class_exists($notificationClass)
+                && $licenseAttributed->owner
+                && method_exists($licenseAttributed->owner, 'notify')
+            ) {
+                $licenseAttributed->owner->notify(new $notificationClass(
                     $licenseAttributed,
                     $technicalDirector,
                     $rejectionReason

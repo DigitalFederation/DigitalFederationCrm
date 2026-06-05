@@ -123,10 +123,6 @@ class LicenseAttributedController extends BaseLicenseAttributedController
 
         $license = $query->firstOrFail();
 
-        if (empty($license)) {
-            return redirect()->back()->with('error', __('cmas.error.license_not_found'));
-        }
-
         return view('web.international.individual.licenses-attributed.show', compact('license'));
     }
 

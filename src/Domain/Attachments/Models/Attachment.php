@@ -20,6 +20,13 @@ use Illuminate\Support\Carbon;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * @property int|string|null $owner_id
+ * @property string|null $owner_type
+ * @property int|string|null $recipient_id
+ * @property string|null $recipient_name
+ * @property string|null $recipient_type
+ */
 class Attachment extends Model implements hasMedia
 {
     use HasFactory;

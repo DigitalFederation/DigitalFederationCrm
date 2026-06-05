@@ -27,8 +27,14 @@ use Mpociot\Versionable\VersionableTrait;
  * @method static orderBy(string $string)
  * @method static findOrFail(int $id)
  *
+ * @property \Illuminate\Support\Carbon|null $activated_at
+ * @property \Illuminate\Support\Carbon|null $cancelled_at
+ * @property \Illuminate\Support\Carbon|null $current_term_ends_at
+ * @property int|null $federation_id
+ * @property int|null $parent_id
+ * @property string|null $name
  * @property MembershipState $state
- * @property MembershipState $status_class
+ * @property class-string<MembershipState>|null $status_class
  */
 class Membership extends Model
 {

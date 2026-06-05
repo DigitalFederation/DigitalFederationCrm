@@ -12,7 +12,7 @@ class CalculateLicensePriceAction
     /**
      * Calculate the correct price for a license based on the requester.
      *
-     * @param  array|License  $license  License object or array with pricing information.
+     * @param  License  $license  License with pricing information.
      * @param  string  $requesterType  Type of the requester ('Federation', 'Entity', 'Individual').
      * @return float|null The calculated price or null if not applicable.
      */

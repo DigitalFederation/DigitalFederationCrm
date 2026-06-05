@@ -8,6 +8,7 @@ use Domain\Licenses\States\ActiveToSuspendedTransition;
 use Domain\Licenses\States\SuspendedLicenseAttributedState;
 use Domain\Licenses\States\SuspendedToActiveTransition;
 use Exception;
+use Illuminate\Support\Carbon;
 
 class ManageLicenseAction
 {
@@ -74,8 +75,9 @@ class ManageLicenseAction
     public function updateExpiration(LicenseAttributed $license, string $newExpirationDate): LicenseAttributed
     {
         $oldExpiration = $license->date_expire;
-        $license->date_expire = $newExpirationDate;
-        $license->current_term_ends_at = $newExpirationDate;
+        $expiresAt = Carbon::parse($newExpirationDate);
+        $license->date_expire = $expiresAt;
+        $license->current_term_ends_at = $expiresAt;
         $license->save();
 
         activity('License')

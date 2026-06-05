@@ -9,6 +9,7 @@ use App\Notifications\OfficialDocumentDeletedNotification;
 use Domain\OfficialDocuments\Models\OfficialDocument;
 use Domain\OfficialDocuments\States\ActiveOfficialDocumentState;
 use Domain\OfficialDocuments\States\RejectedOfficialDocumentState;
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -142,7 +144,7 @@ class OfficialDocumentsFromFederationController extends Controller
         if ($officialDocument->federation_id == $user->federations()->first()->id) {
             $mediaItem = $officialDocument->media()->first();
 
-            if (! $mediaItem) {
+            if (! $mediaItem instanceof Media) {
                 return back()->with('error', 'File not found');
             }
 

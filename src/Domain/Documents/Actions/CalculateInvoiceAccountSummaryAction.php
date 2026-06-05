@@ -19,6 +19,9 @@ class CalculateInvoiceAccountSummaryAction
      * current_balance
      * invoices
      */
+    /**
+     * @param  Builder<\Domain\Documents\Models\Document>  $invoices
+     */
     public static function execute(Builder $invoices): array
     {
         $allInvoices = $invoices->get();

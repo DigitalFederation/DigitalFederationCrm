@@ -35,9 +35,6 @@ class DeleteFederationAction
         if ($federation->certificationsAttributed()->exists()) {
             $dependencies[] = 'certifications attributed';
         }
-        if ($federation->certificationSlots()->exists()) {
-            $dependencies[] = 'certification slots';
-        }
         if ($federation->organizers()->exists()) {
             $dependencies[] = 'event organizer';
         }

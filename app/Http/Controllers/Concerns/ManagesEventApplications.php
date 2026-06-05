@@ -167,6 +167,7 @@ trait ManagesEventApplications
 
     public function export(Request $request): StreamedResponse
     {
+        /** @var \Illuminate\Database\Eloquent\Collection<int, EventApplication> $applications */
         $applications = QueryBuilder::for(EventApplication::class)
             ->allowedFilters([
                 AllowedFilter::exact('status_class'),
@@ -243,6 +244,7 @@ trait ManagesEventApplications
 
     public function downloadDocuments(EventApplication $application): \Symfony\Component\HttpFoundation\BinaryFileResponse|RedirectResponse
     {
+        /** @var \Illuminate\Database\Eloquent\Collection<int, ApplicationDocument> $documents */
         $documents = $application->documents;
 
         if ($documents->isEmpty()) {

@@ -112,7 +112,7 @@ class SubscriptionController extends Controller
         return view('web.federation.subscriptions.create', compact('availablePackages', 'entities'));
     }
 
-    private function getAvailablePackagesForEntities($federation): \Illuminate\Database\Eloquent\Collection
+    private function getAvailablePackagesForEntities($federation): \Illuminate\Support\Collection
     {
         $query = MembershipPackage::with(['affiliationPlans', 'insurancePlans'])
             ->where('is_active', true)

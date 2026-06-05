@@ -43,7 +43,7 @@ class MemberSubscriptionController extends Controller
             ->appends(request()->query());
 
         // Load entities relationship only for individuals
-        $subscriptions->getCollection()->transform(function ($subscription) {
+        $subscriptions->getCollection()->transform(function (MemberSubscription $subscription) {
             if ($subscription->member_type === 'individual' && $subscription->member) {
                 $subscription->member->load('entities');
             }

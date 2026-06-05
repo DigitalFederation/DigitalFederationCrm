@@ -16,6 +16,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * @property string|null $rejection_reason
+ * @property string|null $revocation_reason
+ * @property \Illuminate\Support\Carbon|null $revoked_at
+ * @property int|string|null $revoked_by
+ */
 class DivingProfessionalCertification extends Model implements HasMedia
 {
     use HasFactory, HasUuids, InteractsWithMedia;

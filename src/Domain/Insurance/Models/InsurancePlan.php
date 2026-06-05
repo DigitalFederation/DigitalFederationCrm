@@ -91,7 +91,7 @@ class InsurancePlan extends Model implements HasMedia
      * If the plan has fixed dates, returns the plan's end_date.
      * Otherwise, calculates based on period from the given start date.
      */
-    public function calculateEndDate(Carbon $startDate): Carbon
+    public function calculateEndDate(Carbon $startDate): \Carbon\Carbon
     {
         // If plan has fixed dates, use the plan's end_date
         if ($this->hasFixedDates()) {
@@ -110,7 +110,7 @@ class InsurancePlan extends Model implements HasMedia
      * If the plan has fixed dates, returns the plan's start_date.
      * Otherwise, returns the given start date (typically from subscription).
      */
-    public function getInsuranceStartDate(Carbon|\Carbon\Carbon $subscriptionStartDate): Carbon
+    public function getInsuranceStartDate(Carbon|\Carbon\Carbon $subscriptionStartDate): \Carbon\Carbon
     {
         if ($this->hasFixedDates()) {
             return $this->start_date->copy();
@@ -171,7 +171,7 @@ class InsurancePlan extends Model implements HasMedia
 
     public function getDurationInDays(): int
     {
-        return $this->start_date->diffInDays($this->end_date);
+        return (int) $this->start_date->diffInDays($this->end_date);
     }
 
     public function scopeAvailableForEntity($query, $entity)

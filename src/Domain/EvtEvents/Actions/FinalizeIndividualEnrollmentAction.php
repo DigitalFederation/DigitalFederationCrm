@@ -224,7 +224,7 @@ class FinalizeIndividualEnrollmentAction
             Log::error('Failed to finalize individual enrollment action', [
                 'event_id' => $event->id,
                 'individual_id' => $individual->id,
-                'enrollment_id' => $enrollment->id ?? null,
+                'enrollment_id' => $enrollment->id,
                 'user_id' => $user->id,
                 'error' => $e->getMessage(),
                 'error_class' => get_class($e),
@@ -234,7 +234,7 @@ class FinalizeIndividualEnrollmentAction
             // Log activity for failure
             activity('enrollment_error')
                 ->causedBy($user)
-                ->performedOn($enrollment ?? null)
+                ->performedOn($enrollment)
                 ->withProperties([
                     'event_id' => $event->id,
                     'individual_id' => $individual->id,

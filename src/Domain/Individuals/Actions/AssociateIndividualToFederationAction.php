@@ -20,7 +20,7 @@ class AssociateIndividualToFederationAction
             'updated_at' => now()]
         );
 
-        if ($federations->get()->contains($federation->id)) {
+        if ($federations->whereKey($federation->id)->exists()) {
             activity('Individual To Federation')
                 ->performedOn($individual)
                 ->event('associate')
