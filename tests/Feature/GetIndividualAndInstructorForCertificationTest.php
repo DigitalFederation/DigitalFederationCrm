@@ -135,5 +135,5 @@ it('prevents adding a director not related to the entity as an instructor', func
         ->set('selectedFederation', $this->federation->id)
         ->set('codeInstructor', $individual_not_in_entity->code_cmas)
         ->call('searchInstructor')
-        ->assertSee('The individual member associated with this CMAS code does not hold an instructor certification, does not hold an active instructor licence or does not belong to a Diving entity.');
+        ->assertSee('The individual member associated with this international code does not hold an instructor certification, does not hold an active instructor licence or does not belong to a Diving entity.');
 });

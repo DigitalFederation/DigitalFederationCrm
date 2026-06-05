@@ -135,11 +135,11 @@ return [
         'dives_to_approve' => 'Mergulhos a Aprovar',
         'files_area' => 'Área de Ficheiros',
         'administrative' => 'Administrativo',
-        'international_licenses_cmas' => 'CMAS International Licenses',
+        'international_licenses_cmas' => 'International Licenses',
         'international_purchase_license' => 'Purchase International License',
         'international_entity_licenses' => 'Entity International Licenses',
         'international_member_licenses' => 'Member International Licenses',
-        'cmas_diving_instructors' => 'CMAS Diving Instructors',
+        'cmas_diving_instructors' => 'Diving Instructors',
         'payments' => 'Pagamentos',
     ],
     'individual' => [

@@ -194,8 +194,8 @@ return [
     // Committee-based document series
     'committee_document_series' => 'Committee-based Document Series',
     'committee_document_series_description' => 'Select the document series for licenses and certifications based on their committee. This takes priority over the type-based mapping below.',
-    'committee_diving' => 'CMAS Diving Committee',
-    'committee_scientific' => 'CMAS Scientific Committee',
+    'committee_diving' => 'Diving Committee',
+    'committee_scientific' => 'Scientific Committee',
     'committee_sport' => 'Sport Committee',
     'committee_divingservices' => 'Diving Services Committee',
 

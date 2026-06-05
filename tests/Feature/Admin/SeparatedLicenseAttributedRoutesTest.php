@@ -69,10 +69,10 @@ it('can access national diving individual licenses route as admin', function () 
     $response->assertViewHas('isInternational', false);
 });
 
-it('can access CMAS diving entity licenses route as admin', function () {
+it('can access International diving entity licenses route as admin', function () {
     $this->actingAs($this->admin);
 
-    $response = $this->get(route('admin.cmas-diving-entity-licenses-attributed.index'));
+    $response = $this->get(route('admin.international-diving-entity-licenses-attributed.index'));
 
     $response->assertStatus(200);
     $response->assertViewIs('web.admin.license_attributed.separated');
@@ -81,10 +81,10 @@ it('can access CMAS diving entity licenses route as admin', function () {
     $response->assertViewHas('isInternational', true);
 });
 
-it('can access CMAS diving individual licenses route as admin', function () {
+it('can access International diving individual licenses route as admin', function () {
     $this->actingAs($this->admin);
 
-    $response = $this->get(route('admin.cmas-diving-individual-licenses-attributed.index'));
+    $response = $this->get(route('admin.international-diving-individual-licenses-attributed.index'));
 
     $response->assertStatus(200);
     $response->assertViewIs('web.admin.license_attributed.separated');
@@ -131,8 +131,8 @@ it('returns correct page title for each admin route', function () {
         'admin.sport-individual-licenses-attributed.index' => __('licenses.admin_sport_individual_licenses_title'),
         'admin.national-diving-entity-licenses-attributed.index' => __('licenses.admin_national_diving_entity_licenses_title'),
         'admin.national-diving-individual-licenses-attributed.index' => __('licenses.admin_national_diving_individual_licenses_title'),
-        'admin.cmas-diving-entity-licenses-attributed.index' => __('licenses.admin_cmas_diving_entity_licenses_title'),
-        'admin.cmas-diving-individual-licenses-attributed.index' => __('licenses.admin_cmas_diving_individual_licenses_title'),
+        'admin.international-diving-entity-licenses-attributed.index' => __('licenses.admin_cmas_diving_entity_licenses_title'),
+        'admin.international-diving-individual-licenses-attributed.index' => __('licenses.admin_cmas_diving_individual_licenses_title'),
         'admin.scientific-entity-licenses-attributed.index' => __('licenses.admin_scientific_entity_licenses_title'),
         'admin.scientific-individual-licenses-attributed.index' => __('licenses.admin_scientific_individual_licenses_title'),
     ];

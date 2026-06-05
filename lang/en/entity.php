@@ -31,7 +31,7 @@ return [
     'table_name' => 'Name',
     'table_country' => 'Country',
     'table_national_fed_nr' => 'National Fed. Nr',
-    'table_cmas_zone' => 'CMAS Zone',
+    'table_cmas_zone' => 'International Zone',
     'table_sub_region' => 'Sub-region',
     'table_actions' => 'Actions',
     'table_nationality' => 'Nationality',
@@ -156,7 +156,7 @@ return [
     'showing_last_documents' => 'Showing last :count documents',
 
     // Messages
-    'invalid_cmas_code' => 'The CMAS code is invalid. Please confirm the information provided.',
+    'invalid_cmas_code' => 'The international code is invalid. Please confirm the information provided.',
     'invalid_member_number' => 'The member number is invalid. Please confirm the information provided.',
     'member_must_have_federation' => 'This member must have a federation relationship (active or pending) and must not be already part of your entity.',
     'invitation_sent_success' => 'The member invitation was sent with success. Please allow time for the member to review your request.',
@@ -191,10 +191,10 @@ return [
     // Map
     'get_directions' => 'Get Directions',
 
-    // CMAS Portal
-    'cmas_portal_access' => 'CMAS Portal Access',
-    'has_cmas_portal_account' => 'Has CMAS Portal Account',
-    'cmas_portal_description' => 'Check this box if the entity has an account on the CMAS Portal',
+    // International Portal
+    'cmas_portal_access' => 'International Portal Access',
+    'has_cmas_portal_account' => 'Has International Portal Account',
+    'cmas_portal_description' => 'Check this box if the entity has an account on the International Portal',
 
     // Public Page Management
     'public_page' => [

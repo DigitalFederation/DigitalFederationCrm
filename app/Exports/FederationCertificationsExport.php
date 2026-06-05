@@ -64,7 +64,7 @@ class FederationCertificationsExport implements FromQuery, ShouldQueue, WithHead
         return [
             'Holder Name',
             'National Code',
-            'CMAS International Code',
+            'International Code',
             'Certification Name',
             'Federation Name',
             'Entity Name',

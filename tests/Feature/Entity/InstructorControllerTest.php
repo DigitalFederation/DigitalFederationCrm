@@ -116,23 +116,23 @@ beforeEach(function () {
 });
 
 // ============================================================================
-// CMAS Diving Instructor Controller Tests
+// International Diving Instructor Controller Tests
 // ============================================================================
 
-test('entity can view CMAS diving instructors index page', function () {
+test('entity can view International diving instructors index page', function () {
     actingAs($this->entityUser);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertStatus(200);
-    $response->assertViewIs('web.entity.cmas_diving_instructor.index');
+    $response->assertViewIs('web.entity.international_diving_instructor.index');
     $response->assertViewHas('entity');
     $response->assertViewHas('instructors');
     $response->assertViewHas('professionalRoles');
     $response->assertViewHas('pendingInvitations');
 });
 
-test('entity CMAS diving index shows associated instructors', function () {
+test('entity International diving index shows associated instructors', function () {
     // Create an associated instructor
     EntityProfessionalRole::firstOrCreate([
         'entity_id' => $this->entity->id,
@@ -146,13 +146,13 @@ test('entity CMAS diving index shows associated instructors', function () {
 
     actingAs($this->entityUser);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertStatus(200);
     $response->assertSee($this->individual->code_cmas);
 });
 
-test('entity CMAS diving index shows pending invitations', function () {
+test('entity International diving index shows pending invitations', function () {
     // Create pending invitation
     EntityProfessionalRoleInvitation::create([
         'entity_id' => $this->entity->id,
@@ -168,7 +168,7 @@ test('entity CMAS diving index shows pending invitations', function () {
 
     actingAs($this->entityUser);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertStatus(200);
     $response->assertViewHas('pendingInvitations', function ($invitations) {
@@ -176,7 +176,7 @@ test('entity CMAS diving index shows pending invitations', function () {
     });
 });
 
-test('entity can cancel pending CMAS diving invitation', function () {
+test('entity can cancel pending International diving invitation', function () {
     // Create pending association (not invitation)
     $pendingAssociation = EntityProfessionalRole::firstOrCreate([
         'entity_id' => $this->entity->id,
@@ -190,9 +190,9 @@ test('entity can cancel pending CMAS diving invitation', function () {
 
     actingAs($this->entityUser);
 
-    $response = delete(route('entity.cmas-diving-instructor.cancel_invitation', $pendingAssociation->id));
+    $response = delete(route('entity.international-diving-instructor.cancel_invitation', $pendingAssociation->id));
 
-    $response->assertRedirect(route('entity.cmas-diving-instructor.index'));
+    $response->assertRedirect(route('entity.international-diving-instructor.index'));
     $response->assertSessionHas('success');
 
     assertDatabaseHas('entity_professional_role', [
@@ -201,7 +201,7 @@ test('entity can cancel pending CMAS diving invitation', function () {
     ]);
 });
 
-test('entity cannot cancel non-pending CMAS diving invitation', function () {
+test('entity cannot cancel non-pending International diving invitation', function () {
     // Create active association
     $activeAssociation = EntityProfessionalRole::firstOrCreate([
         'entity_id' => $this->entity->id,
@@ -215,7 +215,7 @@ test('entity cannot cancel non-pending CMAS diving invitation', function () {
 
     actingAs($this->entityUser);
 
-    $response = delete(route('entity.cmas-diving-instructor.cancel_invitation', $activeAssociation->id));
+    $response = delete(route('entity.international-diving-instructor.cancel_invitation', $activeAssociation->id));
 
     $response->assertSessionHas('error');
 
@@ -226,7 +226,7 @@ test('entity cannot cancel non-pending CMAS diving invitation', function () {
     ]);
 });
 
-test('entity can deactivate CMAS diving instructor relationship', function () {
+test('entity can deactivate International diving instructor relationship', function () {
     $association = EntityProfessionalRole::firstOrCreate([
         'entity_id' => $this->entity->id,
         'individual_id' => $this->individual->id,
@@ -239,16 +239,16 @@ test('entity can deactivate CMAS diving instructor relationship', function () {
 
     actingAs($this->entityUser);
 
-    $response = delete(route('entity.cmas-diving-instructor.remove', $association->id), [
+    $response = delete(route('entity.international-diving-instructor.remove', $association->id), [
         'action' => 'deactivate',
         'reason' => 'No longer needed',
     ]);
 
-    $response->assertRedirect(route('entity.cmas-diving-instructor.index'));
+    $response->assertRedirect(route('entity.international-diving-instructor.index'));
     $response->assertSessionHas('success');
 });
 
-test('entity can delete CMAS diving instructor relationship', function () {
+test('entity can delete International diving instructor relationship', function () {
     $association = EntityProfessionalRole::firstOrCreate([
         'entity_id' => $this->entity->id,
         'individual_id' => $this->individual->id,
@@ -261,11 +261,11 @@ test('entity can delete CMAS diving instructor relationship', function () {
 
     actingAs($this->entityUser);
 
-    $response = delete(route('entity.cmas-diving-instructor.remove', $association->id), [
+    $response = delete(route('entity.international-diving-instructor.remove', $association->id), [
         'action' => 'delete',
     ]);
 
-    $response->assertRedirect(route('entity.cmas-diving-instructor.index'));
+    $response->assertRedirect(route('entity.international-diving-instructor.index'));
     $response->assertSessionHas('success');
 
     $this->assertDatabaseMissing('entity_professional_role', [
@@ -414,7 +414,7 @@ test('entity cannot cancel another entitys invitation', function () {
     // Try to cancel from other entity
     actingAs($otherEntityUser);
 
-    $response = delete(route('entity.cmas-diving-instructor.cancel_invitation', $pendingAssociation->id));
+    $response = delete(route('entity.international-diving-instructor.cancel_invitation', $pendingAssociation->id));
 
     $response->assertStatus(403);
 });
@@ -423,7 +423,7 @@ test('user without entity cannot access instructor pages', function () {
     $userWithoutEntity = User::factory()->create(['group_id' => $this->entityGroup->id]);
     actingAs($userWithoutEntity);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
     $response->assertStatus(403);
 
     $response = get(route('entity.scientific-instructor.index'));

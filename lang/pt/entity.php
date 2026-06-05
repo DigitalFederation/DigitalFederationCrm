@@ -31,7 +31,7 @@ return [
     'table_name' => 'Nome',
     'table_country' => 'País',
     'table_national_fed_nr' => 'Nr. Fed. Nacional',
-    'table_cmas_zone' => 'Zona CMAS',
+    'table_cmas_zone' => 'Zona Internacional',
     'table_sub_region' => 'Sub-região',
     'table_actions' => 'Ações',
     'table_nationality' => 'Nacionalidade',
@@ -191,10 +191,10 @@ return [
     // Mapa
     'get_directions' => 'Obter Direções',
 
-    // Portal CMAS
-    'cmas_portal_access' => 'Acesso ao Portal CMAS',
-    'has_cmas_portal_account' => 'Tem Conta no Portal CMAS',
-    'cmas_portal_description' => 'Marque esta caixa se a entidade tem uma conta no Portal CMAS',
+    // International Portal
+    'cmas_portal_access' => 'Acesso ao Portal Internacional',
+    'has_cmas_portal_account' => 'Tem Conta no Portal Internacional',
+    'cmas_portal_description' => 'Marque esta caixa se a entidade tem uma conta no Portal Internacional',
 
     // Gestao da Pagina Publica
     'public_page' => [

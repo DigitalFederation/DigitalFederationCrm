@@ -32,7 +32,7 @@ test('controller correctly bypasses international scope for entity own licenses'
         'deleted_at' => null,
     ]);
 
-    // Authenticate as entity user (non-CMAS)
+    // Authenticate as entity user (non-international)
     $this->actingAs($user);
 
     // Test the exact query the controller uses (with scope bypass)
@@ -71,7 +71,7 @@ test('entity diving licenses controller bypasses international scope', function 
         'deleted_at' => null,
     ]);
 
-    // Authenticate as entity user (non-CMAS)
+    // Authenticate as entity user (non-international)
     $this->actingAs($user);
 
     // Test that without the scope bypass, the license would be hidden
@@ -93,6 +93,6 @@ test('entity diving licenses controller bypasses international scope', function 
         })
         ->count();
 
-    expect($normalQuery)->toBe(0, 'Normal query should filter out international license for non-CMAS user');
+    expect($normalQuery)->toBe(0, 'Normal query should filter out international license for non-international user');
     expect($bypassQuery)->toBe(1, 'Query with scope bypass should show international license');
 });

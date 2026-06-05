@@ -194,8 +194,8 @@ return [
     // Committee-based document series
     'committee_document_series' => 'Séries de Documentos por Comité',
     'committee_document_series_description' => 'Selecione a série de documentos para licenças e certificações com base no seu comité. Esta configuração tem prioridade sobre o mapeamento por tipo abaixo.',
-    'committee_diving' => 'Comité CMAS Diving',
-    'committee_scientific' => 'Comité CMAS Scientific',
+    'committee_diving' => 'Comité de Mergulho',
+    'committee_scientific' => 'Comité Científico',
     'committee_sport' => 'Comité Desportivo',
     'committee_divingservices' => 'Comité Serviços de Mergulho',
 

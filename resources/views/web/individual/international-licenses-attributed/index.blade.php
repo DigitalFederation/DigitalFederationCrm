@@ -6,7 +6,6 @@
 
     <!-- CMAS International Header -->
     <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 flex items-center">
-        <img src="{{ asset('images/cmas-logo.png') }}" alt="CMAS" class="h-12 w-auto mr-4">
         <div>
             <h2 class="text-lg font-semibold text-blue-900">{{ __('licenses.cmas_international_licenses') }}</h2>
             <p class="text-sm text-blue-700">{{ __('licenses.international_licenses_description') }}</p>
@@ -85,7 +84,6 @@
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <img src="{{ asset('images/cmas-logo.png') }}" alt="CMAS" class="h-6 w-auto mr-2">
                                     <div>
                                         <div class="text-sm font-medium text-gray-900">
                                             {{ $license->license_name }}

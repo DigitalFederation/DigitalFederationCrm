@@ -42,7 +42,7 @@
             </div>
 
             <div style="width: 83%" class="float-right">
-                <div class="text-xs font-bold text-gray-800"> {{ __("CMAS Nº") }} <span
+                <div class="text-xs font-bold text-gray-800"> {{ __("International Nº") }} <span
                         class="font-normal">{{ $certificationAttributed->license_number }}</span></div>
                 <div style="white-space: nowrap" class="text-xs font-bold text-gray-800"> {{ __("National Nº") }} <span
                         class="font-normal">{{ $certificationAttributed->national_code }}</span></div>

@@ -102,7 +102,7 @@ class FederationCreateIndividualEnrollment extends Component implements HasForms
                     ->label('Name'),
                 TextColumn::make('code_cmas')
                     ->searchable()
-                    ->label('CMAS Code'),
+                    ->label('International Code'),
             ])
             ->bulkActions([
                 BulkAction::make('updateSelectedIndividuals')

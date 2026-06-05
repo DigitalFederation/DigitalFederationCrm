@@ -13,24 +13,24 @@ return [
     'purchase_first_license' => 'Adquirir Primeira Licença',
 
     // Headers
-    'international_licenses' => 'Licenças Internacionais CMAS',
-    'international_license' => 'Licença Internacional CMAS',
-    'international_certifications' => 'Certificações Internacionais CMAS',
-    'official_international_licenses' => 'Licenças internacionais oficiais reconhecidas pela CMAS mundialmente',
-    'official_international_license' => 'Licença internacional oficial reconhecida pela CMAS',
-    'diving_scientific_certifications' => 'Certificações de Mergulho e Científicas reconhecidas pela CMAS mundialmente',
+    'international_licenses' => 'Licenças Internacionais',
+    'international_license' => 'Licença Internacional',
+    'international_certifications' => 'Certificações Internacionais',
+    'official_international_licenses' => 'Licenças internacionais oficiais reconhecidas mundialmente',
+    'official_international_license' => 'Licença internacional oficial reconhecida internacionalmente',
+    'diving_scientific_certifications' => 'Certificações de Mergulho e Científicas reconhecidas mundialmente',
 
     // Individual - License Purchase
     'purchase_international_license' => 'Adquirir Licença Internacional',
     'select_purchase_international_license' => 'Selecione e adquira uma licença internacional para si',
     'view_national_licenses' => 'Ver Licenças Nacionais',
     'no_international_access' => 'Sem Acesso a Licenças Internacionais',
-    'no_international_access_description' => 'Não está associado a uma federação que tenha acordos de licenças internacionais. Apenas membros de federações com acordos internacionais CMAS podem adquirir estas licenças.',
+    'no_international_access_description' => 'Não está associado a uma federação que tenha acordos de licenças internacionais. Apenas membros de federações com acordos internacionais podem adquirir estas licenças.',
 
     // Individual - Licenses Attributed
     'my_international_licenses' => 'Minhas Licenças Internacionais',
     'view_manage_international_licenses' => 'Visualize e gerencie as suas licenças internacionais',
-    'licenses_information' => 'Aqui pode visualizar todas as suas licenças internacionais CMAS e adquirir novas licenças',
+    'licenses_information' => 'Aqui pode visualizar todas as suas licenças internacionais e adquirir novas licenças',
     'license' => 'Licença',
     'committee' => 'Comissão',
     'start_date' => 'Data de Início',
@@ -48,14 +48,14 @@ return [
     'license_name' => 'Nome da Licença',
     'sport' => 'Desporto',
     'federation' => 'Federação',
-    'cmas_code' => 'Código CMAS',
+    'cmas_code' => 'Código Internacional',
 
     // Individual - Certification Cards
     'my_certification_cards' => 'Minhas Cartas de Certificação',
     'my_international_certifications' => 'Minhas Certificações Internacionais',
-    'view_international_certifications' => 'Visualize as suas certificações internacionais CMAS',
+    'view_international_certifications' => 'Visualize as suas certificações internacionais',
     'download_certification_cards' => 'Descarregue e visualize as suas cartas de certificação internacionais',
-    'certifications_information' => 'Aqui pode visualizar e descarregar as suas cartas de certificação internacionais CMAS',
+    'certifications_information' => 'Aqui pode visualizar e descarregar as suas cartas de certificação internacionais',
     'issued' => 'Emitida',
     'expires' => 'Expira',
     'code' => 'Código',
@@ -67,15 +67,15 @@ return [
     'entity_international_certifications' => 'Certificações Internacionais da Entidade',
     'manage_entity_international_licenses' => 'Gerencie licenças internacionais para a sua entidade e membros',
     'view_members_international_certifications' => 'Visualize certificações internacionais dos membros da sua entidade',
-    'entity_licenses_information' => 'Aqui pode visualizar e gerenciar todas as licenças internacionais CMAS da sua entidade',
-    'entity_certifications_information' => 'Aqui pode visualizar todas as certificações internacionais CMAS dos membros da sua entidade',
+    'entity_licenses_information' => 'Aqui pode visualizar e gerenciar todas as licenças internacionais da sua entidade',
+    'entity_certifications_information' => 'Aqui pode visualizar todas as certificações internacionais dos membros da sua entidade',
     'holder' => 'Titular',
     'no_entity_licenses_description' => 'A sua entidade ainda não possui licenças internacionais. Adquira a sua primeira licença internacional para começar.',
     'no_entity_certifications_description' => 'Os membros da sua entidade ainda não possuem certificações internacionais.',
 
     // Federation - Licenses
     'manage_international_licenses' => 'Gerir Licenças Internacionais',
-    'international_licenses_management' => 'Gestão de Licenças Internacionais CMAS',
+    'international_licenses_management' => 'Gestão de Licenças Internacionais',
     'manage_federation_international_licenses' => 'Gerencie licenças internacionais para a sua federação',
     'federation_licenses_description' => 'Visualize e gerencie todas as licenças internacionais emitidas pela sua federação',
     'holder_type' => 'Tipo de Titular',
@@ -84,7 +84,7 @@ return [
 
     // Federation - Certifications
     'manage_international_certifications' => 'Gerir Certificações Internacionais',
-    'international_certifications_management' => 'Gestão de Certificações Internacionais CMAS',
+    'international_certifications_management' => 'Gestão de Certificações Internacionais',
     'manage_federation_international_certifications' => 'Gerencie certificações internacionais para a sua federação',
     'federation_certifications_description' => 'Visualize e gerencie todas as certificações internacionais emitidas pela sua federação',
     'certification' => 'Certificação',

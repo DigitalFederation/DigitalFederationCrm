@@ -93,7 +93,7 @@
                         <line x1="12" y1="8" x2="12.01" y2="8" />
                         <polyline points="11 12 12 12 12 16 13 16" />
                     </svg>
-                    <p class="text-sm">{{ __('By submitting this request for certification, you are confirming that the students have completed all the theoretical and practical training parts of the CMAS course programme and that the students have all the competencies described in the CMAS training standard.') }}</p>
+                    <p class="text-sm">{{ __('By submitting this request for certification, you are confirming that the students have completed all the theoretical and practical training parts of the course programme and that the students have all the competencies described in the training standard.') }}</p>
                 </div>
 
                 <x-forms.card-form-submit backRoute="federation.certification-attributed.index"

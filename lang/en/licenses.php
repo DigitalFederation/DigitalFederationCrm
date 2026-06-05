@@ -10,7 +10,7 @@ return [
     'my_licenses_description' => 'Here you can view all your licenses and purchase new member licenses',
     'view_my_licenses' => 'View My Licenses',
     'no_federation_association_description' => 'You are not associated with any federation. Please contact your federation administrator to establish this association before purchasing licenses.',
-    'no_international_license_access_description' => 'You are not associated with a federation that has international license agreements. Only members of federations with CMAS international agreements can purchase these licenses.',
+    'no_international_license_access_description' => 'You are not associated with a federation that has international license agreements. Only members of federations with international agreements can purchase these licenses.',
 
     // Tab sections
     'basic_information' => 'Basic Information',
@@ -87,8 +87,8 @@ return [
     'Today' => 'Today',
     'Permanent' => 'Permanent',
 
-    // CMAS and codes
-    'CMAS International Code' => 'CMAS International Code',
+    // International and codes
+    'CMAS International Code' => 'International Code',
     'Pending Assignment' => 'Pending Assignment',
     'Order Number' => 'Order Number',
 
@@ -290,7 +290,7 @@ return [
     'View National Licenses' => 'View National Licenses',
     'Select and purchase an international license for yourself' => 'Select and purchase an international license for yourself',
     'No International License Access' => 'No International License Access',
-    'You are not associated with a federation that has international license agreements. Only members of federations with CMAS international agreements can purchase these licenses.' => 'You are not associated with a federation that has international license agreements. Only members of federations with CMAS international agreements can purchase these licenses.',
+    'You are not associated with a federation that has international license agreements. Only members of federations with CMAS international agreements can purchase these licenses.' => 'You are not associated with a federation that has international license agreements. Only members of federations with international agreements can purchase these licenses.',
     'Back to International Licenses' => 'Back to International Licenses',
     'View My International Licenses' => 'View My International Licenses',
     'Purchase International Licenses for Members' => 'Purchase International Licenses for Members',
@@ -318,8 +318,8 @@ return [
     'Sport Licenses' => 'Sport Licenses',
     'International Entity Licenses' => "{$internationalName} Entity Licenses",
     'International Professional Licenses' => "{$internationalName} Professional Licenses",
-    'CMAS Scientific Entity Licenses' => 'CMAS Scientific Entity Licenses',
-    'CMAS Scientific Professional Licenses' => 'CMAS Scientific Professional Licenses',
+    'CMAS Scientific Entity Licenses' => 'Scientific Entity Licenses',
+    'CMAS Scientific Professional Licenses' => 'Scientific Professional Licenses',
     'Primary Diving Services Licenses' => "{$primaryShortName} Diving Services Licenses",
 
     // Middleware error messages
@@ -361,10 +361,10 @@ return [
     'Purchase a CMAS license for your entity' => "Purchase an {$internationalShortName} license for your entity",
     'Purchase International Professional Licenses' => "Purchase {$internationalName} Professional Licenses",
     'Select members and purchase CMAS licenses on their behalf' => "Select members and purchase {$internationalShortName} licenses on their behalf",
-    'Purchase CMAS Scientific Entity License' => 'Purchase CMAS Scientific Entity License',
-    'Purchase a CMAS scientific license for your entity' => 'Purchase a CMAS scientific license for your entity',
-    'Purchase CMAS Scientific Professional Licenses' => 'Purchase CMAS Scientific Professional Licenses',
-    'Select members and purchase CMAS scientific licenses on their behalf' => 'Select members and purchase CMAS scientific licenses on their behalf',
+    'Purchase CMAS Scientific Entity License' => 'Purchase Scientific Entity License',
+    'Purchase a CMAS scientific license for your entity' => 'Purchase a scientific license for your entity',
+    'Purchase CMAS Scientific Professional Licenses' => 'Purchase Scientific Professional Licenses',
+    'Select members and purchase CMAS scientific licenses on their behalf' => 'Select members and purchase scientific licenses on their behalf',
     'Purchase Primary Diving Services Licenses' => "Purchase {$primaryShortName} Diving Services Licenses",
     'Select members and purchase primary diving licenses on their behalf' => "Select members and purchase {$primaryShortName} diving licenses on their behalf",
 
@@ -405,10 +405,10 @@ return [
     'federation_national_diving_entity_licenses_subtitle' => "{$primaryShortName} diving licenses attributed to diving centers",
     'federation_national_diving_individual_licenses_title' => "{$primaryShortName} Diving Professional Licenses",
     'federation_national_diving_individual_licenses_subtitle' => "{$primaryShortName} diving licenses attributed to professionals",
-    'federation_cmas_diving_entity_licenses_title' => 'CMAS Diving Center Licenses',
-    'federation_cmas_diving_entity_licenses_subtitle' => 'CMAS diving licenses attributed to diving centers',
-    'federation_cmas_diving_individual_licenses_title' => 'CMAS Diving Professional Licenses',
-    'federation_cmas_diving_individual_licenses_subtitle' => 'CMAS diving licenses attributed to professionals',
+    'federation_cmas_diving_entity_licenses_title' => 'International Diving Center Licenses',
+    'federation_cmas_diving_entity_licenses_subtitle' => 'International diving licenses attributed to diving centers',
+    'federation_cmas_diving_individual_licenses_title' => 'International Diving Professional Licenses',
+    'federation_cmas_diving_individual_licenses_subtitle' => 'International diving licenses attributed to professionals',
     'federation_scientific_entity_licenses_title' => 'Scientific Diving Center Licenses',
     'federation_scientific_entity_licenses_subtitle' => 'Scientific diving licenses attributed to diving centers',
     'federation_scientific_individual_licenses_title' => 'Scientific Diving Professional Licenses',
@@ -423,12 +423,12 @@ return [
     'admin_national_diving_entity_licenses_subtitle' => "All {$primaryShortName} diving licenses attributed to diving centers",
     'admin_national_diving_individual_licenses_title' => "{$primaryShortName} Diving Professional Licenses",
     'admin_national_diving_individual_licenses_subtitle' => "All {$primaryShortName} diving licenses attributed to professionals",
-    'admin_cmas_diving_entity_licenses_title' => 'CMAS Entity Licenses',
-    'admin_cmas_diving_entity_licenses_subtitle' => 'All CMAS licenses attributed to entities',
-    'admin_cmas_diving_individual_licenses_title' => 'CMAS Recreational Diving Professional Licenses',
-    'admin_cmas_diving_individual_licenses_subtitle' => 'All licenses attributed to CMAS recreational diving professionals',
-    'admin_scientific_entity_licenses_title' => 'CMAS Scientific Entity Licenses',
-    'admin_scientific_entity_licenses_subtitle' => 'All scientific diving licenses attributed to CMAS entities',
+    'admin_cmas_diving_entity_licenses_title' => 'International Entity Licenses',
+    'admin_cmas_diving_entity_licenses_subtitle' => 'All international licenses attributed to entities',
+    'admin_cmas_diving_individual_licenses_title' => 'Recreational Diving Professional Licenses',
+    'admin_cmas_diving_individual_licenses_subtitle' => 'All licenses attributed to recreational diving professionals',
+    'admin_scientific_entity_licenses_title' => 'Scientific Entity Licenses',
+    'admin_scientific_entity_licenses_subtitle' => 'All scientific diving licenses attributed to entities',
     'admin_scientific_individual_licenses_title' => 'Scientific Diving Professional Licenses',
     'admin_scientific_individual_licenses_subtitle' => 'All scientific diving licenses attributed to professionals',
 
@@ -442,8 +442,8 @@ return [
 
     // International licenses page
     'international_licenses' => 'International Licenses',
-    'cmas_international_licenses' => 'CMAS International Licenses',
-    'international_licenses_description' => 'Your international licenses recognized by CMAS worldwide',
+    'cmas_international_licenses' => 'International Licenses',
+    'international_licenses_description' => 'Your international licenses recognized worldwide',
     'view_national_licenses' => 'View National Licenses',
     'purchase_international_license' => 'Purchase International License',
     'license' => 'License',

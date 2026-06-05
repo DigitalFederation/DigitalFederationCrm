@@ -1057,7 +1057,7 @@ return [
     'remove_staff' => 'Remover membro do staff',
     'referees_enrollment' => 'Inscrição de Oficiais Técnicos',
     'enroll_referee' => 'Inscrever Oficial Técnico',
-    'cmas_code' => 'Código CMAS',
+    'cmas_code' => 'Código Internacional',
     'confirm_remove_referee' => 'Tem a certeza que deseja cancelar a inscrição deste oficial técnico?',
     'remove_referee' => 'Remover oficial técnico',
     'export_referee_enrollments' => 'Exportar Inscrições',

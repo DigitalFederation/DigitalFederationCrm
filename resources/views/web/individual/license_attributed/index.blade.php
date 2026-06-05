@@ -18,7 +18,7 @@
                     $purchaseRoute = match($committee) {
                         'sport' => 'individual.sport-license-purchase.index',
                         'diving' => 'individual.national-diving-license-purchase.index',
-                        'cmas-diving' => 'individual.cmas-diving-license-purchase.index',
+                        'international-diving' => 'individual.international-diving-license-purchase.index',
                         'scientific' => 'individual.scientific-license-purchase.index',
                         default => 'individual.sport-license-purchase.index',
                     };

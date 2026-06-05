@@ -40,7 +40,7 @@
                     </div>
                     
                     <div class="flex justify-between">
-                        <dt class="text-slate-600">{{ __('CMAS International Code') }}:</dt>
+                        <dt class="text-slate-600">{{ __('International Code') }}:</dt>
                         <dd class="font-medium">{{ $licenseAttributed->license_number ?? __('Pending Assignment') }}</dd>
                     </div>
                     

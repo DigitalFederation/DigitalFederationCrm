@@ -753,7 +753,7 @@ test('license activates via ManuallyMarkDocumentAsPaidAction', function () {
 test('international diving entity license with requires_admin_validation creates payment document', function () {
     // This test verifies the fix for: international licenses with requires_admin_validation = true
     // should still generate payment documents because they skip validation state and go to PendingLicenseAttributedState
-    // BUG: CMAS Diving entity licenses weren't generating payment documents while CMAS Scientific was
+    // BUG: International Diving entity licenses weren't generating payment documents while Scientific was
     // ROOT CAUSE: The condition checked `!$requiresValidation` instead of checking if state is PendingLicenseAttributedState
 
     Event::fake([LicenseAttributedCreatedEvent::class]);
@@ -761,13 +761,13 @@ test('international diving entity license with requires_admin_validation creates
     // Create INTERNATIONAL diving committee
     $divingCommittee = Committee::factory()->create([
         'code' => 'DIVING',
-        'name' => 'CMAS Diving',
+        'name' => 'International Diving',
         'is_international' => true,
     ]);
 
-    // Create CMAS Diving entity license with requires_admin_validation = true
-    // This mimics the production CMAS Diving licenses (IDs 15, 16, 17)
-    $cmasDivingLicense = License::factory()->create([
+    // Create International Diving entity license with requires_admin_validation = true
+    // This mimics the production International Diving licenses (IDs 15, 16, 17)
+    $internationalDivingLicense = License::factory()->create([
         'name' => 'Licenca Centro de Mergulho CMAS',
         'license_code' => 'EMC',
         'committee_id' => $divingCommittee->id,
@@ -777,11 +777,11 @@ test('international diving entity license with requires_admin_validation creates
         'requires_admin_validation' => true, // This is the key - has validation flag but is international
     ]);
 
-    $cmasDivingLicense->federations()->attach($this->federation->id);
+    $internationalDivingLicense->federations()->attach($this->federation->id);
 
     // Purchase the international diving license as entity
     $purchaseAction = app(PurchaseLicenseAction::class);
-    $licenseAttributed = $purchaseAction($cmasDivingLicense, $this->entity);
+    $licenseAttributed = $purchaseAction($internationalDivingLicense, $this->entity);
 
     // KEY ASSERTION 1: International licenses skip validation state and go to PendingLicenseAttributedState
     expect($licenseAttributed->status_class)->toBe(PendingLicenseAttributedState::class)
@@ -819,7 +819,7 @@ test('international diving entity license with requires_admin_validation creates
 });
 
 test('international scientific entity license creates payment document', function () {
-    // Verify CMAS Scientific licenses (which work correctly) continue to work
+    // Verify Scientific licenses (which work correctly) continue to work
     // This ensures we don't break the working case while fixing the broken one
 
     Event::fake([LicenseAttributedCreatedEvent::class]);
@@ -831,8 +831,8 @@ test('international scientific entity license creates payment document', functio
         'is_international' => true,
     ]);
 
-    // Create CMAS Scientific entity license without validation requirement
-    $cmasScientificLicense = License::factory()->create([
+    // Create Scientific entity license without validation requirement
+    $scientificLicense = License::factory()->create([
         'name' => 'Licenca de Escola de Mergulho Cientifico',
         'license_code' => 'LEMC',
         'committee_id' => $scientificCommittee->id,
@@ -842,11 +842,11 @@ test('international scientific entity license creates payment document', functio
         'requires_admin_validation' => false,
     ]);
 
-    $cmasScientificLicense->federations()->attach($this->federation->id);
+    $scientificLicense->federations()->attach($this->federation->id);
 
     // Purchase the scientific license as entity
     $purchaseAction = app(PurchaseLicenseAction::class);
-    $licenseAttributed = $purchaseAction($cmasScientificLicense, $this->entity);
+    $licenseAttributed = $purchaseAction($scientificLicense, $this->entity);
 
     // Should go to pending state
     expect($licenseAttributed->status_class)->toBe(PendingLicenseAttributedState::class)

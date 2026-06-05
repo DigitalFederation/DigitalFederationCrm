@@ -108,11 +108,11 @@ describe('Sport License Purchase Routes', function () {
 });
 
 describe('Committee-aware member license redirect', function () {
-    it('redirects cmas diving member purchase to cmas diving entity purchase', function () {
+    it('redirects international diving member purchase to international diving entity purchase', function () {
         $response = $this->actingAs($this->user)
-            ->get(route('entity.cmas-diving-member-license-purchase.index'));
+            ->get(route('entity.international-diving-member-license-purchase.index'));
 
-        $response->assertRedirect(route('entity.cmas-diving-license-purchase.index'))
+        $response->assertRedirect(route('entity.international-diving-license-purchase.index'))
             ->assertSessionHas('error');
     });
 
@@ -124,19 +124,19 @@ describe('Committee-aware member license redirect', function () {
             ->assertSessionHas('error');
     });
 
-    it('redirects national diving member purchase to cmas diving entity purchase', function () {
+    it('redirects national diving member purchase to international diving entity purchase', function () {
         $response = $this->actingAs($this->user)
             ->get(route('entity.national-diving-member-license-purchase.index'));
 
-        $response->assertRedirect(route('entity.cmas-diving-license-purchase.index'))
+        $response->assertRedirect(route('entity.international-diving-license-purchase.index'))
             ->assertSessionHas('error');
     });
 });
 
-describe('CMAS Diving License Purchase Routes', function () {
-    it('can access cmas diving entity license purchase page', function () {
+describe('International Diving License Purchase Routes', function () {
+    it('can access international diving entity license purchase page', function () {
         $response = $this->actingAs($this->user)
-            ->get(route('entity.cmas-diving-license-purchase.index'));
+            ->get(route('entity.international-diving-license-purchase.index'));
 
         $response->assertOk()
             ->assertViewIs('web.entity.license-purchase.index')
@@ -145,7 +145,7 @@ describe('CMAS Diving License Purchase Routes', function () {
             ->assertViewHas('type', 'entity');
     });
 
-    it('can access cmas diving member license purchase page', function () {
+    it('can access international diving member license purchase page', function () {
         // Entity needs active license first for member purchases
         // Diving committee has is_international = true
         $entityLicense = License::factory()->create([
@@ -167,7 +167,7 @@ describe('CMAS Diving License Purchase Routes', function () {
         expect($this->entity->hasActiveEntityLicense())->toBeTrue();
 
         $response = $this->actingAs($this->user)
-            ->get(route('entity.cmas-diving-member-license-purchase.index'));
+            ->get(route('entity.international-diving-member-license-purchase.index'));
 
         $response->assertOk()
             ->assertViewIs('web.entity.license-purchase.index')
@@ -280,7 +280,7 @@ describe('License Filtering by Committee isInternational', function () {
         $response->assertViewHas('isInternational', false);
     });
 
-    it('cmas diving route shows only international licenses', function () {
+    it('international diving route shows only international licenses', function () {
         // Create national sport license (should not appear - different committee)
         // Sport committee has is_international = false
         $nationalLicense = License::factory()->create([
@@ -304,7 +304,7 @@ describe('License Filtering by Committee isInternational', function () {
         $internationalLicense->federations()->attach($this->federation->id);
 
         $response = $this->actingAs($this->user)
-            ->get(route('entity.cmas-diving-license-purchase.index'));
+            ->get(route('entity.international-diving-license-purchase.index'));
 
         $response->assertOk();
 
@@ -318,10 +318,10 @@ describe('Route Access Control', function () {
     it('requires authentication for all routes', function () {
         $routes = [
             'entity.sport-license-purchase.index',
-            'entity.cmas-diving-license-purchase.index',
+            'entity.international-diving-license-purchase.index',
             'entity.scientific-license-purchase.index',
             'entity.sport-member-license-purchase.index',
-            'entity.cmas-diving-member-license-purchase.index',
+            'entity.international-diving-member-license-purchase.index',
             'entity.scientific-member-license-purchase.index',
             'entity.national-diving-member-license-purchase.index',
         ];

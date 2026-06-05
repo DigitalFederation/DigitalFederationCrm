@@ -92,7 +92,7 @@
             @endif
 
             <div class="sm:flex sm:justify-center sm:items-center mb-5">
-                <x-dynamic-table :headers="['CMAS Code', 'Name', 'Location', 'Email', 'Sent', 'Instructor Type', 'Status', '']">
+                <x-dynamic-table :headers="['International Code', 'Name', 'Location', 'Email', 'Sent', 'Instructor Type', 'Status', '']">
                     @foreach ($instructors as $instructor)
                         <tr>
                             <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">

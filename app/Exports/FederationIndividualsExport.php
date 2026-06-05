@@ -68,7 +68,7 @@ class FederationIndividualsExport implements FromQuery, ShouldQueue, WithHeading
             'Birthdate',
             'Gender',
             'Email',
-            'CMAS Code',
+            'International Code',
             'Address',
             'Ident. Nº',
             'Ident. Expire',

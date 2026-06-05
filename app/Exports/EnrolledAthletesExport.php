@@ -54,7 +54,7 @@ class EnrolledAthletesExport implements FromCollection, WithHeadings, WithMappin
     {
         return [
             'Name',
-            'CMAS Code',
+            'International Code',
             'Discipline',
             'Gender',
             'Enrolled At',

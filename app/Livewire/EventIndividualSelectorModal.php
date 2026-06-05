@@ -59,7 +59,7 @@ class EventIndividualSelectorModal extends Component implements HasForms, HasTab
                 ->sortable(['name', 'surname'])
                 ->getStateUsing(fn (Individual $record): string => $record->full_name),
             Tables\Columns\TextColumn::make('code_cmas')
-                ->label('CMAS Code')
+                ->label('International Code')
                 ->searchable(),
             Tables\Columns\TextColumn::make('country.name')
                 ->label('Nationality')

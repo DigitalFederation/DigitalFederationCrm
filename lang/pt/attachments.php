@@ -66,16 +66,16 @@ return [
     // Admin-specific committee file titles
     'admin_committee_titles' => [
         'SPORT' => 'Documentos de Desporto',
-        'SCIENTIFIC' => 'Documentos CMAS Mergulho Cientifico',
-        'DIVING' => 'Documentos de Mergulho CMAS',
+        'SCIENTIFIC' => 'Documentos de Mergulho Cientifico',
+        'DIVING' => 'Documentos de Mergulho',
         'DIVINGSERVICES' => 'Documentos Mergulho Recreativo',
     ],
 
     // Entity-specific committee file titles
     'entity_committee_titles' => [
         'SPORT' => 'Ficheiros de Desporto',
-        'SCIENTIFIC' => 'Ficheiros de Mergulho Científico CMAS',
-        'DIVING' => 'Ficheiros de Mergulho CMAS',
+        'SCIENTIFIC' => 'Ficheiros de Mergulho Científico',
+        'DIVING' => 'Ficheiros de Mergulho',
         'DIVINGSERVICES' => 'Ficheiros de Serviços de Mergulho',
     ],
 

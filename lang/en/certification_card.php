@@ -3,8 +3,8 @@
 return [
     'my_certifications' => 'My Certifications',
     'my_international_certifications' => 'My International Certifications',
-    'cmas_certifications' => 'CMAS Certifications',
-    'international_certifications_subtitle' => 'CMAS Diving & Scientific certifications',
+    'cmas_certifications' => 'International Certifications',
+    'international_certifications_subtitle' => 'International Diving & Scientific certifications',
     'total_certifications' => 'total certifications',
     'filter' => 'Filter',
     'category' => 'Category',

@@ -61,6 +61,6 @@ return [
     // Committee name translations
     'committee_SPORT' => 'Sport Committee',
     'committee_DIVINGSERVICES' => 'Diving Services Committee',
-    'committee_DIVING' => 'CMAS Diving Committee',
-    'committee_SCIENTIFIC' => 'CMAS Scientific Committee',
+    'committee_DIVING' => 'International Diving Committee',
+    'committee_SCIENTIFIC' => 'Scientific Committee',
 ];

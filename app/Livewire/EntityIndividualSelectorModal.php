@@ -78,7 +78,7 @@ class EntityIndividualSelectorModal extends Component implements HasForms, HasTa
                 ->searchable(['name', 'surname'])
                 ->sortable(['name', 'surname'])
                 ->getStateUsing(fn (Individual $record): string => $record->full_name),
-            Tables\Columns\TextColumn::make('code_cmas')->label('CMAS Code')->searchable(),
+            Tables\Columns\TextColumn::make('code_cmas')->label('International Code')->searchable(),
             Tables\Columns\TextColumn::make('country.name')
                 ->label('Nationality')
                 ->sortable()

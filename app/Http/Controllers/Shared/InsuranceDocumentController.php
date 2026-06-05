@@ -144,7 +144,7 @@ class InsuranceDocumentController extends Controller
             'plan' => $insurancePlan, // Add alias for template compatibility
             'member' => $individual, // Add alias for template compatibility
             'policyNumber' => $policyNumber,
-            'filiadoId' => $individual->member_number, // "Nº de Filiado" is always member_number
+            'memberId' => $individual->member_number, // "Nº de Filiado" is always member_number
             'address' => $individual->address,
             'postalCode' => $individual->postal_code,
             'district' => $individual->location, // Use location field as district

@@ -305,12 +305,15 @@ class MenuItem extends Model
     }
 
     /**
-     * Get the display text for this menu item
-     * Since we're not using translation keys anymore, just return the name directly
+     * Get the display text for this menu item.
+     *
+     * Names may be stored as readable strings (admin UI / staging seed) or as
+     * translation keys (e.g. seeded from config/menu.php). __() resolves keys and
+     * returns readable literals unchanged, so both styles render correctly.
      */
     public function getDisplayText(): string
     {
-        return $this->name;
+        return $this->name ? (string) __($this->name) : '';
     }
 
     /**

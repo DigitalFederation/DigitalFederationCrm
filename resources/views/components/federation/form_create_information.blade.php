@@ -342,7 +342,7 @@
                 <option value="0" default @if(old('is_default_federation',$federation->is_default_federation ?? null)==0) selected @endif> {{ __('No') }} </option>
                 <option value="1" @if(old('is_default_federation',$federation->is_default_federation ?? null)==1) selected @endif> {{ __('Yes') }} </option>
             </select>
-            <div class="text-xs mt-1 text-gray-500"> {{ __('*Only used to define the virtual CMAS federation. The default in the system') }} </div>
+            <div class="text-xs mt-1 text-gray-500"> {{ __('*Only used to define the virtual international federation. The default in the system') }} </div>
             @if($errors->has('is_default_federation'))
                 <div class="text-xs mt-1 text-rose-500 h-2">
                     {{ $errors->first('is_default_federation') }}

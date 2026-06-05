@@ -13,7 +13,7 @@ return [
     // Individual Profile Tab
     'individual_profile_title' => 'Diagnóstico do Perfil Individual',
     'individual_profile_description' => 'Pesquise um indivíduo para ver o perfil completo de elegibilidade e entender porque pode ou não ser inscrito para diferentes funções.',
-    'search_placeholder' => 'Pesquisar por código CMAS, nome ou email...',
+    'search_placeholder' => 'Pesquisar por código, nome ou email...',
     'no_individual_selected' => 'Nenhum Indivíduo Selecionado',
     'search_to_start' => 'Pesquise um indivíduo para ver o perfil de elegibilidade.',
     'quick_status' => 'Estado Rápido',

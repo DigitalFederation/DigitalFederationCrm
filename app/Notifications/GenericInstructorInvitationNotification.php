@@ -76,7 +76,7 @@ class GenericInstructorInvitationNotification extends Notification implements Sh
             ->subject(__('Invitation: Associate with :entityName as Instructor/Leader', ['entityName' => $entityName]))
             ->greeting(__('Hello!'))
             ->line(new HtmlString(__(':entityName has invited you to associate with them as an Instructor & Dive Leader.', ['entityName' => "<a href='{$entityLink}' target='_blank'>{$entityName}</a>"])))
-            ->line(__('Accepting this invitation will automatically associate your account with :entityName for all relevant Instructor & Dive Leader roles within the :committee committee for which you currently hold an active CMAS certification and license.', ['entityName' => $entityName, 'committee' => $committeeDisplay]))
+            ->line(__('Accepting this invitation will automatically associate your account with :entityName for all relevant Instructor & Dive Leader roles within the :committee committee for which you currently hold an active certification and license.', ['entityName' => $entityName, 'committee' => $committeeDisplay]))
             ->line(new HtmlString(
                 // Accept Button (Blue)
                 "<a href='{$acceptUrl}' style='display: inline-block; margin-right: 10px; padding: 10px 20px; background-color: #1a56db; color: white; text-align: center; text-decoration: none; border-radius: 5px; font-weight: bold;'>" . __('Accept Invitation') . '</a>' .

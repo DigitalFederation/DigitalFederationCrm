@@ -67,7 +67,7 @@ return [
     // Filters
     'year' => 'Year',
     'document_number' => 'Document Number',
-    'filter_cmas_code_help' => 'Search by the CMAS code of the owner',
+    'filter_cmas_code_help' => 'Search by the international code of the owner',
     'filter_member_placeholder' => 'Member name',
     'organization' => 'Organization',
     'national_organization' => 'National Organization',

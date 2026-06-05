@@ -170,8 +170,8 @@ return [
     'select_roles_hint' => 'Select one or more roles for this user',
     'save_user' => 'Save User',
     'choose_federation_for_user' => 'Choose a Federation to associate the user:',
-    'cmas_admin' => 'CMAS Admin',
-    'cmas_admin_users' => 'CMAS Admin Users',
+    'cmas_admin' => 'Admin',
+    'cmas_admin_users' => 'Admin Users',
     'are_you_sure' => 'Are you sure?',
 
     // Common flash messages

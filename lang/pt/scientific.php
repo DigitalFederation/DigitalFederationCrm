@@ -44,8 +44,8 @@ return [
     'invite_instructor' => 'Convidar Instrutor Científico',
     'invite_new_instructors' => 'Convidar Novos Instrutores Científicos',
     'select_instructor' => 'Selecionar Instrutor',
-    'enter_member_or_cmas_code' => 'Introduza o numero de membro ou codigo CMAS do instrutor que deseja convidar',
-    'member_number_placeholder' => 'Introduza o numero de membro ou codigo CMAS',
+    'enter_member_or_cmas_code' => 'Introduza o numero de membro ou codigo internacional do instrutor que deseja convidar',
+    'member_number_placeholder' => 'Introduza o numero de membro ou codigo internacional',
     'select_role' => 'Selecionar Função',
     'select_role_description' => 'Selecione a função profissional para este instrutor',
     'select_role_placeholder' => 'Selecione uma função',
@@ -56,7 +56,7 @@ return [
 
     // Error messages
     'professional_role_not_found' => 'Função profissional científica não configurada no sistema',
-    'invalid_member_number' => 'Numero de membro ou codigo CMAS inválido',
+    'invalid_member_number' => 'Numero de membro ou codigo internacional inválido',
     'individual_must_have_certification' => 'O indivíduo deve ter uma certificação ou licença ativa',
     'invitation_already_sent' => 'Ja foi enviado um convite para este instrutor',
     'professional_already_associated' => 'Este instrutor ja esta associado a sua entidade',

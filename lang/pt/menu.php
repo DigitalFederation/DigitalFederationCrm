@@ -149,7 +149,7 @@ return [
         'administrative' => 'Administrativo',
         'payments' => 'Pagamentos',
         'international_federation' => 'Federação Internacional',
-        'cmas_diving_instructors' => 'Instrutores de Mergulho CMAS',
+        'cmas_diving_instructors' => 'Instrutores de Mergulho',
     ],
     'individual' => [
         'dashboard' => 'Painel de Controlo',

@@ -54,7 +54,7 @@ class PublicSearchCertificationRequest extends FormRequest
                 // Check which form was likely submitted to provide specific field errors
                 if (array_key_exists('code_cmas', $data) && ! $hasNameGroup) {
                     // Submitted Form 1 (CMAS Code) but it's empty
-                    $validator->errors()->add('code_cmas', __('The CMAS Code field is required.'));
+                    $validator->errors()->add('code_cmas', __('The International Code field is required.'));
                     $errorAdded = true; // Mark that a specific error was added
                 } elseif (array_key_exists('name', $data) || array_key_exists('surname', $data) || array_key_exists('birthdate', $data)) {
                     // Submitted Form 2 (Manual) but it's incomplete
@@ -76,7 +76,7 @@ class PublicSearchCertificationRequest extends FormRequest
                 if (! $errorAdded) {
                     $validator->errors()->add(
                         'search_criteria', // General error key
-                        __('Please provide either a CMAS Code or the full Name, Surname, and Date of Birth.')
+                        __('Please provide either an International Code or the full Name, Surname, and Date of Birth.')
                     );
                 }
             }

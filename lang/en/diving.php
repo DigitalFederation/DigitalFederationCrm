@@ -122,7 +122,7 @@ return [
     'this_director_will_handle_systems' => 'This director will handle the following certification systems:',
     'invalid_member_number' => 'Invalid member number',
     'individual_must_have_active_license' => 'Individual must have an active diving license',
-    'individual_must_have_diving_certification' => 'Individual must have a diving professional certification or active CMAS diving license',
+    'individual_must_have_diving_certification' => 'Individual must have a diving professional certification or active diving license',
     'invitation_already_sent' => 'An invitation has already been sent to this professional',
     'professional_already_associated' => 'This professional is already associated with your entity',
     'invitation_system_not_ready' => 'The invitation system is not ready',
@@ -318,10 +318,10 @@ return [
     'delete' => 'Delete',
     'delete_warning_permanent' => 'Danger Zone: This action is permanent',
 
-    // CMAS Diving Professionals List
+    // International Diving Professionals List
     'diving_professionals_description' => 'View and manage diving professionals and technical directors across the system',
     'view_all_diving_professionals' => 'View all diving professionals registered in the system',
-    'search_professional_name_code' => 'Search by name, surname or CMAS code',
+    'search_professional_name_code' => 'Search by name, surname or international code',
     'professional_name' => 'Professional Name',
     'role' => 'Role',
     'instructor' => 'Instructor',
@@ -497,7 +497,7 @@ return [
     // Individual Diving Certifications
     'upload_diving_certification' => 'Diving Professional Certification',
     'professional_certification_requirements' => 'Dive Leader and Diving Instructor certifications are required to carry out your activity as a diving professional or Technical Director in diving service provider entities. The federation will validate the authenticity and validity of your certifications. Make sure the uploaded document is legible and contains all the necessary information: training system, certification name, number, issue date and expiration date or status (if applicable).',
-    'professional_certification_upload_info' => 'Upload your professional diving certifications from any recognized training system (CMAS, SSI, PADI, SDI/TDI, DDI, GUE).',
+    'professional_certification_upload_info' => 'Upload your professional diving certifications from any recognized training system (SSI, PADI, SDI/TDI, DDI, GUE).',
     'diving_certifications' => 'Diving Certifications',
     'upload_certification' => 'Upload Certification',
     'training_system' => 'Diving Training System',

@@ -64,7 +64,7 @@ beforeEach(function () {
     ]);
 
     // Diving committee is international (is_international = true on committee)
-    $this->cmasDivingLicense = License::factory()->create([
+    $this->internationalDivingLicense = License::factory()->create([
         'name' => 'CMAS Recreational Diving License',
         'requester_model' => ['Individual'],
         'active' => true,
@@ -83,7 +83,7 @@ beforeEach(function () {
     $this->federation->licenses()->attach([
         $this->sportLicense->id,
         $this->nationalDivingLicense->id,
-        $this->cmasDivingLicense->id,
+        $this->internationalDivingLicense->id,
         $this->scientificLicense->id,
     ]);
 });
@@ -109,9 +109,9 @@ test('individual can access national diving license purchase page', function () 
         ->assertViewHas('pageTitle');
 });
 
-test('individual can access cmas diving license purchase page', function () {
+test('individual can access international diving license purchase page', function () {
     $response = actingAs($this->user)
-        ->get(route('individual.cmas-diving-license-purchase.index'));
+        ->get(route('individual.international-diving-license-purchase.index'));
 
     $response->assertSuccessful()
         ->assertViewHas('committee', 'DIVING')
@@ -152,7 +152,7 @@ test('national diving license purchase page only shows national diving licenses'
         ->assertSet('isInternational', false);
 });
 
-test('cmas diving license purchase page only shows international diving licenses', function () {
+test('international diving license purchase page only shows international diving licenses', function () {
     Livewire::actingAs($this->user)
         ->test(LicensePurchaseForm::class, [
             'individual' => $this->individual,
@@ -193,9 +193,9 @@ test('individual can access national diving licenses attributed page', function 
         ->assertViewHas('isInternational', false);
 });
 
-test('individual can access cmas diving licenses attributed page', function () {
+test('individual can access international diving licenses attributed page', function () {
     $response = actingAs($this->user)
-        ->get(route('individual.cmas-diving-licenses-attributed.index'));
+        ->get(route('individual.international-diving-licenses-attributed.index'));
 
     $response->assertSuccessful()
         ->assertViewHas('committee', 'DIVING')
@@ -244,9 +244,9 @@ test('separated routes have correct page titles', function () {
         ->get(route('individual.national-diving-license-purchase.index'))
         ->assertSee(__('licenses.individual_national_diving_license_title'));
 
-    // CMAS Diving
+    // International Diving
     actingAs($this->user)
-        ->get(route('individual.cmas-diving-license-purchase.index'))
+        ->get(route('individual.international-diving-license-purchase.index'))
         ->assertSee(__('licenses.individual_cmas_diving_license_title'));
 
     // Scientific

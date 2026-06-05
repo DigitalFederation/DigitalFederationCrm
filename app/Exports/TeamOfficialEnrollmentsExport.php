@@ -55,7 +55,7 @@ class TeamOfficialEnrollmentsExport implements FromCollection, ShouldAutoSize, W
     {
         $baseHeadings = [
             'Name',
-            'CMAS Code',
+            'International Code',
             'Federation',
             'Federation CMAS Code',
             'Status',

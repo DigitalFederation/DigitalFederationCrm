@@ -103,7 +103,7 @@ it('does not create a document for a free license attributed to an individual', 
     expect($licenseAttributed->status_class)->toEqual(ActiveLicenseAttributedState::class);
 });
 
-it('sets individual license attributed to waiting approval if CMAS approval is required', function () {
+it('sets individual license attributed to waiting approval if admin approval is required', function () {
     $group = Group::factory()->create(['code' => 'INDIVIDUAL', 'id' => 3]);
     $user = User::factory()->create(['group_id' => $group->id]);
     $federation = Federation::factory()->create(['is_local' => false]);
@@ -124,7 +124,7 @@ it('sets individual license attributed to waiting approval if CMAS approval is r
         'license_type_name' => 'individual',
         'individual' => [$individual->id],
         'requester_model_type' => 'individual',
-        'notes' => 'Test license requiring CMAS approval',
+        'notes' => 'Test license requiring admin approval',
     ];
 
     $this->actingAs($user)->post(route('individual.license-attributed.store'), $data);

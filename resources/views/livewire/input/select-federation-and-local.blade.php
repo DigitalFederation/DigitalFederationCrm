@@ -1,7 +1,7 @@
 <div class="flex flex-col md:flex-row gap-4">
     <div class="w-full">
         <label class="block text-sm font-medium mb-1" for="mainFederation_id">
-            {{ __('National Federation under CMAS') }}
+            {{ __('National Federation') }}
             <span
                 class="text-rose-500">*</span></label>
         <select id="mainFederation_id"

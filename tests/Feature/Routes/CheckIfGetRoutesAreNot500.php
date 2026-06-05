@@ -52,7 +52,7 @@ test('all static GET routes should not return 500 when accessed with correct cre
     foreach ($routes as $route) {
         // Determine the required user type based on the route prefix or other criteria
         $user = null;
-        if (strpos($route['uri'], 'cmas') !== false) {
+        if (strpos($route['uri'], 'admin') !== false) {
             $user = UserFactory::new()->forGroup('ADMIN')->create();
         } elseif (strpos($route['uri'], 'federation') !== false) {
             $user = UserFactory::new()->forGroup('FEDERATION')->create();

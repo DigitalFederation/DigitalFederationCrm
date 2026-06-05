@@ -170,8 +170,8 @@ return [
     'select_roles_hint' => 'Selecione uma ou mais funções para este utilizador',
     'save_user' => 'Guardar Utilizador',
     'choose_federation_for_user' => 'Escolher uma Federação para associar ao utilizador:',
-    'cmas_admin' => 'Admin CMAS',
-    'cmas_admin_users' => 'Utilizadores Admin CMAS',
+    'cmas_admin' => 'Administrador',
+    'cmas_admin_users' => 'Utilizadores Administradores',
     'are_you_sure' => 'Tem certeza?',
 
     // Common flash messages

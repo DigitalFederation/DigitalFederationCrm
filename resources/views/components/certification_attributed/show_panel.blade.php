@@ -31,7 +31,7 @@
 
 
             <div>
-                <div class="text-secondary font-semibold">{{ __('CMAS International Number')}}</div>
+                <div class="text-secondary font-semibold">{{ __('International Number')}}</div>
                 <p class="text-slate-500">
                     {{ !empty($certification->license_number) ? $certification->license_number : __('Not defined') }}
                 </p>

@@ -331,8 +331,8 @@ describe('Federation Routes', function () {
     });
 });
 
-describe('CMAS/Admin Routes', function () {
-    it('can access the cmas dashboard', function () {
+describe('Admin & International Routes', function () {
+    it('can access the admin dashboard', function () {
         $user = createUserForGroup('ADMIN');
 
         $response = $this->actingAs($user)->get('/admin/dashboard');
@@ -371,9 +371,9 @@ describe('CMAS/Admin Routes', function () {
         );
     });
 
-    it('does not return 500 on cmas routes', function () {
+    it('does not return 500 on international routes', function () {
         $user = createUserForGroup('ADMIN');
-        $routes = getRoutesForPrefix('cmas/');
+        $routes = getRoutesForPrefix('international/');
 
         $failedRoutes = [];
 

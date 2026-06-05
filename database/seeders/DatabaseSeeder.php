@@ -29,5 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CmasSubRegionCountrySeeder::class);
         $this->call(RoleMappingSeeder::class);
 
+        // Navigation menus (DB-driven sidebar). Without this a fresh install
+        // renders no sidebar at all.
+        $this->call(MenuSeeder::class);
     }
 }

@@ -249,7 +249,7 @@ class GetIndividualAndInstructorForCertification extends Component
         $individualQuery = $this->buildInstructorQuery($entityId);
 
         if (! $individualQuery->exists() || ! $checkInstructor($individualQuery)) {
-            $this->selected_license_error_instructor = __('The individual member associated with this CMAS code does not hold an instructor certification, does not hold an active instructor licence or does not belong to a Diving entity.');
+            $this->selected_license_error_instructor = __('The individual member associated with this international code does not hold an instructor certification, does not hold an active instructor licence or does not belong to a Diving entity.');
 
             return;
         }
@@ -316,7 +316,7 @@ class GetIndividualAndInstructorForCertification extends Component
         $individualQuery = $this->buildAssistantInstructorQuery();
 
         if (! $individualQuery->exists() || ! $checkInstructor($individualQuery)) {
-            $this->selected_license_error_assistant_instructor = __('The individual member associated with this CMAS code does not hold an instructor certification, does not hold an active instructor licence or does not belong to a Diving entity.');
+            $this->selected_license_error_assistant_instructor = __('The individual member associated with this international code does not hold an instructor certification, does not hold an active instructor licence or does not belong to a Diving entity.');
 
             return;
         }

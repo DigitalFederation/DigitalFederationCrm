@@ -38,7 +38,7 @@ class SeparatedLicenseAttributedController extends Controller
      * International diving entity licenses.
      * Committee: DIVING, International: true
      */
-    public function divingCmasEntity(): View
+    public function divingInternationalEntity(): View
     {
         return $this->renderLicensesPage('entity', CommitteeCodeEnum::Diving->value, true, __('licenses.International Entity Licenses'));
     }
@@ -47,7 +47,7 @@ class SeparatedLicenseAttributedController extends Controller
      * International diving member licenses.
      * Committee: DIVING, International: true
      */
-    public function divingCmasMembers(): View
+    public function divingInternationalMembers(): View
     {
         return $this->renderLicensesPage('members', CommitteeCodeEnum::Diving->value, true, __('licenses.International Professional Licenses'));
     }

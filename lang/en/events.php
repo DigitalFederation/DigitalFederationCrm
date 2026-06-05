@@ -1060,7 +1060,7 @@ return [
     'remove_staff' => 'Remove staff member',
     'referees_enrollment' => 'Technical Officials Enrollment',
     'enroll_referee' => 'Enroll Technical Official',
-    'cmas_code' => 'CMAS Code',
+    'cmas_code' => 'International Code',
     'confirm_remove_referee' => 'Are you sure you want to cancel this technical official enrollment?',
     'remove_referee' => 'Remove technical official',
     'export_referee_enrollments' => 'Export Enrollments',

@@ -211,7 +211,7 @@ class InvoicesExport implements FromCollection, WithHeadings, WithMapping
             'Invoice Date',
             'Customer Type',
             'Customer Name',
-            'CMAS Code',
+            'International Code',
             'Federation',
             'VAT Number',
             'Address',

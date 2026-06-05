@@ -152,7 +152,7 @@
                             </div>
                             <div>
                                 <dt class="text-xs font-medium text-slate-500 uppercase tracking-wider">{{ __('main.membership_id') }}</dt>
-                                <dd class="mt-1 text-sm font-mono font-semibold text-slate-900">{{ $filiadoId ?: __('main.not_available') }}</dd>
+                                <dd class="mt-1 text-sm font-mono font-semibold text-slate-900">{{ $memberId ?: __('main.not_available') }}</dd>
                             </div>
                             <div>
                                 <dt class="text-xs font-medium text-slate-500 uppercase tracking-wider">{{ __('main.birthdate') }}</dt>

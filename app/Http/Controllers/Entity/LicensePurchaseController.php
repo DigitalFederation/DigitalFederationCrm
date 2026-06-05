@@ -36,7 +36,7 @@ class LicensePurchaseController extends Controller
     /**
      * International diving entity license purchase.
      */
-    public function divingCmasEntity()
+    public function divingInternationalEntity()
     {
         return $this->renderPurchasePage(
             'entity',
@@ -78,7 +78,7 @@ class LicensePurchaseController extends Controller
     /**
      * International diving member license purchase.
      */
-    public function divingCmasMembers()
+    public function divingInternationalMembers()
     {
         return $this->renderPurchasePage(
             'members',
@@ -140,9 +140,9 @@ class LicensePurchaseController extends Controller
         if ($type === 'members' && ! $entity->hasActiveEntityLicense()) {
             $entityLicenseRouteMap = [
                 CommitteeCodeEnum::Sport->value => 'entity.sport-license-purchase.index',
-                CommitteeCodeEnum::Diving->value => 'entity.cmas-diving-license-purchase.index',
+                CommitteeCodeEnum::Diving->value => 'entity.international-diving-license-purchase.index',
                 CommitteeCodeEnum::Scientific->value => 'entity.scientific-license-purchase.index',
-                CommitteeCodeEnum::DivingServices->value => 'entity.cmas-diving-license-purchase.index',
+                CommitteeCodeEnum::DivingServices->value => 'entity.international-diving-license-purchase.index',
             ];
 
             $redirectRoute = $entityLicenseRouteMap[$committee] ?? 'entity.sport-license-purchase.index';

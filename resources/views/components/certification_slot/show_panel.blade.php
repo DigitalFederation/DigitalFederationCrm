@@ -10,7 +10,7 @@
     <div class="flex flex-col flex-auto mt-6">
 
         <div class="mb-2">
-            <div class="text-secondary font-semibold">{{ __('CMAS International Number')}}</div>
+            <div class="text-secondary font-semibold">{{ __('International Number')}}</div>
             <p class="text-slate-500">
                 {{ !empty($certification->license_number) ? $certification->license_number : __('Not defined') }}
             </p>
@@ -37,7 +37,7 @@
             <p class="text-slate-500">{{ $certification->national_license_code }}</p>
         </div>
         <div class="mb-2">
-            <div class="text-secondary font-semibold">{{ __('CMAS license number')}}</div>
+            <div class="text-secondary font-semibold">{{ __('International license number')}}</div>
             <p class="text-slate-500">{{ $certification->cmas_license_code }}</p>
         </div>
         <div class="mb-2">

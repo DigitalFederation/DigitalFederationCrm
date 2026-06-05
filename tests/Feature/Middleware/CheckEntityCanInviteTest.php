@@ -86,7 +86,7 @@ test('entity with active diving license can access diving instructor page', func
 
     actingAs($this->entityUser);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertStatus(200);
 });
@@ -95,7 +95,7 @@ test('entity without diving license cannot access diving instructor page', funct
     // No diving license for entity
     actingAs($this->entityUser);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertRedirect();
     $response->assertSessionHas('error');
@@ -113,7 +113,7 @@ test('entity with expired diving license cannot access diving instructor page', 
 
     actingAs($this->entityUser);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertRedirect();
     $response->assertSessionHas('error');
@@ -131,7 +131,7 @@ test('entity with pending diving license cannot access diving instructor page', 
 
     actingAs($this->entityUser);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertRedirect();
     $response->assertSessionHas('error');
@@ -220,7 +220,7 @@ test('entity with scientific license but not diving cannot access diving page', 
 
     actingAs($this->entityUser);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertRedirect();
     $response->assertSessionHas('error');
@@ -247,7 +247,7 @@ test('entity with both diving and scientific licenses can access both pages', fu
 
     actingAs($this->entityUser);
 
-    $divingResponse = get(route('entity.cmas-diving-instructor.index'));
+    $divingResponse = get(route('entity.international-diving-instructor.index'));
     $divingResponse->assertStatus(200);
 
     $scientificResponse = get(route('entity.scientific-instructor.index'));
@@ -262,7 +262,7 @@ test('user without entity cannot access instructor pages via middleware', functi
     $userWithoutEntity = User::factory()->create(['group_id' => $this->entityGroup->id]);
     actingAs($userWithoutEntity);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertStatus(403);
 });
@@ -283,7 +283,7 @@ test('middleware shows correct error message for inactive license', function () 
 
     actingAs($this->entityUser);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertRedirect();
     // The error message should indicate they have an inactive license
@@ -294,7 +294,7 @@ test('middleware shows correct error message for no license at all', function ()
     // No license for entity at all
     actingAs($this->entityUser);
 
-    $response = get(route('entity.cmas-diving-instructor.index'));
+    $response = get(route('entity.international-diving-instructor.index'));
 
     $response->assertRedirect();
     // The error message should indicate they need a license

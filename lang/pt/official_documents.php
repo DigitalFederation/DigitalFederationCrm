@@ -157,7 +157,7 @@ return [
     'entity_name' => 'Nome da Entidade',
     'entity_code' => 'Código da Entidade',
     'individual_name' => 'Nome do Indivíduo',
-    'cmas_code' => 'Código CMAS',
+    'cmas_code' => 'Código Internacional',
     'document_status' => 'Estado do Documento',
     'current_status' => 'Estado Atual',
     'activated_at' => 'Ativado Em',

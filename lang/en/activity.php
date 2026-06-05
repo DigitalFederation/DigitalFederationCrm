@@ -30,7 +30,7 @@ return [
     // Certification activity logs
     'certification_activated_after_payment' => 'Certification activated after payment',
     'certification_activated_by_federation' => 'Certification activated by Federation',
-    'certification_activated_by_cmas' => 'Certification activated by CMAS',
+    'certification_activated_by_cmas' => 'Certification activated by International Federation',
     'certification_set_to_provisional_state' => 'Certification set to Provisional state',
     'certification_activated_by_ntc_approval/date' => 'Certification activated by NTC approval/Date',
     'certification_created_by_entity,_remains_pending' => 'Certification created by Entity, remains Pending',
@@ -44,5 +44,5 @@ return [
     'diving_certification_deleted' => 'Diving certification deleted',
     'updated_diving_professional_certification_details' => 'Updated diving professional certification details',
     'certification_updated_by_federation_admin' => 'Certification updated by Federation admin',
-    'certification_updated_by_cmas_admin' => 'Certification updated by CMAS admin',
+    'certification_updated_by_cmas_admin' => 'Certification updated by International admin',
 ];
