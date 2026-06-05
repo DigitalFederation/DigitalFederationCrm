@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property DivingLogState $status_class
+ * @property class-string<DivingLogState>|null $status_class
  * @property DivingLogState $state
  */
 class DivingLog extends Model
@@ -32,7 +32,7 @@ class DivingLog extends Model
     /**
      * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'dive_type' => DivingLogDiveTypeEnum::class,

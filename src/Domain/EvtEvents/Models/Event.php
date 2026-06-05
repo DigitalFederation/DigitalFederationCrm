@@ -30,6 +30,10 @@ use Mpociot\Versionable\VersionableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * @property string|null $event_fee_type
+ * @property int|null $organizer_id
+ */
 class Event extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, SoftDeletes, VersionableTrait;

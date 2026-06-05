@@ -7,6 +7,7 @@ use Domain\EvtEvents\Models\Event;
 use Domain\EvtEvents\Models\IndividualEnrollment;
 use Domain\EvtEvents\Models\IndividualEnrollmentAttribute;
 use Domain\EvtEvents\Models\Pricing;
+use Domain\Entities\Models\Entity;
 use Domain\Federations\Models\Federation;
 use Domain\Individuals\Models\Individual;
 use Illuminate\Database\Eloquent\Model;

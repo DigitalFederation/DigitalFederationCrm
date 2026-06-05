@@ -28,7 +28,7 @@ class CreatePermissionAction
             // Clear permission cache
             app()['cache']->forget('spatie.permission.cache');
 
-            return $permission;
+            return Permission::findOrFail($permission->id);
         });
     }
 }

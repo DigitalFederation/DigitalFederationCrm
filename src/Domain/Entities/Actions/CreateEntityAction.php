@@ -15,8 +15,11 @@ class CreateEntityAction
 {
     public function __invoke(EntityData $data): Entity
     {
-        $data->code_cmas = UtilityMethods::generateUniqueEntityCode();
-        $data = (array) $data;
+        $data = [
+            ...(array) $data,
+            'code_cmas' => UtilityMethods::generateUniqueEntityCode(),
+        ];
+
         $entity = Entity::create($data);
 
         $this->SyncFederations($data['federation_id'], $entity);
@@ -31,18 +34,16 @@ class CreateEntityAction
         // Dispatch QR code generation job
         dispatch(new GenerateModelQrCode($entity));
 
-        if (! empty($entity)) {
-            activity('Entity')
-                ->performedOn($entity)
-                ->event('created')
-                ->withProperties([
-                    ...$data,
-                    'terms_accepted' => true,
-                    'data_sharing_accepted' => true,
-                    'terms_accepted_at' => now(),
-                ])
-                ->log('New entity created.'.$entity->name);
-        }
+        activity('Entity')
+            ->performedOn($entity)
+            ->event('created')
+            ->withProperties([
+                ...$data,
+                'terms_accepted' => true,
+                'data_sharing_accepted' => true,
+                'terms_accepted_at' => now(),
+            ])
+            ->log('New entity created.'.$entity->name);
 
         return $entity;
     }

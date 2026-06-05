@@ -3,7 +3,6 @@
 namespace Domain\Memberships\Actions;
 
 use App\Notifications\MembershipActivationNotification;
-use Carbon\Carbon;
 use Domain\Memberships\Models\Membership;
 use Domain\Memberships\States\ActiveMembershipState;
 use Domain\Memberships\States\PendingMembershipState;
@@ -27,7 +26,7 @@ class ActivateMembershipAction
         if ($membership->status_class == PendingMembershipState::class) {
 
             $membership->status_class = ActiveMembershipState::class;
-            $membership->activated_at = Carbon::now();
+            $membership->activated_at = now();
             $membership->save();
 
             $membershipUsers = $membership->federation()->first()->users;

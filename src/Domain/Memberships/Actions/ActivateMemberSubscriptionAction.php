@@ -4,6 +4,7 @@ namespace Domain\Memberships\Actions;
 
 use App\Notifications\UserAlert;
 use App\Services\DashboardCacheService;
+use Domain\Entities\Models\Entity;
 use Domain\Individuals\Models\Individual;
 use Domain\Individuals\Models\IndividualFederation;
 use Domain\Individuals\States\ActiveIndividualFederationState;
@@ -128,13 +129,13 @@ class ActivateMemberSubscriptionAction
         switch ($memberSubscription->member_type) {
             case 'individual':
             case 'Domain\Individuals\Models\Individual':
-                if ($memberSubscription->member && $memberSubscription->member->user) {
+                if ($memberSubscription->member instanceof Individual && $memberSubscription->member->user) {
                     $users->push($memberSubscription->member->user);
                 }
                 break;
             case 'entity':
             case 'Domain\Entities\Models\Entity':
-                if ($memberSubscription->member) {
+                if ($memberSubscription->member instanceof Entity) {
                     $users = $memberSubscription->member->users;
                 }
                 break;

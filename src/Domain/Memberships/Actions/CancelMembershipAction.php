@@ -2,7 +2,6 @@
 
 namespace Domain\Memberships\Actions;
 
-use Carbon\Carbon;
 use Domain\Memberships\Models\Membership;
 use Domain\Memberships\States\ActiveMembershipState;
 use Domain\Memberships\States\ActiveToCanceledTransition;
@@ -33,7 +32,7 @@ class CancelMembershipAction
         }
 
         if ($membership->status_class == CanceledMembershipState::class) {
-            $membership->cancelled_at = Carbon::now();
+            $membership->cancelled_at = now();
             $membership->save();
 
             $syncFederationRolesAction = new SyncUserFederationCommitteeAction;

@@ -10,17 +10,16 @@ use Domain\Insurance\States\PendingPaymentInsuranceState;
 use Domain\Memberships\Models\Affiliation;
 use Domain\Memberships\Models\MembershipPackage;
 use Domain\Memberships\States\ActiveAffiliationState;
-use Illuminate\Database\Eloquent\Model;
 
 class SubscriptionValidationService
 {
     /**
      * Validate if a member can subscribe to a package according to business rules
      *
-     * @param  Model  $member  Entity or Individual
+     * @param  Entity|Individual  $member
      * @return array ['valid' => bool, 'error' => string|null]
      */
-    public function validateSubscription(Model $member, MembershipPackage $package): array
+    public function validateSubscription(Entity|Individual $member, MembershipPackage $package): array
     {
         if (! $this->isSupportedMember($member)) {
             return [
@@ -59,7 +58,7 @@ class SubscriptionValidationService
      * 2. For individual self-subscription: Allow as part of initial subscription
      * 3. Cannot have the same insurance plan already active or pending
      */
-    private function validateInsuranceOnlyPackage(Model $member, MembershipPackage $package): array
+    private function validateInsuranceOnlyPackage(Entity|Individual $member, MembershipPackage $package): array
     {
         // Different validation rules based on who is subscribing
         // Individual self-subscription: More lenient (can get insurance with first package)
@@ -107,7 +106,7 @@ class SubscriptionValidationService
      * 5. NEW: If package contains ONLY non-validation plans AND member is Individual
      *    → Individual must have an active validation plan
      */
-    private function validateAffiliationPackage(Model $member, MembershipPackage $package): array
+    private function validateAffiliationPackage(Entity|Individual $member, MembershipPackage $package): array
     {
         // Check for existing validation affiliations
         $hasValidationAffiliation = $this->hasActiveValidationAffiliation($member);
@@ -156,7 +155,7 @@ class SubscriptionValidationService
     /**
      * Check if member has any active validation affiliation
      */
-    private function hasActiveValidationAffiliation(Model $member): bool
+    private function hasActiveValidationAffiliation(Entity|Individual $member): bool
     {
         return Affiliation::where('member_type', $this->getMorphAlias($member))
             ->where('member_id', $member->id)
@@ -171,7 +170,7 @@ class SubscriptionValidationService
     /**
      * Check if member has any active insurance
      */
-    private function hasActiveInsurance(Model $member): bool
+    private function hasActiveInsurance(Entity|Individual $member): bool
     {
         $memberType = $member instanceof Entity ? 'entity' : 'individual';
 
@@ -188,7 +187,7 @@ class SubscriptionValidationService
     /**
      * Check for duplicate affiliation plans
      */
-    private function checkDuplicateAffiliationPlans(Model $member, MembershipPackage $package): array
+    private function checkDuplicateAffiliationPlans(Entity|Individual $member, MembershipPackage $package): array
     {
         $newAffiliationPlanIds = $package->affiliationPlans->pluck('id');
 
@@ -240,7 +239,7 @@ class SubscriptionValidationService
     /**
      * Check for duplicate insurance plans
      */
-    private function checkDuplicateInsurancePlans(Model $member, MembershipPackage $package): array
+    private function checkDuplicateInsurancePlans(Entity|Individual $member, MembershipPackage $package): array
     {
         $newInsurancePlanIds = $package->insurancePlans->pluck('id');
 
@@ -281,7 +280,7 @@ class SubscriptionValidationService
     /**
      * Check if member type is supported
      */
-    private function isSupportedMember(Model $member): bool
+    private function isSupportedMember(Entity|Individual $member): bool
     {
         return $member instanceof Entity || $member instanceof Individual;
     }
@@ -289,7 +288,7 @@ class SubscriptionValidationService
     /**
      * Get morph alias for member model
      */
-    private function getMorphAlias(Model $member): string
+    private function getMorphAlias(Entity|Individual $member): string
     {
         return match (true) {
             $member instanceof Entity => 'entity',
@@ -301,7 +300,7 @@ class SubscriptionValidationService
     /**
      * Get a summary of member's current subscriptions
      */
-    public function getMemberSubscriptionSummary(Model $member): array
+    public function getMemberSubscriptionSummary(Entity|Individual $member): array
     {
         if (! $this->isSupportedMember($member)) {
             return [

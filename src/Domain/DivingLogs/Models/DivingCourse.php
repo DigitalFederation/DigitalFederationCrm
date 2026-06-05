@@ -14,6 +14,10 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+/**
+ * @property int|null $diving_location_id
+ * @property string|null $name
+ */
 class DivingCourse extends Model implements HasMedia
 {
     use HasFactory;

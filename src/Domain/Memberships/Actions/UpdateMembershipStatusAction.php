@@ -12,8 +12,12 @@ class UpdateMembershipStatusAction
     public function __invoke(MemberSubscription $subscription): void
     {
         $now = Carbon::now();
-        $affiliationValid = $subscription->affiliation->end_date->gt($now);
-        $insuranceValid = $subscription->insurance->end_date->gt($now);
+        $affiliationValid = $subscription->affiliations->contains(
+            fn ($affiliation): bool => $affiliation->end_date->gt($now)
+        );
+        $insuranceValid = $subscription->insurances->contains(
+            fn ($insurance): bool => $insurance->end_date->gt($now)
+        );
 
         if ($affiliationValid && $insuranceValid && $subscription->end_date->gt($now)) {
             $subscription->status_class = ActiveMemberSubscriptionState::class;

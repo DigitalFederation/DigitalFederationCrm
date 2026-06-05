@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property mixed $status_class
  * @property mixed $state
+ * @property int|null $entity_id
  */
 class IndividualEntity extends Model
 {

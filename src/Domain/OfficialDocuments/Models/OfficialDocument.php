@@ -23,6 +23,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * @property Entity|Federation|Individual|null $owner
+ */
 class OfficialDocument extends Model implements HasMedia
 {
     use CreatedUpdatedBy;
@@ -31,7 +34,7 @@ class OfficialDocument extends Model implements HasMedia
     use InteractsWithMedia;
 
     /**
-     * @var int|mixed|null
+     * @var array<int, string>
      */
     protected $fillable = [
         'individual_id',

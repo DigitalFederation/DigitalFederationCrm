@@ -15,9 +15,10 @@ class EnrollmentService
 {
     public function getActivePricing(Event $event): Collection
     {
+        /** @var \Illuminate\Database\Eloquent\Collection<int, Pricing> $allPrices */
         $allPrices = (new GetPricesFromEventAction)->execute($event->id, null, null);
         // Filter fixed prices like EVENT_FEE from the list
-        $filteredPrices = $allPrices->filter(function ($price) {
+        $filteredPrices = $allPrices->filter(function (Pricing $price) {
             return $price->price_type != EvtEventFeeTypeEnum::EVENT_FEE->value;
         });
 
@@ -32,7 +33,7 @@ class EnrollmentService
         }
 
         $getDisciplines = new GetDisciplinesFromEventAction;
-        $allDisciplines = $getDisciplines->execute($event);
+        $allDisciplines = collect($getDisciplines->execute($event)['disciplines'] ?? []);
 
         // Example: Filter disciplines by gender
         $gender = $individual->gender; // Assuming `gender` is a column in the `individuals` table

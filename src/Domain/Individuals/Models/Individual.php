@@ -5,9 +5,6 @@ namespace Domain\Individuals\Models;
 use App\Enums\EvtAthleteEnrollmentStatusEnum;
 use App\Models\Country;
 use App\Models\User;
-use App\Packages\MantaRayLms\Domain\ClassGroups\Models\ClassGroup;
-use App\Packages\MantaRayLms\Domain\Courses\Models\CourseInstructor;
-use App\Packages\MantaRayLms\Enums\CourseInstructorStatusEnum;
 use App\Scopes\IndividualsFromFederationScope;
 use App\Traits\CreatedUpdatedBy;
 use Database\Factories\IndividualFactory;
@@ -60,6 +57,29 @@ use Support\Traits\HasQrCode;
  * @method static find(int $id)
  * @method static select(string ...$column)
  * @method static findOrFail(string $id)
+ *
+ * @property string|null $affiliate_number
+ * @property \Illuminate\Support\Carbon|null $birthdate
+ * @property string|null $code_cmas
+ * @property int|null $country_id
+ * @property int|null $member_number
+ * @property string|null $address
+ * @property string|null $doc_ref
+ * @property string|null $doc_ref_type
+ * @property string|null $doc_ref_validation_date
+ * @property string|null $email
+ * @property string|null $first_name_latin
+ * @property string|null $gender
+ * @property string|null $last_name_latin
+ * @property string|null $location
+ * @property string $name
+ * @property string|null $native_name
+ * @property string|null $phone
+ * @property string|null $postal_code
+ * @property string|null $qrcode_path
+ * @property string $surname
+ * @property string|null $user_id
+ * @property string|null $vat_number
  */
 class Individual extends Model implements HasMedia
 {
@@ -596,7 +616,7 @@ class Individual extends Model implements HasMedia
     {
         // Transliterate search term and query the latin field
         // Use double quotes for the regex pattern string
-        $cleanedName = preg_replace("/[^\p{L}\p{N}'\s-]/u", '', $name ?? '');
+        $cleanedName = preg_replace("/[^\p{L}\p{N}'\s-]/u", '', $name);
         $latinName = Str::ascii($cleanedName);
 
         return $query->where('first_name_latin', 'like', '%' . $latinName . '%');
@@ -606,7 +626,7 @@ class Individual extends Model implements HasMedia
     {
         // Transliterate search term and query the latin field
         // Use double quotes for the regex pattern string
-        $cleanedSurname = preg_replace("/[^\p{L}\p{N}'\s-]/u", '', $surname ?? '');
+        $cleanedSurname = preg_replace("/[^\p{L}\p{N}'\s-]/u", '', $surname);
         $latinSurname = Str::ascii($cleanedSurname);
 
         return $query->where('last_name_latin', 'like', '%' . $latinSurname . '%');
@@ -793,26 +813,6 @@ class Individual extends Model implements HasMedia
     public function refereedCompetitions(): HasMany
     {
         return $this->hasMany(CompetitionReferee::class, 'individual_id');
-    }
-
-    public function groups(): BelongsToMany
-    {
-        return $this->belongsToMany(ClassGroup::class, 'lms_group_student', 'student_id', 'group_id');
-    }
-
-    /**
-     * LMS
-     */
-    // Add to Individual model
-    public function courseInstructors(): HasMany
-    {
-        return $this->hasMany(CourseInstructor::class, 'instructor_id');
-    }
-    public function scopeIsLmsInstructor(Builder $query): Builder
-    {
-        return $query->whereHas('courseInstructors', function ($query) {
-            $query->where('status', CourseInstructorStatusEnum::ACTIVE);
-        });
     }
 
     // Add Mutators for automatic transliteration

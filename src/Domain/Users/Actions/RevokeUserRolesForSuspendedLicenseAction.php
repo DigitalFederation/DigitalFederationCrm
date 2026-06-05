@@ -7,6 +7,7 @@ use Domain\Individuals\Models\Individual;
 use Domain\Individuals\Models\ProfessionalRole;
 use Domain\Licenses\Models\LicenseAttributed;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class RevokeUserRolesForSuspendedLicenseAction
 {
@@ -33,7 +34,7 @@ class RevokeUserRolesForSuspendedLicenseAction
         $rolePattern = strtolower($professionalRoles->role);
         $currentRoles = $user->getRoleNames();
         // Find all roles of the user that match this pattern
-        $rolesToRemove = $user->roles->filter(function ($role) use ($rolePattern) {
+        $rolesToRemove = $user->roles->filter(function (Role $role) use ($rolePattern) {
             return Str::contains(strtolower($role->name), $rolePattern);
         })->pluck('name')->toArray();
 

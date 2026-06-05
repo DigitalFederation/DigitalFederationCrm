@@ -5,11 +5,10 @@ namespace Domain\OfficialDocuments\Actions;
 use App\Notifications\OfficialDocumentActivatedNotification;
 use Domain\OfficialDocuments\Models\OfficialDocument;
 use Domain\OfficialDocuments\States\ActiveOfficialDocumentState;
-use Illuminate\Database\Eloquent\Model;
 
 class ActivateOfficialDocumentAction
 {
-    public function __invoke(OfficialDocument|Model $document, ?string $expireDate, ?string $startDate = null): void
+    public function __invoke(OfficialDocument $document, ?string $expireDate, ?string $startDate = null): void
     {
         $updateData = [
             'status_class' => ActiveOfficialDocumentState::class,

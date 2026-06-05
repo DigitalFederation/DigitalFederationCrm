@@ -41,12 +41,10 @@ class CreateMembershipAction
         $membership = Membership::create((array) $data);
         $membership->plans()->sync($data->plans);
 
-        if (isset($membership)) {
-            activity('Membership')
-                ->performedOn($membership)
-                ->event('created')
-                ->log('Membership: '.$membership->name.', was added to Federation');
-        }
+        activity('Membership')
+            ->performedOn($membership)
+            ->event('created')
+            ->log('Membership: '.$membership->name.', was added to Federation');
 
         return $membership;
     }

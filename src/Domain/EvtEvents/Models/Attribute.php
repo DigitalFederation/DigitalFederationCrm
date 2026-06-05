@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 /**
  * @method static create(mixed $data)
+ *
+ * @property object{custom_value: mixed} $pivot
  */
 class Attribute extends Model
 {

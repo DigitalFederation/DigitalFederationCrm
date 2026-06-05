@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
+/**
+ * @property int $id
+ * @property int $event_id
+ */
 class TechnicalDelegateReport extends Model
 {
     protected $table = 'evt_technical_delegate_reports';

@@ -15,6 +15,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * @property int $id
+ * @property int $event_id
+ * @property float|null $total_price
+ * @property float|null $price
+ * @property float|null $per_person_price
+ * @property float|null $discipline_price
+ * @property Event|null $event
+ * @property Enrollment|null $enrollment
+ * @property Pricing|null $pricing
+ */
 class AthleteEnrollment extends Model
 {
     use HasFactory, LogsActivity, SoftDeletes;

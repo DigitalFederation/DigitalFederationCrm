@@ -5,7 +5,6 @@ namespace Domain\DivingLogs\Actions;
 use Domain\DivingLogs\Models\DivingLog;
 use Domain\DivingLogs\Models\DivingLogIndividualSequence;
 use Exception;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class IncrementDiveLogSequenceAction
@@ -15,7 +14,7 @@ class IncrementDiveLogSequenceAction
      *
      * @throws Exception
      */
-    public function execute(DivingLog|Model $divingLog): void
+    public function execute(DivingLog $divingLog): void
     {
 
         try {

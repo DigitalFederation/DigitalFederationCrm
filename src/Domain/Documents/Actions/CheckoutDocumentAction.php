@@ -2,8 +2,8 @@
 
 namespace Domain\Documents\Actions;
 
-use App\Models\PaymentMethod;
 use Domain\Documents\Models\Document;
+use Domain\Payments\Models\PaymentMethod;
 use Illuminate\Http\RedirectResponse;
 
 class CheckoutDocumentAction
@@ -27,7 +27,7 @@ class CheckoutDocumentAction
         // Validate the input and perform any necessary business logic
 
         // Example: Check if the payment method is an offline payment
-        if ($paymentMethod->type === 'offline') {
+        if ($paymentMethod->driver === 'offline') {
             // Perform additional logic for offline payments
             // ...
 

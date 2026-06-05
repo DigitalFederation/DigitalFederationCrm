@@ -21,15 +21,16 @@ class EditMembershipAction
 
         if (empty($data->current_term_ends_at)) {
             $calculateAction = new CalculateMembershipEndTermDateAction;
-            $membershipPlans = MembershipPlan::whereIn('id', $data->plans)->get()->unique('interval', 'interval_unit');
+            $membershipPlans = MembershipPlan::whereIn('id', $data->plans)->get()->unique(fn (MembershipPlan $plan) => $plan->interval . ':' . $plan->interval_unit);
+            $membershipPlan = $membershipPlans->first();
 
             // If we have only one plan, and we have interval and interval unit, we calculate the end term
-            if ($membershipPlans->count() == 1 && ! empty($membershipPlan->interval) && ! empty($membershipPlan->interval_unit)) {
+            if ($membershipPlans->count() === 1 && $membershipPlan && ! empty($membershipPlan->interval) && ! empty($membershipPlan->interval_unit)) {
                 $data->current_term_ends_at = $calculateAction(
                     $data->current_term_starts_at,
                     $data->current_term_ends_at,
-                    $membershipPlan->first()->interval,
-                    $membershipPlan->first()->interval_unit
+                    $membershipPlan->interval,
+                    $membershipPlan->interval_unit
                 );
             }
         }
@@ -38,7 +39,7 @@ class EditMembershipAction
         $updated = $membership->update((array) $data);
         $membership->plans()->sync($data->plans);
 
-        if (isset($updated)) {
+        if ($updated) {
             activity('Membership')
                 ->performedOn($membership)
                 ->event('updated')

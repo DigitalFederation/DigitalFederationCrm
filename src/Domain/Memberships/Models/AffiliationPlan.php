@@ -83,7 +83,7 @@ class AffiliationPlan extends Model implements HasMedia
 
     public function getDurationInDays(): int
     {
-        return $this->start_date->diffInDays($this->end_date);
+        return (int) $this->start_date->diffInDays($this->end_date);
     }
 
     public function scopeActive($query)

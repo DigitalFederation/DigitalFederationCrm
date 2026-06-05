@@ -12,6 +12,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property class-string<IndividualFederationState>|null $status_class
+ * @property IndividualFederationState $state
+ * @property int $federation_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ */
 class IndividualFederation extends Model
 {
     use HasFactory;

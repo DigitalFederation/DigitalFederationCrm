@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ParseSelectedIndividualsAction
 {
+    /**
+     * @param  Collection<int, \Domain\EvtEvents\Models\Enrollment>  $pendingEnrollments
+     */
     public function execute(Collection $pendingEnrollments): array
     {
         $selectedIndividuals = [];

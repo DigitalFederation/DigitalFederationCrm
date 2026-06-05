@@ -36,10 +36,24 @@ use Support\Traits\HasDocumentPaymentStatus;
  * @method static create(array $certificationAttributedData)
  * @method static make(array|string[] $certificationAttributedData)
  * @method static find(int $id)
- * @method static findOrFail(string $id)
- *
- * @property mixed $state
- * @property mixed $status_class
+     * @method static findOrFail(string $id)
+     *
+     * @property \Illuminate\Support\Carbon|null $activated_at
+     * @property \Illuminate\Support\Carbon|null $current_term_ends_at
+     * @property \Illuminate\Support\Carbon|null $current_term_starts_at
+     * @property int|null $batch_id
+     * @property int|null $certification_id
+     * @property int|null $entity_id
+     * @property int|null $federation_id
+     * @property int|null $individual_id
+     * @property string|null $certification_name
+     * @property string|null $cmas_international_code
+     * @property string|null $federation_name
+     * @property string|null $holder_name
+     * @property string|null $national_code
+     * @property string|null $price_option
+     * @property CertificationAttributedState $state
+     * @property class-string<CertificationAttributedState>|null $status_class
  */
 class CertificationAttributed extends Model
 {
@@ -59,7 +73,6 @@ class CertificationAttributed extends Model
         'individual_id',
         'national_code',
         'cmas_international_code',
-        'slot_type_id',
         'certification_name',
         'holder_name',
         'federation_name',
@@ -158,11 +171,6 @@ class CertificationAttributed extends Model
     public function individual(): BelongsTo
     {
         return $this->belongsTo(Individual::class);
-    }
-
-    public function slotType(): BelongsTo
-    {
-        return $this->belongsTo(CertificationSlotType::class);
     }
 
     public function assistants(): BelongsToMany

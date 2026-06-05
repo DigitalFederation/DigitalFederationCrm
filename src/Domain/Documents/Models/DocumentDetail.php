@@ -19,6 +19,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int|null $owner_id
+ * @property int|null $quantity
+ * @property string|null $customer_name
+ * @property string $description
+ * @property string|null $owner_type
+ * @property string|null $reference
+ * @property string|float|int|null $net_value
+ * @property string|float|int|null $tax_percentage
+ * @property string|float|int|null $tax_value
+ * @property string|float|int|null $total_value
+ * @property string|float|int|null $unit_value
+ */
 class DocumentDetail extends Model
 {
     use HasFactory;
@@ -179,15 +192,6 @@ class DocumentDetail extends Model
 
         // AthleteEnrollment - has individual relationship
         if ($owner instanceof AthleteEnrollment) {
-            if (! $owner->relationLoaded('individual')) {
-                $owner->load('individual');
-            }
-
-            return $owner->individual;
-        }
-
-        // CertificationSlot - may have individual
-        if ($owner instanceof CertificationSlot) {
             if (! $owner->relationLoaded('individual')) {
                 $owner->load('individual');
             }

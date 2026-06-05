@@ -13,11 +13,10 @@ class GetLicenceFromInstructorAction
      * Undocumented function
      *
      * @param  Collection  $instructors  [1,2,3]
-     * @return void
      */
     public function __invoke(Collection $instructors, ?int $federation_id = null)
     {
-        if (! empty($instructors)) {
+        if ($instructors->isNotEmpty()) {
 
             $licenses = LicenseAttributed::whereHas('owner', function (Builder $query) use ($instructors) {
                 $query->where('model_type', 'individual')

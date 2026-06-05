@@ -13,6 +13,20 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * @property int $id
+ * @property int $event_id
+ * @property int|string|null $document_id
+ * @property string|null $enrollable_type
+ * @property \Illuminate\Database\Eloquent\Collection<int, IndividualEnrollment> $individualEnrollments
+ * @property \Illuminate\Database\Eloquent\Collection<int, AthleteEnrollment> $athleteEnrollments
+ * @property \Illuminate\Database\Eloquent\Collection<int, CoachEnrollment> $coachEnrollments
+ * @property \Illuminate\Database\Eloquent\Collection<int, RefereeEnrollment> $refereeEnrollments
+ * @property \Illuminate\Database\Eloquent\Collection<int, TeamOfficialEnrollment> $teamOfficialEnrollments
+ * @property \Illuminate\Database\Eloquent\Collection<int, TeamOfficialEnrollment> $officialsEnrollments
+ * @property Event|null $event
+ * @property Pricing|null $pricing
+ */
 class Enrollment extends Model
 {
     use HasFactory, LogsActivity;

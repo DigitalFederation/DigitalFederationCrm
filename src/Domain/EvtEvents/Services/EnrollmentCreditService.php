@@ -3,6 +3,7 @@
 namespace Domain\EvtEvents\Services;
 
 use Carbon\Carbon;
+use Domain\Entities\Models\Entity;
 use Domain\EvtEvents\Models\AthleteEnrollment;
 use Domain\EvtEvents\Models\CoachEnrollment;
 use Domain\EvtEvents\Models\EnrollmentCredit;
@@ -10,7 +11,7 @@ use Domain\EvtEvents\Models\Event;
 use Domain\EvtEvents\Models\Pricing;
 use Domain\EvtEvents\Models\RefereeEnrollment;
 use Domain\EvtEvents\Models\TeamOfficialEnrollment;
-use Illuminate\Database\Eloquent\Model;
+use Domain\Federations\Models\Federation;
 use Illuminate\Support\Facades\Log;
 
 class EnrollmentCreditService
@@ -18,10 +19,10 @@ class EnrollmentCreditService
     /**
      * Add credit when a participant is removed
      *
-     * @param  Model  $enrollment  The enrollment model being removed
+     * @param  AthleteEnrollment|CoachEnrollment|RefereeEnrollment|TeamOfficialEnrollment  $enrollment  The enrollment model being removed
      * @return array Information about the added credit
      */
-    public function addCredit(Model $enrollment): array
+    public function addCredit(AthleteEnrollment|CoachEnrollment|RefereeEnrollment|TeamOfficialEnrollment $enrollment): array
     {
         try {
             // Determine role type and monetary value based on enrollment model
@@ -91,7 +92,7 @@ class EnrollmentCreditService
             Log::info('Added enrollment credit', [
                 'event_id' => $event->id,
                 'enrollable_type' => get_class($enrollable),
-                'enrollable_id' => $enrollable->id,
+                'enrollable_id' => $enrollable->getKey(),
                 'role_type' => $roleType,
                 'monetary_value' => $monetaryValue,
                 'expires_at' => $expirationDate,
@@ -133,7 +134,7 @@ class EnrollmentCreditService
     /**
      * Get the default role type for an enrollment when normal detection fails
      */
-    private function getDefaultRoleType(Model $enrollment): string
+    private function getDefaultRoleType(AthleteEnrollment|CoachEnrollment|RefereeEnrollment|TeamOfficialEnrollment $enrollment): string
     {
         $className = get_class($enrollment);
         if (strpos($className, 'Athlete') !== false) {
@@ -177,10 +178,10 @@ class EnrollmentCreditService
      * Get available credits for a given event and organization
      *
      * @param  Event  $event  The event
-     * @param  Model  $enrollable  The enrollable model (Federation or Entity)
+     * @param  Federation|Entity  $enrollable  The enrollable model
      * @return array Available credits by role type
      */
-    public function getAvailableCredits(Event $event, Model $enrollable): array
+    public function getAvailableCredits(Event $event, Federation|Entity $enrollable): array
     {
         $now = Carbon::now();
 
@@ -210,11 +211,11 @@ class EnrollmentCreditService
      * Get available slots for a specific role type
      *
      * @param  Event  $event  The event
-     * @param  Model  $enrollable  The enrollable model (Federation or Entity)
+     * @param  Federation|Entity  $enrollable  The enrollable model
      * @param  string  $roleType  The role type
      * @return int Number of available slots
      */
-    public function getAvailableSlots(Event $event, Model $enrollable, string $roleType): int
+    public function getAvailableSlots(Event $event, Federation|Entity $enrollable, string $roleType): int
     {
         $now = Carbon::now();
 
@@ -234,7 +235,7 @@ class EnrollmentCreditService
      * Update credit in database
      *
      * @param  Event  $event  The event
-     * @param  Model  $enrollable  The enrollable model
+     * @param  Federation|Entity  $enrollable  The enrollable model
      * @param  string  $roleType  The role type
      * @param  int  $slots  Number of slots to add/subtract
      * @param  float  $monetaryValue  The monetary value to add/subtract
@@ -243,7 +244,7 @@ class EnrollmentCreditService
      */
     private function updateCredit(
         Event $event,
-        Model $enrollable,
+        Federation|Entity $enrollable,
         string $roleType,
         int $slots,
         float $monetaryValue = 0,
@@ -267,13 +268,13 @@ class EnrollmentCreditService
      * Use available credits for new registrations
      *
      * @param  Event  $event  The event
-     * @param  Model  $enrollable  The enrollable model
+     * @param  Federation|Entity  $enrollable  The enrollable model
      * @param  array  $participants  The participants by role type
      * @return array Credits used by role type
      */
     public function useCredits(
         Event $event,
-        Model $enrollable,
+        Federation|Entity $enrollable,
         array $participants
     ): array {
         $creditsUsed = [];
@@ -333,12 +334,12 @@ class EnrollmentCreditService
     /**
      * Determine role type from enrollment model
      *
-     * @param  Model  $enrollment  The enrollment model
+     * @param  AthleteEnrollment|CoachEnrollment|RefereeEnrollment|TeamOfficialEnrollment  $enrollment  The enrollment model
      * @return string The role type
      *
      * @throws \Exception If the enrollment type is unknown
      */
-    private function getRoleTypeFromEnrollment(Model $enrollment): string
+    private function getRoleTypeFromEnrollment(AthleteEnrollment|CoachEnrollment|RefereeEnrollment|TeamOfficialEnrollment $enrollment): string
     {
         return match (true) {
             $enrollment instanceof AthleteEnrollment => 'athlete',

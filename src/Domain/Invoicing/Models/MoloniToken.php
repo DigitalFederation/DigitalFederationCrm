@@ -4,6 +4,10 @@ namespace Domain\Invoicing\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property \Illuminate\Support\Carbon|null $access_token_expires_at
+ * @property \Illuminate\Support\Carbon|null $refresh_token_expires_at
+ */
 class MoloniToken extends Model
 {
     protected $table = 'moloni_tokens';

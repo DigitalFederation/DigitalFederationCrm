@@ -16,10 +16,12 @@ parameters:
         - database/*
         - config/*
         - resources/*
-    checkGenericClassInNonGenericObjectType: false
-    checkMissingIterableValueType: false
     reportUnmatchedIgnoredErrors: false
     ignoreErrors:
+        -
+            identifier: missingType.generics
+        -
+            identifier: missingType.iterableValue
         - '#Unsafe usage of new static#'
         - '#Call to an undefined method#'
         - '#Method Illuminate\\Validation\\Validator::validate does not exist.#'

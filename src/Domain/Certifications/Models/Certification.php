@@ -25,6 +25,22 @@ use Spatie\Permission\Models\Role;
  * @method static find(int $id)
  * @method static insert(array $certifications)
  *
+ * @property int|null $committee_id
+ * @property string|null $certification_view
+ * @property bool $allow_entity_group_request
+ * @property int|null $license_id
+ * @property int|null $professional_role_id
+ * @property string|null $acronym
+ * @property string|null $moloni_reference
+ * @property string|null $name
+ * @property string|float|int|null $digital_plus_card_price
+ * @property string|float|int|null $tax_percentage
+ * @property string|float|int|null $unit_value
+ * @property string|float|int|null $unit_value_entity
+ * @property string|float|int|null $unit_value_federation
+ * @property string|float|int|null $unit_value_individual
+ * @property string|null $requester_model
+ *
  * @mixin \Domain\Certifications\Models\Certification;
  */
 class Certification extends Model

@@ -14,6 +14,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Mpociot\Versionable\VersionableTrait;
 
+/**
+ * @property array<int, int>|null $required_athlete_licenses
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Domain\Licenses\Models\License> $requiredAthleteLicenses
+ */
 class Competition extends Model
 {
     use HasFactory, VersionableTrait;

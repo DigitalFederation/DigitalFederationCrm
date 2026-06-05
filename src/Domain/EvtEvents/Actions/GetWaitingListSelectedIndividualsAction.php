@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class GetWaitingListSelectedIndividualsAction
 {
+    /**
+     * @param  EloquentCollection<int, \Domain\EvtEvents\Models\Enrollment>  $pendingEnrollments
+     */
     public function execute(EloquentCollection $pendingEnrollments)
     {
         $selectedIndividuals = [];

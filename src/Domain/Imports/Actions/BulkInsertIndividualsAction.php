@@ -119,6 +119,7 @@ class BulkInsertIndividualsAction
                             doc_ref: $data['doc_ref'] ?? null,
                             doc_ref_validation_date: $data['doc_ref_validation_date'] ?? null,
                             email: $data['email'],
+                            code_cmas: $data['code_cmas'] ?? null,
                             user_id: $user->id,
                             federation_id: $options['federation_ids'] ?? null,
                             entity_id: $entityId,

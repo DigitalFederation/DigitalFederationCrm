@@ -35,7 +35,7 @@ class ActivateLicenseAttributedAction
                 throw new \Exception(__('licenses.cannot_activate_unpaid_license'));
             }
             $license->status_class = ActiveLicenseAttributedState::class;
-            $license->activated_at = now()->format('Y-m-d H:i:s');
+            $license->activated_at = now();
 
             // Load the license relationship to check interval configuration
             $license->load('license');
@@ -43,8 +43,8 @@ class ActivateLicenseAttributedAction
             // Calculate validity dates based on license configuration
             if ($license->license && ! $license->current_term_starts_at) {
                 $dates = $this->calculateValidityDatesAction->execute($license->license, $license->activated_at);
-                $license->current_term_starts_at = $dates['start_date']->format('Y-m-d H:i:s');
-                $license->current_term_ends_at = $dates['end_date']?->format('Y-m-d H:i:s');
+                $license->current_term_starts_at = $dates['start_date'];
+                $license->current_term_ends_at = $dates['end_date'];
             }
 
             $license->save();

@@ -9,6 +9,7 @@ use Domain\Memberships\Models\MembershipPlan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
 
 /**
  * Handles the assignment of membership plans to a local federation.
@@ -58,7 +59,7 @@ class AssignLocalMembershipPlanAction
             foreach ($users as $user) {
 
                 // ve
-                $rolesToRemove = $user->roles->filter(function ($role) {
+                $rolesToRemove = $user->roles->filter(function (Role $role) {
                     return preg_match('/^local-federation-.*-admin$/', $role->name);
                 });
 

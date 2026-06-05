@@ -194,7 +194,6 @@ class CreateAffiliationAction
             \Domain\Memberships\States\ActiveMemberSubscriptionState::class => ActiveAffiliationState::class,
             \Domain\Memberships\States\PendingPaymentMemberSubscriptionState::class => PendingPaymentAffiliationState::class,
             \Domain\Memberships\States\ExpiredMemberSubscriptionState::class => \Domain\Memberships\States\ExpiredAffiliationState::class,
-            \Domain\Memberships\States\CanceledMemberSubscriptionState::class => \Domain\Memberships\States\ExpiredAffiliationState::class,
         ];
 
         return $statusMap[$subscriptionStatusClass] ?? InactiveAffiliationState::class;
@@ -209,8 +208,6 @@ class CreateAffiliationAction
         $morphMap = [
             Entity::class => 'entity',
             \Domain\Individuals\Models\Individual::class => 'individual',
-            'Domain\\Entities\\Models\\Entity' => 'entity',
-            'Domain\\Individuals\\Models\\Individual' => 'individual',
         ];
 
         // If already a morph alias, return as is

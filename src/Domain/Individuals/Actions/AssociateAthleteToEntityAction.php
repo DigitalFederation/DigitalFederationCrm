@@ -32,13 +32,12 @@ class AssociateAthleteToEntityAction
 
                 $entity_athlete = EntityAthlete::firstOrCreate($data->toArray());
 
-                if (! empty($entity_athlete)) {
-                    activity('Athlete To Entity')
-                        ->performedOn($entity_athlete)
-                        ->event('associate')
-                        ->withProperties($entity_athlete->toArray())
-                        ->log('Athlete associated to entity '.$entity_athlete->entity_name);
-                }
+                activity('Athlete To Entity')
+                    ->performedOn($entity_athlete)
+                    ->event('associate')
+                    ->withProperties($entity_athlete->toArray())
+                    ->log('Athlete associated to entity '.$entity_athlete->entity_name);
+
                 $this->notifyProfessionalRole($entity_athlete);
             } else {
                 DB::rollBack();

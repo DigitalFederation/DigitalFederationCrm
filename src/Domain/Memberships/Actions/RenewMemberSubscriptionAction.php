@@ -24,7 +24,7 @@ class RenewMemberSubscriptionAction
 
     private function calculateNewEndDate(MemberSubscription $subscription): \Carbon\Carbon
     {
-        // Implementation for calculating new end date
+        return $subscription->end_date?->copy()->addYear() ?? now()->addYear();
     }
 
     private function renewAffiliation(MemberSubscription $subscription): void

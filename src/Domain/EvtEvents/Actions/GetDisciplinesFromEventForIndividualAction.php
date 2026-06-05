@@ -26,7 +26,7 @@ class GetDisciplinesFromEventForIndividualAction
         $enrolledDisciplines = (new GetAthleteEnrolledDisciplinesFromEvent)->execute($event, $individual);
 
         // Filter disciplines based on individual's attributes
-        $eligibleDisciplines = $disciplines->filter(function ($discipline) use ($individual, $enrolledDisciplines) {
+        $eligibleDisciplines = $disciplines->filter(function ($discipline) use ($event, $individual, $enrolledDisciplines) {
 
             // Check if the individual is already enrolled in this discipline
             if ($enrolledDisciplines->contains($discipline)) {

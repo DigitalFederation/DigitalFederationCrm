@@ -23,7 +23,7 @@ class EnrollmentsCostCalculationService
      * Calculate the total cost for all pending enrollments.
      *
      * @param  Event  $event  The event for which to calculate costs.
-     * @param  Collection  $pendingEnrollments  Array of pending enrollments.
+     * @param  Collection<int, Enrollment>  $pendingEnrollments  Pending enrollments.
      * @param  bool  $isIndividualEnrollment  Flag to indicate if the enrollment is individual.
      * @return float The total cost of all pending enrollments.
      */
@@ -101,7 +101,7 @@ class EnrollmentsCostCalculationService
      * Get a detailed cost breakdown for all pending enrollments.
      *
      * @param  Event  $event  The event for which to calculate costs.
-     * @param  Collection  $pendingEnrollments  Array of pending enrollments.
+     * @param  Collection<int, Enrollment>  $pendingEnrollments  Pending enrollments.
      * @param  bool  $isIndividualEnrollment  Flag to indicate if the enrollment is individual.
      * @return array An array containing the cost breakdown.
      */
@@ -211,7 +211,6 @@ class EnrollmentsCostCalculationService
      * @param  Enrollment  $enrollment  The enrollment being processed.
      * @param  array  $breakdown  Reference to the cost breakdown array.
      * @param  bool  $eventFeeAdded  Reference to flag indicating if event fee has been added.
-     * @param  bool  $perPersonFeeAdded  Reference to flag indicating if per person fee has been added.
      * @param  bool  $isIndividualEnrollment  Flag to indicate if the enrollment is individual.
      */
     private function processEnrollment(Event $event, Enrollment $enrollment, array &$breakdown, bool &$eventFeeAdded, bool $isIndividualEnrollment, array &$countedIndividuals): void
@@ -229,7 +228,6 @@ class EnrollmentsCostCalculationService
      * @param  Enrollment  $enrollment  The enrollment being processed.
      * @param  array  $breakdown  Reference to the cost breakdown array.
      * @param  bool  $eventFeeAdded  Reference to flag indicating if event fee has been added.
-     * @param  bool  $perPersonFeeAdded  Reference to flag indicating if per person fee has been added.
      * @param  bool  $isIndividualEnrollment  Flag to indicate if the enrollment is individual.
      */
     private function processAthleteEnrollments(
@@ -260,7 +258,6 @@ class EnrollmentsCostCalculationService
      * @param  AthleteEnrollment  $athleteEnrollment  The athlete enrollment being processed.
      * @param  array  $breakdown  Reference to the cost breakdown array.
      * @param  bool  $eventFeeAdded  Reference to flag indicating if event fee has been added.
-     * @param  bool  $perPersonFeeAdded  Reference to flag indicating if per person fee has been added.
      * @param  bool  $isIndividualEnrollment  Flag to indicate if the enrollment is individual.
      */
     private function addAthleteEnrollmentCosts(

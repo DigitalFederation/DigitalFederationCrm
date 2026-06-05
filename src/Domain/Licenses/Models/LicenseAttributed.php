@@ -35,7 +35,21 @@ use Support\Traits\HasDocumentPaymentStatus;
  * @method static insert(array $records)
  * @method static find(int $id)
  *
- * @property LicenseAttributedState $status_class
+ * @property \Illuminate\Support\Carbon|null $activated_at
+ * @property \Illuminate\Support\Carbon|null $current_term_ends_at
+ * @property \Illuminate\Support\Carbon|null $current_term_starts_at
+ * @property \Illuminate\Support\Carbon|null $date_expire
+ * @property int|null $license_id
+ * @property int|string|null $model_id
+ * @property int|null $requested_by_id
+ * @property string|null $federation_name
+ * @property string|null $holder_name
+ * @property string|null $license_name
+ * @property string|null $model_type
+ * @property string|null $notes
+ * @property string|null $requester_model_type
+ * @property string|float|int|null $total_value
+ * @property class-string<LicenseAttributedState>|null $status_class
  * @property LicenseAttributedState $state
  */
 class LicenseAttributed extends Model
@@ -166,11 +180,7 @@ class LicenseAttributed extends Model
 
     public function getStateAttribute(): LicenseAttributedState
     {
-        $statusClass = $this->status_class;
-
-        if (empty($statusClass)) {
-            $statusClass = PendingLicenseAttributedState::class;
-        }
+        $statusClass = $this->status_class ?: PendingLicenseAttributedState::class;
 
         return new $statusClass($this);
     }
@@ -313,12 +323,14 @@ class LicenseAttributed extends Model
 
     public function getCmasCodeAttribute()
     {
-        if ($this->individual) {
-            return $this->individual->cmas_code;
+        $owner = $this->owner;
+
+        if ($owner instanceof Individual) {
+            return $owner->code_cmas;
         }
 
-        if ($this->entity) {
-            return $this->entity->cmas_code;
+        if ($owner instanceof Entity) {
+            return $owner->code_cmas;
         }
 
         return null;
