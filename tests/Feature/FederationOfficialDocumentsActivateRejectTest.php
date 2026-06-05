@@ -28,7 +28,7 @@ it('activates an official document', function () {
     ]);
     $user->federations()->attach($this->federation->id);
 
-    Permission::create(['name' => 'access federation official documents']);
+    Permission::findOrCreate('access federation official documents');
     $user->givePermissionTo('access federation official documents');
 
     $document = OfficialDocument::factory()->create([
@@ -59,7 +59,7 @@ it('rejects an official document', function () {
         'group_id' => $this->group->id,
     ]);
     $user->federations()->attach($this->federation->id);
-    Permission::create(['name' => 'access federation official documents']);
+    Permission::findOrCreate('access federation official documents');
     $user->givePermissionTo('access federation official documents');
 
     $document = OfficialDocument::factory()->create([

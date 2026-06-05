@@ -156,7 +156,7 @@ it('can request a invite for athlete if it has a athlete license', function () {
     $entityAthlete = $associateAthleteToEntityAction(EntityAthleteData::fromArray([
         'entity_id' => $entity->id,
         'individual_id' => $individual->id,
-        'sport_id' => $licenseAthlete->id,
+        'sport_id' => $licenseAthlete->sport_id,
         'entity_name' => $entity->name,
         'individual_name' => $individual->name,
         'sport_name' => $licenseAthlete->name,
