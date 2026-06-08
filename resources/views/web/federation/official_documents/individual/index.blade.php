@@ -58,7 +58,7 @@
                             </td>
 
                             <td class="px-2 py-3 whitespace-nowrap w-px text-center md:text-left">
-                                {{ $document->role }}
+                                {{ $document->roleLabel() }}
                             </td>
 
                             <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">

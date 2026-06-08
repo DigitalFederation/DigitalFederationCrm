@@ -14,6 +14,8 @@ return [
         'athlete' => 'Athlete',
         'coach' => 'Coach',
         'referee_judge' => 'Referee/Judge',
+        'individual' => 'Individual',
+        'entity' => 'Entity',
     ],
     'no_records_message' => 'There are no documents yet. Use the form above to add the first record.',
     'add_record' => 'Add record',

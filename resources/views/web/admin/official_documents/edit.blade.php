@@ -147,7 +147,7 @@
                                     {{ __('official_documents.role') }}
                                 </label>
                                 <p class="mt-1 text-sm text-gray-900 py-2 px-3 bg-gray-100 rounded-md border border-gray-200">
-                                    {{ ucfirst(__('roles.' . $document->role)) }}
+                                    {{ $document->roleLabel() }}
                                 </p>
                             </div>
                             @endif

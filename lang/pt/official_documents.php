@@ -14,6 +14,8 @@ return [
         'athlete' => 'Atleta',
         'coach' => 'Treinador',
         'referee_judge' => 'Oficial Técnico',
+        'individual' => 'Individual',
+        'entity' => 'Entidade',
     ],
     'no_records_message' => 'Ainda não existem documentos. Use o formulário acima para adicionar o primeiro registo.',
     'add_record' => 'Adicionar registo',
