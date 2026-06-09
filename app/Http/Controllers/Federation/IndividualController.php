@@ -363,7 +363,7 @@ class IndividualController extends Controller
             return $official_document->getMedia('media');
         });
 
-        $official_document_types = config('documents.official_documents');
+        $official_document_types = \App\Enums\OfficialDocumentTypeEnum::individualTypes();
 
         $countries = Country::select('id', 'name')
             ->whereHas('federations', function ($query) use ($federation) {

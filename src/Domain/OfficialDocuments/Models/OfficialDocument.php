@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Lang;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -113,6 +114,32 @@ class OfficialDocument extends Model implements HasMedia
     public function stateColor()
     {
         return $this->state->color();
+    }
+
+    /**
+     * Human-readable label for the document role.
+     *
+     * Roles reach this model in two formats: slug roles from self-service uploads
+     * (e.g. "instructor-leader", "referee-judge") and professional role codes from
+     * individual uploads (e.g. "INSTRUCTOR", "TECHNICAL_OFFICIAL"). The latter reuse
+     * the canonical professional_roles.role_types translations to avoid duplication.
+     */
+    public function roleLabel(): string
+    {
+        if (! $this->role) {
+            return '';
+        }
+
+        $slugKey = str_replace('-', '_', $this->role);
+        if (Lang::has('official_documents.roles.' . $slugKey)) {
+            return __('official_documents.roles.' . $slugKey);
+        }
+
+        if (Lang::has('professional_roles.role_types.' . $this->role)) {
+            return __('professional_roles.role_types.' . $this->role);
+        }
+
+        return $this->role;
     }
 
     public static function scopeCommittee(Builder $query, ?string $committee = null): Builder

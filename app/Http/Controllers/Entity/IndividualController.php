@@ -240,7 +240,7 @@ class IndividualController extends Controller
             return $official_document->getMedia('media');
         });
 
-        $official_document_types = config('documents.official_documents.types');
+        $official_document_types = \App\Enums\OfficialDocumentTypeEnum::individualTypes();
 
         $countries = collect();
         if ($federation) {
