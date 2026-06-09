@@ -5,7 +5,6 @@ namespace Domain\Licenses\Actions;
 use Domain\Entities\Models\Entity;
 use Domain\Individuals\Models\Individual;
 use Domain\Licenses\Models\License;
-use Domain\OfficialDocuments\Models\OfficialDocument;
 use Domain\OfficialDocuments\States\ActiveOfficialDocumentState;
 
 class ValidateLicenseDocumentRequirementsAction
@@ -42,14 +41,10 @@ class ValidateLicenseDocumentRequirementsAction
             ];
         }
 
-        // Determine owner type
-        $ownerType = match (true) {
-            $owner instanceof Individual => 'Domain\Individuals\Models\Individual',
-            $owner instanceof Entity => 'Domain\Entities\Models\Entity',
-            default => null
-        };
-
-        if (! $ownerType) {
+        // Only Individuals own personal documents. Entities returned early above;
+        // guard any other owner type so misuse fails cleanly instead of erroring on
+        // ->officialDocuments().
+        if (! $owner instanceof Individual) {
             $this->errors[] = [
                 'code' => 'INVALID_OWNER_TYPE',
                 'message' => __('validation.invalid_owner_type'),
@@ -62,10 +57,14 @@ class ValidateLicenseDocumentRequirementsAction
             ];
         }
 
-        // Check each required document type
+        // Individual documents are stored against the individual_id column, so query
+        // through the officialDocuments() relationship — consistent with
+        // InsurancePlan::individualHasRequiredDocument() and the rest of the system.
+        // The legacy owner_type/owner_id polymorphic columns are never populated by the
+        // personal upload flow, so a polymorphic query reported every document as
+        // missing and blocked individual license purchases.
         foreach ($license->required_document_types as $documentType) {
-            $hasActiveDocument = OfficialDocument::where('owner_type', $ownerType)
-                ->where('owner_id', $owner->id)
+            $hasActiveDocument = $owner->officialDocuments()
                 ->where('type', $documentType)
                 ->where('status_class', ActiveOfficialDocumentState::class)
                 ->where(function ($query) {
